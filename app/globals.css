@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light theme (08:00–18:00) */
+  --bg: 0 0% 100%;          /* #ffffff */
+  --fg: 222 47% 11%;        /* #111827 */
+  --muted: 215 16% 47%;     /* #6B7280 */
+  --accent-green: 160 84% 39%; /* #10B981 */
+  --accent-blue: 217 91% 60%;  /* #3B82F6 */
+  --accent-purple: 252 100% 60%; /* #7C6CFF */
+  --card: 0 0% 100%;        /* #ffffff */
+  --border: 0 0% 0% / 0.1;  /* 10% black */
+}
+
+.dark {
+  /* Dark theme (18:00–08:00) */
+  --bg: 212 29% 6%;         /* #0B0F14 */
+  --fg: 210 46% 92%;        /* #E6EEF5 */
+  --muted: 210 18% 70%;
+  --accent-green: 160 84% 39%;
+  --accent-blue: 217 91% 60%;
+  --accent-purple: 252 100% 78%; /* #9B8CFF */
+  --card: 220 20% 12%;      /* #111827 */
+  --border: 0 0% 100% / 0.1; /* 10% white */
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[hsl(var(--bg))] text-[hsl(var(--fg))] antialiased;
+}
+
+/* Disable horizontal scroll */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Ensure only one vertical scrollbar (document) */
+html, body {
+  height: 100%;
+}
+html {
+  overflow-y: auto;
+}
+body {
+  overflow-y: visible;
+}
+
+/* Accessible focus ring */
+:where(a, button, input, select, textarea) {
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[hsl(var(--bg))] focus:ring-[hsl(var(--accent-blue))];
+}
+
+/* 8pt baseline rhythm helpers */
+.container {
+  @apply mx-auto px-4 sm:px-6;
+}
+
+/* Helper: subtle section backgrounds */
+.section-bg {
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)),
+    linear-gradient(135deg, rgba(155,140,255,0.04), rgba(16,185,129,0.03));
+}
+
+/* Helper: aurora behind hero */
+.aurora-bg {
+  pointer-events: none;
+}
+
+/* Improve readability for long subtitles */
+.subtle-lead {
+  @apply leading-relaxed text-[hsl(var(--muted))];
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: 0;
+  top: -40px;
+  background: hsl(var(--accent-blue));
+  color: #000;
+  padding: 8px 12px;
+  z-index: 100;
+}
+.skip-link:focus {
+  top: 0;
+}
