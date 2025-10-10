@@ -1,6 +1,6 @@
 export default function AboutPage() {
   return (
-    <main className="container py-16">
+    <main className="container py-16 reveal">
       <h1 className="text-3xl sm:text-4xl font-bold">Профессиональное саммари</h1>
       <p className="mt-4 text-muted max-w-prose">
         Молодой Java‑разработчик с опытом в Spring Boot, пониманием JVM и управления памятью,
@@ -64,5 +64,4 @@ export default function AboutPage() {
     </main>
   );
 }
-
 

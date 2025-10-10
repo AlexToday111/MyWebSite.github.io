@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" suppressHydrationWarning>
-      <body className={`${inter.variable} ${manrope.variable} ${bebas.variable} font-sans`}>
+      <body className={`${inter.variable} ${manrope.variable} ${bebas.variable} `}>
         <a href="#content" className="skip-link">Сразу к контенту</a>
         <Providers>{children}</Providers>
       </body>

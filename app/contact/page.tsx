@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function ContactPage() {
   const [status, setStatus] = useState<string | null>(null);
   return (
-    <main className="container py-16">
+    <main className="container py-16 reveal">
       <h1 className="text-3xl sm:text-4xl font-bold">Контакты</h1>
       <form
         className="mt-6 grid max-w-xl gap-4"
@@ -54,5 +54,4 @@ export default function ContactPage() {
     </main>
   );
 }
-
 

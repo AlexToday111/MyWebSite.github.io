@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { FolderOpen } from "lucide-react";
 
 function useScrollDirection() {
   const [dir, setDir] = useState<"down" | "up">("down");
@@ -22,11 +23,31 @@ function useScrollDirection() {
 }
 
 export default function NeonProjectGrid() {
-  const cards: { title: string; text: string }[] = [
-    { title: "Сервис на Spring", text: "REST API, аутентификация, права доступа, кеширование. Миграции, мониторинг, контейнеризация." },
-    { title: "Streaming с Kafka", text: "Топики, группы потребителей, ретраи/партиции, DLQ и мониторинг пайплайнов." },
-    { title: "Кэш Redis", text: "Ключи c TTL, rate limiting, pub/sub, репликация." },
-    { title: "CI/CD", text: "Git, тесты (JUnit/Mockito), сборка, контейнеризация и деплой." },
+  const cards: { title: string; text: string; href: string }[] = [
+    {
+      title: "Visual Curcuit Designer",
+      text:
+        "Веб-сервис, предоставляющий оптимизированную платформу для проектирования, компиляции и отладки цифровых схем непосредственно в браузере.",
+      href: "https://github.com/AlexToday666/Visual-Circuit-Designer",
+    },
+    {
+      title: "Торговая система",
+      text:
+        "Реализация стратегии дивергенций цены и RSI: живой сканер и торговля через MetaTrader 5, бэктест на Backtrader, HTML-отчёты QuantStats, утилиты для выгрузки данных и списка инструментов",
+      href: "https://github.com/AlexToday666/MT5-Divergence-Bot",
+    },
+    {
+      title: "Rating My Spot",
+      text:
+        "REST API сервис для поиска лучших мест работы (кафе, коворкинги, библиотеки) с фильтрацией по уровню шума, скорости Wi‑Fi и количеству розеток",
+      href: "https://github.com/AlexToday666/RMS",
+    },
+    {
+      title: "Notes API",
+      text:
+        "это простой REST-сервис для хранения заметок с тегами, поддержкой поиска и архивирования.",
+      href: "https://github.com/AlexToday666/Notes-API",
+    },
   ];
 
   const hexToRgba = (hex: string, a = 1) => {
@@ -36,7 +57,6 @@ export default function NeonProjectGrid() {
     return `rgba(${r}, ${g}, ${b}, ${a})`;
   };
 
-  // unified violet style, same as skills/process cards
   const dir = useScrollDirection();
   const variants = {
     hidden: (d: "down" | "up") => ({ opacity: 0, y: d === "down" ? 40 : -40 }),
@@ -44,15 +64,15 @@ export default function NeonProjectGrid() {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      {cards.map(({ title, text }) => {
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      {cards.map(({ title, text, href }) => {
         const violet = "#A78BFA";
         const border = hexToRgba(violet, 0.55);
         const glow = hexToRgba(violet, 0.25);
         return (
           <motion.div
             key={title}
-            className="group relative rounded-2xl"
+            className="group relative rounded-2xl h-full"
             custom={dir}
             initial="hidden"
             whileInView="show"
@@ -60,21 +80,26 @@ export default function NeonProjectGrid() {
             variants={variants}
           >
             <div
-              className="relative rounded-2xl border bg-card/90 p-5 pr-14 text-left shadow-sm"
+              className="relative h-40 rounded-2xl border bg-card/90 p-4 pr-12 text-left shadow-sm flex flex-col"
               style={{ borderColor: border, boxShadow: `0 0 0 1px ${border} inset, 0 0 30px ${glow}` }}
             >
               {/* Per-card folder icon button */}
               <Link
-                href="/projects"
-                aria-label="Open project"
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Open project on GitHub"
                 className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex h-8 w-8 items-center justify-center rounded-md border border-white/10 bg-white/5 text-violet-400 transition-colors duration-200 hover:bg-violet-500 hover:text-black"
               >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                  <path d="M10 4H4a2 2 0 0 0-2 2v2h20V9a2 2 0 0 1-2 2H4v5a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8H12l-2-4z" />
-                </svg>
+                <FolderOpen className="h-4 w-4" strokeWidth={2.2} aria-hidden />
               </Link>
-              <h3 className="text-base font-semibold">{title}</h3>
-              <p className="mt-2 text-sm text-white/70">{text}</p>
+              <span className="inline-flex w-fit items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-sm text-white/90 font-semibold">
+                {title}
+              </span>
+              <p className="mt-2 text-sm text-white/70 font-readable clamp-2">
+                {text}
+              </p>
+              <span className="mt-auto text-xs text-white/40">&nbsp;</span>
             </div>
             <span
               aria-hidden

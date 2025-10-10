@@ -2,9 +2,9 @@ import { education } from "@/data/education";
 
 export default function EducationPage() {
   return (
-    <main className="container py-16">
+    <main className="container py-16 reveal">
       <h1 className="text-3xl sm:text-4xl font-bold">Образование</h1>
-      <ul className="mt-6 space-y-4">
+      <ul className="mt-6 space-y-4 reveal-grid">
         {education.map((e) => (
           <li key={e.title} className="rounded-2xl border border-white/10 bg-card/60 p-4">
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
@@ -26,5 +26,3 @@ export default function EducationPage() {
     </main>
   );
 }
-
-

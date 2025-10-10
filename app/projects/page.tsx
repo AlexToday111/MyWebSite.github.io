@@ -27,7 +27,7 @@ export default function ProjectsPage() {
   }, [active]);
 
   return (
-    <main className="container py-16">
+    <main id="projects-page" className="container py-16 reveal">
       <h1 className="text-3xl sm:text-4xl font-bold">Проекты</h1>
       <div className="mt-6 flex flex-wrap gap-2">
         <Tag label="Все" active={active === null} onClick={() => setActive(null)} />
@@ -36,7 +36,7 @@ export default function ProjectsPage() {
         ))}
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 reveal-grid">
         {sorted.map((p) => (
           <motion.article
             key={p.title}
@@ -82,5 +82,3 @@ export default function ProjectsPage() {
     </main>
   );
 }
-
-

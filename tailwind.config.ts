@@ -11,7 +11,16 @@ const config: Config = {
   theme: {
     container: { center: true, padding: "1rem" },
     extend: {
+      fontFamily: {
+        sans: ["var(--ff-exotica)", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
+        serif: ["var(--ff-exotica)", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
+        mono: ["var(--ff-exotica)", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
+      },
       keyframes: {
+        softblink: {
+          '0%, 100%': { opacity: '0.28' },
+          '50%': { opacity: '0.52' },
+        },
         slowpulse: {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.03)' },
@@ -28,6 +37,7 @@ const config: Config = {
         },
       },
       animation: {
+        'soft-blink': 'softblink 6s ease-in-out infinite',
         'slow-pulse': 'slowpulse 6s ease-in-out infinite',
         'orb-1': 'orb1 18s linear infinite',
         'orb-2': 'orb2 22s linear infinite',
@@ -73,9 +83,22 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["var(--ff-exotica)", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
+        serif: ["var(--ff-exotica)", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
+        mono: ["var(--ff-exotica)", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],
+      },
+      keyframes: {
+        softblink: {
+          '0%, 100%': { opacity: '0.28' },
+          '50%': { opacity: '0.52' },
+        },
+      },
+      animation: {
+        'soft-blink': 'softblink 6s ease-in-out infinite',
+      },
+    },
   },
   plugins: [],
 }
-
-

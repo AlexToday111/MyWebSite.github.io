@@ -1,7 +1,6 @@
 import Image from "next/image";
 import GlassCard from "./GlassCard";
 import { profile } from "@/data/profile";
-import { RefreshCw, Workflow, KanbanSquare } from "lucide-react";
 
 const PRIMARY = [
   { name: "Java", src: "/icons/java-original-8x.png", color: "#007396" },
@@ -62,13 +61,13 @@ function hexToRgba(hex: string, alpha = 1) {
 export default function StackSection() {
   return (
     <section id="stack" className="container py-14 sm:py-16">
-      <div className="mb-6 text-center reveal">
+      <div className="mb-6 text-center">
         <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight [font-family:var(--ff-exotica)]">Стэк</h2>
         <p className="mt-2 text-sm text-white/70 max-w-2xl mx-auto">Основные технологии и инструменты, с которыми я работаю.</p>
       </div>
 
       {/* Primary icons */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 reveal-grid">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {PRIMARY.map((p) => {
           const rim = rimFor(p.name);
           const border = hexToRgba(rim, 0.55);
@@ -102,7 +101,7 @@ export default function StackSection() {
       </div>
 
       {/* Secondary brand tiles */}
-      <div className="mt-4 grid grid-cols-3 sm:grid-cols-5 gap-4 reveal-grid">
+      <div className="mt-4 grid grid-cols-3 sm:grid-cols-5 gap-4">
         {SECONDARY.map((p) => {
           const rim = rimFor(p.name);
           const border = hexToRgba(rim, 0.55);
@@ -120,7 +119,6 @@ export default function StackSection() {
                     width={40}
                     height={40}
                     className="transition-transform duration-200 group-hover:scale-110"
-                    style={p.name === 'Kafka' ? { filter: 'brightness(0) saturate(100%) invert(69%) sepia(36%) saturate(726%) hue-rotate(208deg) brightness(102%) contrast(103%)' } : undefined}
                     draggable={false}
                   />
                 </div>
@@ -139,9 +137,9 @@ export default function StackSection() {
       {/* Владение языками */}
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Languages card: dark rim style */}
-        <div className="group relative rounded-3xl h-full transition-transform duration-300 hover:scale-[1.02]">
+        <div className="group relative rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
           <div
-            className="rounded-3xl border bg-card/90 p-5 md:p-6 shadow-sm h-full"
+            className="rounded-3xl border bg-card/90 p-6 md:p-7 shadow-sm"
             style={{
               borderColor: hexToRgba('#A78BFA', 0.55),
               boxShadow: `0 0 0 1px ${hexToRgba('#A78BFA', 0.55)} inset, 0 0 36px ${hexToRgba('#A78BFA', 0.25)}`,
@@ -161,7 +159,15 @@ export default function StackSection() {
                 </div>
               ))}
             </div>
-            {/* decorative chart removed by request */}
+            <svg className="pointer-events-none absolute bottom-2 right-2 h-16 w-40 opacity-70" viewBox="0 0 160 64" fill="none">
+              <path className="chart-path" d="M0 56 C 20 40, 40 44, 60 28 S 100 20, 120 36 S 140 44, 160 24" stroke="url(#grad)" strokeWidth="3" />
+              <defs>
+                <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#60A5FA" />
+                  <stop offset="100%" stopColor="#A78BFA" />
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
           <span
             aria-hidden
@@ -171,29 +177,19 @@ export default function StackSection() {
         </div>
 
         {/* Processes card: dark rim style */}
-        <div className="group relative rounded-3xl h-full transition-transform duration-300 hover:scale-[1.02]">
+        <div className="group relative rounded-3xl transition-transform duration-300 hover:scale-[1.02]">
           <div
-            className="rounded-3xl border bg-card/90 p-5 md:p-6 shadow-sm h-full"
+            className="rounded-3xl border bg-card/90 p-6 md:p-7 shadow-sm"
             style={{
               borderColor: hexToRgba('#A78BFA', 0.55),
               boxShadow: `0 0 0 1px ${hexToRgba('#A78BFA', 0.55)} inset, 0 0 36px ${hexToRgba('#A78BFA', 0.25)}`,
             }}
           >
             <h3 className="text-sm font-semibold text-white/80">Владение процессами</h3>
-            <p className="mt-1.5 text-xs text-white/70">Командные методологии и планирование</p>
-            <div className="mt-5 mb-2 min-h-16 flex flex-wrap gap-3 justify-center items-center">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm sm:text-base text-white/80">
-                <RefreshCw className="h-5 w-5 text-[hsl(var(--accent-purple))]" aria-hidden />
-                Scrum
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm sm:text-base text-white/80">
-                <Workflow className="h-5 w-5 text-[hsl(var(--accent-purple))]" aria-hidden />
-                Agile
-              </span>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm sm:text-base text-white/80">
-                <KanbanSquare className="h-5 w-5 text-[hsl(var(--accent-purple))]" aria-hidden />
-                Kanban
-              </span>
+            <p className="mt-2 text-xs text-white/70">Командные методологии и планирование</p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">Scrum</span>
+              <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">Agile</span>
             </div>
           </div>
           <span
@@ -206,3 +202,4 @@ export default function StackSection() {
     </section>
   );
 }
+
