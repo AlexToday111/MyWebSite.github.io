@@ -26,7 +26,7 @@ export default function ProjectCard({
       </div>
       <div className="p-3">
         <h3 className="text-lg font-semibold">{title}</h3>
-        <p className="mt-1 text-sm text-white/70">{description}</p>
+        <p className="mt-1 text-sm text-white/70 font-readable">{description}</p>
         {results && results.length > 0 && (
           <ul className="mt-2 flex flex-wrap gap-2 text-xs text-amber-300/90">
             {results.map((r) => (
@@ -51,4 +51,3 @@ export default function ProjectCard({
     </GlassCard>
   );
 }
-

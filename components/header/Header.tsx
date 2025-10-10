@@ -17,14 +17,14 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/30">
       <nav className="container flex items-center justify-between py-3">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-6 flex-wrap">
           {links.map((l) => {
             const active = pathname === l.href;
             return (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`text-sm transition hover:text-[hsl(var(--accent-green))] ${active ? "underline underline-offset-4" : ""}`}
+                className={`text-xs sm:text-sm transition hover:text-[hsl(var(--accent-green))] ${active ? "underline underline-offset-4" : ""}`}
               >
                 {l.label}
               </Link>
@@ -36,4 +36,3 @@ export function Header() {
     </header>
   );
 }
-

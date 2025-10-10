@@ -32,10 +32,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ru" suppressHydrationWarning>
-      <body className={`${sprite.className} ${sprite.variable}`}>
+      <body className={`${inter.variable} ${manrope.variable} ${bebas.variable} ${sprite.variable}`}>
         <a href="#content" className="skip-link">Сразу к контенту</a>
         <Providers>{children}</Providers>
       </body>
     </html>
   );
 }
+
