@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBasePath } from "@/lib/paths";
 import GlassCard from "./GlassCard";
 
 export default function ProjectHero({ title, description, image, children }: { title: string; description: string; image: string; children?: React.ReactNode }) {
@@ -12,11 +13,10 @@ export default function ProjectHero({ title, description, image, children }: { t
       <div className="order-1 sm:order-2">
         <div className="rounded-2xl border border-white/10 bg-white/5 p-2">
           <div className="overflow-hidden rounded-xl">
-            <Image src={image} alt={title} width={900} height={600} className="w-full object-cover" />
+            <Image src={withBasePath(image)} alt={title} width={900} height={600} className="w-full object-cover" />
           </div>
         </div>
       </div>
     </GlassCard>
   );
 }
-

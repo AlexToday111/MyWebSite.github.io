@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { withBasePath } from "@/lib/paths";
 import AuroraBackground from "@/components/AuroraBackground";
 import Link from "next/link";
 import ProjectHero from "@/components/ProjectHero";
@@ -25,7 +26,7 @@ export default function HomePage() {
         >
           {/* Background image below text */}
           <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 w-[1200px] h-[1200px]">
-            <Image src="/photos/profile.png" alt="" fill priority sizes="1200px" className="object-contain" />
+            <Image src={withBasePath("/photos/profile.png")} alt="" fill priority sizes="1200px" className="object-contain" />
           </div>
 
           <motion.h1

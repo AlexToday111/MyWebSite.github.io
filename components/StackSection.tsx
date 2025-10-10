@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBasePath } from "@/lib/paths";
 import GlassCard from "./GlassCard";
 import { profile } from "@/data/profile";
 import { RefreshCw, Workflow, KanbanSquare } from "lucide-react";
@@ -81,7 +82,7 @@ export default function StackSection() {
               >
                 <div className="mx-auto grid h-14 w-14 place-items-center">
                   <Image
-                    src={p.src}
+                    src={withBasePath(p.src)}
                     alt={p.name}
                     width={56}
                     height={56}
@@ -115,7 +116,7 @@ export default function StackSection() {
               >
                 <div className="mx-auto grid h-10 w-10 place-items-center">
                   <Image
-                    src={p.src}
+                    src={withBasePath(p.src)}
                     alt={p.name}
                     width={40}
                     height={40}

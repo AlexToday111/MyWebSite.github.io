@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBasePath } from "@/lib/paths";
 import GlassCard from "./GlassCard";
 
 export default function ProjectCard({
@@ -21,7 +22,7 @@ export default function ProjectCard({
   return (
     <GlassCard className="p-3 group transition-all">
       <div className="overflow-hidden rounded-xl">
-        <Image src={image} alt={title} width={800} height={500} className="h-44 w-full object-cover transition-transform duration-200 group-hover:scale-[1.03]" />
+        <Image src={withBasePath(image)} alt={title} width={800} height={500} className="h-44 w-full object-cover transition-transform duration-200 group-hover:scale-[1.03]" />
       </div>
       <div className="p-3">
         <h3 className="text-lg font-semibold">{title}</h3>
@@ -50,5 +51,4 @@ export default function ProjectCard({
     </GlassCard>
   );
 }
-
 

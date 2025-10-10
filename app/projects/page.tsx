@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { withBasePath } from "@/lib/paths";
 import { useMemo, useState } from "react";
 import { projects } from "@/data/projects";
 import { motion } from "framer-motion";
@@ -45,7 +46,7 @@ export default function ProjectsPage() {
           >
             <div className="overflow-hidden rounded-xl">
               <Image
-                src={p.image}
+                src={withBasePath(p.image)}
                 alt={p.title}
                 width={800}
                 height={500}
