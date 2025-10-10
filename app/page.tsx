@@ -13,9 +13,9 @@ import { profile } from "@/data/profile";
 
 export default function HomePage() {
   return (
-    <main id="content" className="relative h-screen overflow-y-scroll overflow-x-hidden snap-y snap-mandatory scroll-smooth">
+    <main id="content" className="relative h-screen overflow-y-scroll overflow-x-hidden scroll-smooth">
       {/* Раздел 1: Ник */}
-      <section id="intro" className="snap-start snap-always min-h-screen grid place-items-center relative">
+      <section id="intro" className="min-h-screen grid place-items-center relative">
         <AuroraBackground />
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,7 +43,7 @@ export default function HomePage() {
       </section>
 
       {/* Раздел 2: Стек + проекты */}
-      <section id="work" className="relative snap-start snap-always min-h-screen">
+      <section id="work" className="relative min-h-screen">
         {/* Фоновая аура: два фиолетовых круга по бокам */}
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute left-[-12%] top-[15%] h-[34rem] w-[34rem] rounded-full bg-gradient-to-tr from-violet-500/35 to-fuchsia-500/25 blur-3xl animate-soft-blink" />
@@ -71,7 +71,7 @@ export default function HomePage() {
       </section>
 
       {/* Раздел 3: Заключение */}
-      <section id="final" className="relative snap-start snap-always min-h-screen grid place-items-center">
+      <section id="final" className="relative min-h-screen grid place-items-center">
         <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
           <div className="absolute left-[-12%] top-[15%] h-[60rem] w-[60rem] rounded-full bg-gradient-to-tr from-violet-500/35 to-fuchsia-500/25 blur-3xl animate-soft-blink" />
           <div className="absolute right-[-14%] bottom-[-10%] h-[68rem] w-[68rem] rounded-full bg-gradient-to-bl from-fuchsia-500/30 to-purple-500/25 blur-3xl animate-soft-blink" />
