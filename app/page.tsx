@@ -1,99 +1,90 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
-import SocialLinks from "@/components/SocialLinks";
+import Image from "next/image";
 import AuroraBackground from "@/components/AuroraBackground";
-import GlassCard from "@/components/GlassCard";
-import Section from "@/components/Section";
-import ContactRow from "@/components/ContactRow";
-import PillNav from "@/components/PillNav";
-import ProjectCard from "@/components/ProjectCard";
+import Link from "next/link";
 import ProjectHero from "@/components/ProjectHero";
-import SkillList from "@/components/SkillList";
+import NeonProjectGrid from "@/components/NeonProjectGrid";
+import StackSection from "@/components/StackSection";
+import FinalCallout from "@/components/FinalCallout";
 import { profile } from "@/data/profile";
 
 export default function HomePage() {
   return (
-    <main id="content" className="relative py-20">
-      <AuroraBackground />
-      <section id="home" className="container relative mb-16 overflow-hidden rounded-3xl">
-        <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight"
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.2 }}
+    <main id="content" className="relative h-screen overflow-y-scroll overflow-x-hidden snap-y snap-mandatory scroll-smooth">
+      {/* Раздел 1: Ник */}
+      <section id="intro" className="snap-start snap-always min-h-screen grid place-items-center relative">
+        <AuroraBackground />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0.6 }}
+          className="relative text-center"
         >
-          {profile.name}
-        </motion.h1>
-        <p className="mt-1 text-base sm:text-lg md:text-xl text-amber-300 font-medium">Backend Java Developer</p>
-        <p className="mt-2 text-base text-white/70">Spring Boot, многопоточность, CI/CD. Развиваюсь как backend‑инженер.</p>
-        <motion.p
-          className="mt-4 text-lg subtle-lead"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05, duration: 0.2 }}
-        >
-          {profile.summary}
-        </motion.p>
-        <div className="mt-6 grid grid-cols-1 sm:grid-cols-[1fr_auto] items-center gap-6">
-          <div>
-            <Link className="inline-flex items-center rounded-xl px-5 py-2 bg-[hsl(var(--accent-green))]/90 text-black shadow-soft transition-all hover:bg-[hsl(var(--accent-green))] hover:shadow-lg" href="/contact">
-              Связаться
-            </Link>
+          {/* Background image below text */}
+          <div aria-hidden className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 w-[1200px] h-[1200px]">
+            <Image src="/photos/profile.png" alt="" fill priority sizes="1200px" className="object-contain" />
           </div>
-          <div className="justify-self-end relative h-20 w-20 sm:h-24 sm:w-24 overflow-hidden rounded-2xl border border-white/10 bg-white/5">
-            <Image src="/profile.png" alt={profile.name} fill sizes="96px" className="object-cover" />
-          </div>
-        </div>
+
+          <motion.h1
+            className="relative z-10 text-6xl sm:text-8xl font-extrabold tracking-tight [font-family:var(--ff-exotica)]"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            {profile.name}
+          </motion.h1>
+
+          
+        </motion.div>
       </section>
 
-      <Section id="summary" title="Summary" subtitle="Статус и быстрые ссылки">
-        <div className="relative">
-          <div className="pointer-events-none absolute inset-0 -z-10 opacity-[0.35] section-bg rounded-3xl" />
-          <div className="grid gap-4 md:grid-cols-3 auto-rows-fr">
-          <GlassCard className="p-6 md:col-span-2">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--fg))]/10 bg-[hsl(var(--fg))]/5 px-3 py-1.5 text-sm">
-              <span className="text-green-300">✅</span> Open to work
-            </div>
-          </GlassCard>
-          <GlassCard className="p-6">
-            <h3 className="text-sm font-semibold text-[hsl(var(--fg))]/90">Контакты</h3>
-            <div className="mt-3">
-              <ContactRow />
-            </div>
-          </GlassCard>
+      {/* Раздел 2: Стек + проекты */}
+      <section id="work" className="relative snap-start snap-always min-h-screen">
+        {/* Фоновая аура: два фиолетовых круга по бокам */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute left-[-12%] top-[15%] h-[34rem] w-[34rem] rounded-full bg-gradient-to-tr from-violet-500/35 to-fuchsia-500/25 blur-3xl" />
+          <div className="absolute right-[-14%] bottom-[-10%] h-[38rem] w-[38rem] rounded-full bg-gradient-to-bl from-fuchsia-500/30 to-purple-500/25 blur-3xl" />
         </div>
-        </div>
-      </Section>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0.4 }}
+        >
+          <StackSection />
+        </motion.div>
+        <section id="projects" className="container py-14 sm:py-16 relative">
+          <div className="mb-6 text-center relative">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight [font-family:var(--ff-exotica)]">Проекты</h2>
+            <p className="mt-2 text-sm text-white/70 max-w-2xl mx-auto">Краткий обзор некоторых реализованных проектов. Подробнее в репозиториях и демо.</p>
+          </div>
+          
+          {/* Hero tile removed as requested */}
+          <div className="mt-6">
+            <NeonProjectGrid />
+          </div>
+        </section>
+      </section>
 
-      <Section id="skills" title="Skills / Tools">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 auto-rows-fr">
-          {profile.skillsSections?.map((sec, idx) => (
-            <GlassCard key={sec.title} className={`p-6 ${idx === 2 ? "lg:col-span-2" : ""}`}>
-              <h3 className="text-base font-semibold text-white/90">{sec.title}</h3>
-              <SkillList items={sec.items as unknown as string[]} />
-            </GlassCard>
-          ))}
+      {/* Раздел 3: Заключение */}
+      <section id="final" className="relative snap-start snap-always min-h-screen grid place-items-center">
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute left-[-12%] top-[15%] h-[60rem] w-[60rem] rounded-full bg-gradient-to-tr from-violet-500/35 to-fuchsia-500/25 blur-3xl" />
+          <div className="absolute right-[-14%] bottom-[-10%] h-[68rem] w-[68rem] rounded-full bg-gradient-to-bl from-fuchsia-500/30 to-purple-500/25 blur-3xl" />
         </div>
-      </Section>
-
-      <Section id="projects" title="Projects">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          <ProjectHero title={profile.projects[0].title} description={profile.projects[0].description} image={profile.projects[0].image}>
-            <a className="rounded-xl px-3 py-1.5 text-sm bg-amber-400/15 hover:bg-amber-400/25" href={profile.projects[0].demo}>Demo</a>
-            <a className="rounded-xl px-3 py-1.5 text-sm bg-teal-400/15 hover:bg-teal-400/25" href={profile.projects[0].repo}>Repo</a>
-          </ProjectHero>
-          {profile.projects.slice(1).map((p) => (
-            <ProjectCard key={p.title} {...p} />
-          ))}
-        </div>
-      </Section>
-
-      <PillNav />
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, amount: 0.5 }}
+          className="w-full"
+        >
+          <FinalCallout />
+        </motion.div>
+      </section>
     </main>
   );
 }
-
-

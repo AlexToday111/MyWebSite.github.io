@@ -1,20 +1,19 @@
 "use client";
 
-import { Home, UserRound, Briefcase, Wrench } from "lucide-react";
+import { Home, Layers, Briefcase, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { LayoutGroup, motion } from "framer-motion";
 
 const items = [
   { id: "home", label: "Home", icon: Home },
-  { id: "summary", label: "Summary", icon: UserRound },
-  { id: "skills", label: "Skills", icon: Wrench },
+  { id: "stack", label: "Stack", icon: Layers },
   { id: "projects", label: "Projects", icon: Briefcase },
-  // "links" section is rendered only if present in DOM
+  { id: "final", label: "Final", icon: Sparkles },
 ] as const;
 
 export default function PillNav() {
   const [active, setActive] = useState<string>("home");
-  const [presentIds, setPresentIds] = useState<string[]>(["home", "summary", "skills", "projects"]);
+  const [presentIds, setPresentIds] = useState<string[]>(items.map(i => i.id));
   const ticking = useRef(false);
 
   useEffect(() => {
@@ -100,5 +99,4 @@ export default function PillNav() {
     </nav>
   );
 }
-
 

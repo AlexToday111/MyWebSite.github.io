@@ -3,90 +3,125 @@
 @tailwind utilities;
 
 :root {
-  /* Light theme (08:00–18:00) */
-  --bg: 0 0% 100%;          /* #ffffff */
-  --fg: 222 47% 11%;        /* #111827 */
-  --muted: 215 16% 47%;     /* #6B7280 */
-  --accent-green: 160 84% 39%; /* #10B981 */
-  --accent-blue: 217 91% 60%;  /* #3B82F6 */
-  --accent-purple: 252 100% 60%; /* #7C6CFF */
-  --card: 0 0% 100%;        /* #ffffff */
-  --border: 0 0% 0% / 0.1;  /* 10% black */
+  /* Deep black + purple */
+  --bg: 258 30% 5%;           /* near-black with violet hue */
+  --fg: 220 40% 96%;          /* near-white */
+  --muted: 220 12% 70%;
+  --accent-green: 268 90% 66%; /* primary violet (repurposed var) */
+  --accent-blue: 260 100% 75%; /* softer purple-blue for accents */
+  --accent-purple: 285 92% 72%;
+  --card: 258 25% 10%;
+  --border: 0 0% 100% / 0.08;
+  /* Use Sprite Graffiti for all site text */
+  --ff-exotica: 'SPRITE GRAFFITI', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ff-ouroboros: 'SPRITE GRAFFITI', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
 .dark {
-  /* Dark theme (18:00–08:00) */
-  --bg: 212 29% 6%;         /* #0B0F14 */
-  --fg: 210 46% 92%;        /* #E6EEF5 */
-  --muted: 210 18% 70%;
-  --accent-green: 160 84% 39%;
-  --accent-blue: 217 91% 60%;
-  --accent-purple: 252 100% 78%; /* #9B8CFF */
-  --card: 220 20% 12%;      /* #111827 */
-  --border: 0 0% 100% / 0.1; /* 10% white */
+  /* Same palette for dark */
+  --bg: 258 30% 5%;
+  --fg: 220 40% 96%;
+  --muted: 220 12% 70%;
+  --accent-green: 268 90% 66%;
+  --accent-blue: 260 100% 75%;
+  --accent-purple: 285 92% 72%;
+  --card: 258 25% 10%;
+  --border: 0 0% 100% / 0.08;
+  /* Display font variable for headings */
+  --ff-exotica: 'SPRITE GRAFFITI', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
 
-html:focus-within {
-  scroll-behavior: smooth;
-}
+html:focus-within { scroll-behavior: smooth; }
 
-body {
-  @apply bg-[hsl(var(--bg))] text-[hsl(var(--fg))] antialiased;
-}
+body { @apply bg-[hsl(var(--bg))] text-[hsl(var(--fg))] antialiased; font-family: var(--ff-exotica); }
 
 /* Disable horizontal scroll */
-html, body {
-  overflow-x: hidden;
-}
+html, body { overflow-x: hidden; }
 
 /* Ensure only one vertical scrollbar (document) */
-html, body {
-  height: 100%;
-}
-html {
-  overflow-y: auto;
-}
-body {
-  overflow-y: visible;
-}
+html, body { height: 100%; }
+html { overflow-y: auto; }
+body { overflow-y: visible; }
 
 /* Accessible focus ring */
 :where(a, button, input, select, textarea) {
-  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[hsl(var(--bg))] focus:ring-[hsl(var(--accent-blue))];
+  @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[hsl(var(--bg))] focus:ring-[hsl(var(--accent-green))];
 }
 
 /* 8pt baseline rhythm helpers */
-.container {
-  @apply mx-auto px-4 sm:px-6;
-}
+.container { @apply mx-auto px-4 sm:px-6; }
 
-/* Helper: subtle section backgrounds */
+/* Subtle section background aurora */
 .section-bg {
   background-image:
-    linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)),
-    linear-gradient(135deg, rgba(155,140,255,0.04), rgba(16,185,129,0.03));
+    radial-gradient(70rem 40rem at 110% -10%, rgba(147,51,234,0.25), transparent),
+    radial-gradient(80rem 40rem at -10% 120%, rgba(99,102,241,0.18), transparent);
 }
 
-/* Helper: aurora behind hero */
-.aurora-bg {
-  pointer-events: none;
-}
+.aurora-bg { pointer-events: none; }
 
-/* Improve readability for long subtitles */
-.subtle-lead {
-  @apply leading-relaxed text-[hsl(var(--muted))];
-}
+.subtle-lead { @apply leading-relaxed text-[hsl(var(--muted))]; }
 
 /* Skip link */
 .skip-link {
   position: absolute;
   left: 0;
   top: -40px;
-  background: hsl(var(--accent-blue));
+  background: hsl(var(--accent-green));
   color: #000;
   padding: 8px 12px;
   z-index: 100;
 }
-.skip-link:focus {
-  top: 0;
+.skip-link:focus { top: 0; }
+
+/* Neon card edge like gradient glow */
+.neon-card { position: relative; }
+.neon-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(168,85,247,.55), rgba(56,189,248,.35));
+  filter: blur(16px);
+  opacity: .25;
+  z-index: -1;
+}
+
+/* Brand icons: grayscale → brand color on hover */
+.brand-icon { filter: grayscale(1) contrast(.8) brightness(.9); transition: filter .2s ease, transform .2s ease, background-color .2s ease; }
+.brand-icon:hover { filter: none; transform: translateY(-2px); background-color: var(--brand-color); }
+
+/* Simple path draw animation for statistic card */
+@keyframes dash {
+  from { stroke-dashoffset: 380; }
+  to { stroke-dashoffset: 0; }
+}
+.chart-path { stroke-dasharray: 380; stroke-dashoffset: 380; animation: dash 2.2s ease-in-out forwards; opacity: .9; }
+
+
+/* Local font-face for EXOTICA (drop files into public/fonts) */
+@font-face {
+  font-family: 'EXOTICA';
+  src: url('/fonts/exotica.woff2') format('woff2'),
+       url('/fonts/exotica.woff') format('woff');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+/* Optional local font for OUROBOROS. Put files into public/fonts */
+@font-face {
+  font-family: 'OUROBOROS';
+  src: url('/fonts/ouroboros.woff2') format('woff2'),
+       url('/fonts/ouroboros.woff') format('woff');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+/* Local font-face for SPRITE GRAFFITI (use your provided OTF) */
+@font-face {
+  font-family: 'SPRITE GRAFFITI';
+  src: url('/fonts/SpriteGraffiti-Regular.otf') format('opentype');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
 }

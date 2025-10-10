@@ -7,7 +7,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 const links = [
   { href: "/", label: "Главная" },
   { href: "/projects", label: "Проекты" },
-  { href: "/education", label: "Обучение" },
+  { href: "/education", label: "Образование" },
   { href: "/about", label: "Обо мне" },
   { href: "/contact", label: "Контакты" },
 ];
@@ -24,7 +24,7 @@ export function Header() {
               <Link
                 key={l.href}
                 href={l.href}
-                className={`text-sm transition hover:text-[hsl(var(--accent-blue))] ${active ? "underline underline-offset-4" : ""}`}
+                className={`text-sm transition hover:text-[hsl(var(--accent-green))] ${active ? "underline underline-offset-4" : ""}`}
               >
                 {l.label}
               </Link>
@@ -36,5 +36,4 @@ export function Header() {
     </header>
   );
 }
-
 
