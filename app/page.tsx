@@ -44,7 +44,7 @@ export default function HomePage() {
           {/* Background image below text */}
           <motion.div 
             aria-hidden 
-            className="pointer-events-none absolute w-[1200px] h-[1200px]"
+            className="pointer-events-none absolute w-full max-w-[600px] sm:max-w-[800px] md:max-w-[1000px] lg:max-w-[1200px] aspect-square"
             initial={{ opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}
             animate={showImage ? { opacity: 0.2, scale: 1, x: '-50%', y: '-50%' } : { opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
@@ -55,7 +55,7 @@ export default function HomePage() {
             }}
           >
             <div className="relative w-full h-full">
-              <Image src={withBasePath("/photos/profile.png")} alt="" fill priority sizes="1200px" className="object-contain" />
+              <Image src={withBasePath("/photos/profile.png")} alt="" fill priority sizes="(max-width: 640px) 600px, (max-width: 768px) 800px, (max-width: 1024px) 1000px, 1200px" className="object-contain" />
               {/* Плавное замыливание по краям - радиальный градиент */}
               <div 
                 className="absolute inset-0" 
@@ -68,7 +68,7 @@ export default function HomePage() {
           </motion.div>
 
           <motion.h1
-            className="relative z-10 mt-12 sm:mt-16 text-[20rem] sm:text-[35rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)] select-none"
+            className="relative z-10 mt-12 sm:mt-16 text-[8rem] xs:text-[12rem] sm:text-[20rem] md:text-[28rem] lg:text-[35rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)] select-none leading-none"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -152,9 +152,9 @@ export default function HomePage() {
         >
           <StackSection />
         </motion.div>
-        <section id="projects" className="container py-14 sm:py-16 relative">
-          <div className="mb-6 text-center relative">
-            <h2 className="text-[2.5rem] sm:text-[3.75rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)]">Проекты</h2>
+        <section id="projects" className="container py-10 sm:py-14 md:py-16 relative">
+          <div className="mb-4 sm:mb-6 text-center relative">
+            <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3.75rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)]">Проекты</h2>
           </div>
           
           {/* Hero tile removed as requested */}

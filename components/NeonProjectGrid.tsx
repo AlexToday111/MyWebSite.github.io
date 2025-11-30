@@ -63,7 +63,7 @@ export default function NeonProjectGrid() {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-7">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-7">
       {cards.map(({ title, text, href }) => {
         const violet = "#A78BFA";
         const border = hexToRgba(violet, 0.55);
@@ -79,18 +79,18 @@ export default function NeonProjectGrid() {
             variants={variants}
           >
             <div
-              className="relative h-60 rounded-2xl border bg-card/95 p-6 text-center shadow-sm flex flex-col items-center justify-center"
+              className="relative min-h-[200px] sm:h-60 rounded-2xl border bg-card/95 p-4 sm:p-6 text-center shadow-sm flex flex-col items-center justify-center"
               style={{ borderColor: border, boxShadow: `0 0 0 1px ${border} inset, 0 0 30px ${glow}` }}
             >
               <Link
                 href={href}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-5 py-2 text-lg text-white/90 font-semibold transition-all duration-200 hover:bg-violet-500 hover:text-black hover:scale-105 hover:ring-2 hover:ring-violet-500/60 hover:ring-offset-2 hover:ring-offset-[hsl(var(--bg))]"
+                className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-2 sm:px-5 text-base sm:text-lg text-white/90 font-semibold transition-all duration-200 hover:bg-violet-500 hover:text-black hover:scale-105 hover:ring-2 hover:ring-violet-500/60 hover:ring-offset-2 hover:ring-offset-[hsl(var(--bg))]"
               >
                 {title}
               </Link>
-              <p className="mt-4 text-lg text-white/70 font-readable clamp-2 text-center">
+              <p className="mt-3 sm:mt-4 text-sm sm:text-base md:text-lg text-white/70 font-readable clamp-2 text-center px-2">
                 {text}
               </p>
             </div>

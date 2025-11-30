@@ -67,9 +67,9 @@ export default function PillNav() {
   };
 
   return (
-    <nav className="fixed left-3 sm:left-8 top-1/2 z-40 -translate-y-1/2" aria-label="Section navigation" aria-orientation="vertical">
+    <nav className="fixed left-2 sm:left-3 md:left-8 top-1/2 z-40 -translate-y-1/2 hidden sm:block" aria-label="Section navigation" aria-orientation="vertical">
       <LayoutGroup>
-        <div className="relative flex flex-col gap-2 rounded-full border border-white/10 bg-white/10 backdrop-blur-xl px-3 sm:px-4 py-2 shadow-[0_0_60px_rgba(251,191,36,.12)]">
+        <div className="relative flex flex-col gap-1 sm:gap-2 rounded-full border border-white/10 bg-white/10 backdrop-blur-xl px-2 sm:px-3 md:px-4 py-2 shadow-[0_0_60px_rgba(251,191,36,.12)]">
           {presentIds.map((id) => {
             const meta = items.find(i => i.id === id)!;
             const isActive = active === id;
@@ -80,7 +80,7 @@ export default function PillNav() {
                 type="button"
                 onClick={() => scrollTo(id)}
                 aria-current={isActive}
-                className="relative inline-flex items-center gap-2 rounded-full px-3 py-4 text-sm sm:text-base transition"
+                className="relative inline-flex items-center gap-1 sm:gap-2 rounded-full px-2 sm:px-3 py-2 sm:py-3 md:py-4 text-xs sm:text-sm md:text-base transition"
               >
                 {isActive && (
                   <motion.span
@@ -89,8 +89,8 @@ export default function PillNav() {
                     transition={{ type: "spring", stiffness: 400, damping: 35 }}
                   />
                 )}
-                <Icon className="relative z-10 h-5 w-5 text-amber-300" aria-hidden />
-                <span className="relative z-10 hidden sm:inline">{meta.label}</span>
+                <Icon className="relative z-10 h-4 w-4 sm:h-5 sm:w-5 text-amber-300" aria-hidden />
+                <span className="relative z-10 hidden md:inline">{meta.label}</span>
               </button>
             );
           })}
