@@ -27,25 +27,25 @@ export default function NeonProjectGrid() {
       title: "Visual Curcuit Designer",
       text:
         "Веб-сервис, предоставляющий оптимизированную платформу для проектирования, компиляции и отладки цифровых схем.",
-      href: "https://github.com/AlexToday666/Visual-Circuit-Designer",
+      href: "https://github.com/AlexToday111/Visual-Circuit-Designer",
     },
     {
       title: "Trading System",
       text:
         "Реализация стратегии дивергенций цены и RSI: живой сканер и торговля через MetaTrader 5, бэктест на Backtrader, HTML-отчёты QuantStats.",
-      href: "https://github.com/AlexToday666/MT5-Divergence-Bot",
+      href: "https://github.com/AlexToday111/MT5-Divergence-Bot",
     },
     {
       title: "Rating My Spot",
       text:
         "REST API сервис для поиска лучших мест работы (кафе, коворкинги, библиотеки) с фильтрацией по уровню шума, скорости Wi‑Fi.",
-      href: "https://github.com/AlexToday666/RMS",
+      href: "https://github.com/AlexToday111/RMS",
     },
     {
       title: "Notes API",
       text:
         "REST-сервис для хранения заметок с тегами, поддержкой поиска и архивирования.",
-      href: "https://github.com/AlexToday666/Notes-API",
+      href: "https://github.com/AlexToday111/Notes-API",
     },
   ];
 
