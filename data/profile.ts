@@ -6,9 +6,9 @@ export const profile = {
   location: "RU / KZ (remote)",
   email: "ernest@example.com",
   links: {
-    github: "https://github.com/AlexToday666",
+    github: "https://github.com/AlexToday111",
     gitlab: "https://gitlab.com/placeholder",
-    leetcode: "https://leetcode.com/u/AlexToday666/",
+    leetcode: "https://leetcode.com/u/AlexToday111/",
     telegram: "https://t.me/ba6kir",
   },
   languages: [
