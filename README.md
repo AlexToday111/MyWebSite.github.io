@@ -25,7 +25,6 @@
 │   ├── layout.tsx         # Основной layout
 │   └── page.tsx           # Главная страница
 ├── components/            # React компоненты
-│   ├── ui/                # UI компоненты
 │   ├── AuroraBackground.tsx
 │   ├── GlassCard.tsx
 │   ├── ProjectCard.tsx
@@ -36,8 +35,9 @@
 │   ├── education.ts       # Образование
 │   └── site.ts            # Настройки сайта
 ├── public/                # Статические файлы
-│   ├── profile.png        # Фото профиля
-│   └── projects/          # Изображения проектов
+│   ├── photos/            # Фото
+│   ├── projects/          # Изображения проектов
+│   └── icons/             # Иконки технологий
 └── ...
 ```
 
