@@ -3,6 +3,8 @@ import "./globals.css";
 import { Providers } from "./providers";
 import { Inter, Manrope, Unbounded } from "next/font/google";
 import localFont from "next/font/local";
+import { Header } from "@/components/header/Header";
+import { Footer } from "@/components/footer/Footer";
 
 const inter = Inter({ subsets: ["latin", "cyrillic"], variable: "--font-inter" });
 const manrope = Manrope({ subsets: ["latin", "cyrillic"], variable: "--font-manrope", weight: ["200","300","400","500","600","700","800"] });
@@ -34,7 +36,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ru" suppressHydrationWarning>
       <body className={`${gendy.className} ${gendy.variable}`}>
         <a href="#content" className="skip-link">Сразу к контенту</a>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Header />
+          <div className="min-h-screen flex flex-col">
+            <div id="content" className="flex-1 pt-16 sm:pt-20">
+              {children}
+            </div>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );

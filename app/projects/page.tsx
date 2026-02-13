@@ -2,41 +2,20 @@
 
 import Image from "next/image";
 import { withBasePath } from "@/lib/paths";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { projects } from "@/data/projects";
 import { motion } from "framer-motion";
 
-function Tag({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`rounded-full border px-3 py-1 text-sm transition ${active ? "border-[hsl(var(--accent-green))] bg-[hsl(var(--accent-green))]/10" : "border-white/10 hover:border-white/20"}`}
-      aria-pressed={active}
-    >
-      {label}
-    </button>
-  );
-}
-
 export default function ProjectsPage() {
-  const [active, setActive] = useState<string | null>(null);
-  const tags = useMemo(() => Array.from(new Set(projects.flatMap((p) => p.stack))).sort(), []);
   const sorted = useMemo(() => {
     const list = [...projects];
     list.sort((a, b) => Number(b.featured ?? 0) - Number(a.featured ?? 0));
-    return active ? list.filter((p) => p.stack.includes(active)) : list;
-  }, [active]);
+    return list;
+  }, []);
 
   return (
     <main id="projects-page" className="container py-8 sm:py-12 md:py-16 reveal">
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">Проекты</h1>
-      <div className="mt-4 sm:mt-6 flex flex-wrap gap-2">
-        <Tag label="Все" active={active === null} onClick={() => setActive(null)} />
-        {tags.map((t) => (
-          <Tag key={t} label={t} active={active === t} onClick={() => setActive(t)} />
-        ))}
-      </div>
-
       <div className="mt-6 sm:mt-8 grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 reveal-grid">
         {sorted.map((p) => (
           <motion.article

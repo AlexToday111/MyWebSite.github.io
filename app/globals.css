@@ -50,31 +50,13 @@ h1, h2, h3 {
   -webkit-touch-callout: none;
 }
 
-/* Disable horizontal scroll */
-html, body { overflow-x: hidden; }
-
-/* Ensure only one vertical scrollbar (document) */
-html, body { height: 100%; }
-html { overflow-y: auto; }
-body { overflow-y: visible; }
-
-/* Hide scrollbar but keep functionality */
-html {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-}
-html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+/* Disable all scrolling on every page */
+html, body {
+  height: 100%;
+  overflow: hidden;
 }
 
-/* Hide scrollbar on main element */
-#content {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-}
-#content::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-}
+#content { overflow: visible; }
 
 /* Accessible focus ring */
 :where(a, button, input, select, textarea) {

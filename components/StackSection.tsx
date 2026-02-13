@@ -1,41 +1,21 @@
 import Image from "next/image";
 import { withBasePath } from "@/lib/paths";
-import GlassCard from "./GlassCard";
-import { profile } from "@/data/profile";
 import { RefreshCw, Workflow, KanbanSquare } from "lucide-react";
 
 const PRIMARY = [
-  { name: "Java", src: "/icons/java-original-8x.png", color: "#007396" },
-  { name: "Spring", src: "/icons/spring-original-8x.png", color: "#6DB33F" },
-  { name: "C++", src: "/icons/c-plusplus-8x.png", color: "#00599C" },
-  { name: "Python", src: "/icons/python-8x.png", color: "#3776AB" },
+  { name: "Java", src: "/icons/java-original-8x.png", level: 5 },
+  { name: "Spring", src: "/icons/spring-original-8x.png", level: 4 },
+  { name: "Git", src: "/icons/git-icon-8x.png", level: 4 },
 ] as const;
 
 const SECONDARY = [
-  { name: "Kafka", src: "/icons/kafka.png", color: "#231F20" },
-  { name: "Redis", src: "/icons/redis-original-8x.png", color: "#DC382D" },
-  { name: "Hibernate", src: "/icons/hibernate-8x.png", color: "#59666C" },
-  { name: "Git", src: "/icons/git-icon-8x.png", color: "#F05032" },
-  { name: "JUnit", src: "/icons/junit-plain-8x.png", color: "#25A162" },
+  { name: "Kafka", src: "/icons/kafka.png" },
+  { name: "Redis", src: "/icons/redis-original-8x.png" },
+  { name: "Hibernate", src: "/icons/hibernate-8x.png" },
+  { name: "JUnit", src: "/icons/junit-plain-8x.png" },
+  { name: "Python", src: "/icons/python-8x.png" },
+  { name: "C++", src: "/icons/c-plusplus-8x.png" },
 ] as const;
-
-function LangBars() {
-  return (
-    <div className="mt-4 space-y-3">
-      {profile.languages.map((l) => (
-        <div key={l.name}>
-          <div className="flex items-center justify-between text-sm">
-            <span>{l.name}</span>
-            <span className="text-white/60">{l.level}</span>
-          </div>
-          <div className="mt-1 h-2 w-full rounded-full bg-white/10">
-            <div className="h-2 rounded-full bg-[hsl(var(--accent-purple))]" style={{ width: `${l.value}%` }} />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 function rimFor(name: string): string {
   const n = name.toLowerCase();
@@ -60,148 +40,115 @@ function hexToRgba(hex: string, alpha = 1) {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
+function Rating({ value }: { value: number }) {
+  const cells = Array.from({ length: 5 }, (_, i) => i < value);
+  return (
+    <div className="flex items-center gap-1">
+      {cells.map((on, i) => (
+        <span
+          key={i}
+          className={`h-2.5 w-6 rounded-full border ${on ? "bg-[hsl(var(--accent-purple))] border-[hsl(var(--accent-purple))]" : "border-white/15 bg-white/5"}`}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function StackSection() {
   return (
-    <section id="stack" className="container py-10 sm:py-14 md:py-16">
-      <div className="mb-4 sm:mb-6 text-center reveal">
-        <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3.75rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)]">Стэк</h2>
+    <section id="stack" className="container py-6 sm:py-8 md:py-10">
+      <div className="mb-4 text-center reveal">
+        <h2 className="text-[2rem] sm:text-[2.4rem] md:text-[3rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)]">Технический стек</h2>
       </div>
 
-      {/* Primary icons */}
-      <div className="flex flex-wrap justify-center gap-4 sm:gap-5 md:gap-6 reveal-grid">
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="relative rounded-3xl border bg-card/95 p-4 sm:p-6 shadow-sm">
+          <div className="text-xs sm:text-sm text-white/60">Образование</div>
+          <div className="mt-2 text-base sm:text-lg font-semibold text-white/90">Университет Иннополис</div>
+          <div className="text-xs sm:text-sm text-white/60">2024–2028</div>
+        </div>
+        <div
+          className="relative rounded-3xl border bg-card/95 p-4 sm:p-6 shadow-sm"
+          style={{
+            borderColor: hexToRgba("#A78BFA", 0.55),
+            boxShadow: `0 0 0 1px ${hexToRgba("#A78BFA", 0.55)} inset, 0 0 30px ${hexToRgba("#A78BFA", 0.25)}`,
+          }}
+        >
+          <div className="text-xs sm:text-sm text-white/60">Владение процессами</div>
+          <div className="mt-3 flex flex-wrap gap-2 sm:gap-3">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs sm:text-sm text-white/80">
+              <RefreshCw className="h-4 w-4 text-[hsl(var(--accent-purple))]" aria-hidden />
+              Scrum
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs sm:text-sm text-white/80">
+              <Workflow className="h-4 w-4 text-[hsl(var(--accent-purple))]" aria-hidden />
+              Agile
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs sm:text-sm text-white/80">
+              <KanbanSquare className="h-4 w-4 text-[hsl(var(--accent-purple))]" aria-hidden />
+              Kanban
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-5 grid gap-3 md:grid-cols-3">
         {PRIMARY.map((p) => {
           const rim = rimFor(p.name);
           const border = hexToRgba(rim, 0.55);
           const glow = hexToRgba(rim, 0.25);
           return (
-            <div key={p.name} className="group relative rounded-2xl transition-transform duration-300 hover:scale-[1.02]">
-              <div
-                className="rounded-2xl border bg-card/95 p-4 sm:p-6 md:p-8 text-center shadow-sm min-w-[100px] sm:min-w-[120px] md:min-w-[140px]"
-                style={{ borderColor: border, boxShadow: `0 0 0 1px ${border} inset, 0 0 30px ${glow}` }}
-              >
-                <div className="mx-auto grid h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem] md:h-20 md:w-20 place-items-center">
+            <div
+              key={p.name}
+              className="relative rounded-2xl border bg-card/95 p-3 sm:p-4 shadow-sm"
+              style={{ borderColor: border, boxShadow: `0 0 0 1px ${border} inset, 0 0 24px ${glow}` }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="grid h-12 w-12 place-items-center rounded-xl border border-white/10 bg-white/5">
                   <Image
                     src={withBasePath(p.src)}
                     alt={p.name}
-                    width={80}
-                    height={80}
-                    className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 transition-transform duration-200 group-hover:scale-110"
+                    width={48}
+                    height={48}
+                    className="h-7 w-7"
                     draggable={false}
                   />
                 </div>
-                <div className="mt-3 sm:mt-4 text-sm sm:text-base font-medium text-white/80">{p.name}</div>
+                <div className="min-w-0">
+                  <div className="text-sm sm:text-base font-semibold text-white/90">{p.name}</div>
+                  <div className="mt-2">
+                    <Rating value={p.level} />
+                  </div>
+                </div>
               </div>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute -inset-2 -z-10 rounded-3xl blur-2xl opacity-30 transition-opacity duration-300 group-hover:opacity-50"
-                style={{ background: `radial-gradient(60% 60% at 50% 85%, ${glow}, transparent 60%)` }}
-              />
             </div>
           );
         })}
       </div>
 
-      {/* Secondary brand tiles */}
-      <div className="mt-6 flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-5 reveal-grid">
+      <div className="mt-4 text-xs sm:text-sm text-white/60 text-center">Остальные навыки</div>
+      <div className="mt-3 flex flex-wrap justify-center gap-3 sm:gap-4">
         {SECONDARY.map((p) => {
           const rim = rimFor(p.name);
-          const border = hexToRgba(rim, 0.55);
-          const glow = hexToRgba(rim, 0.25);
+          const border = hexToRgba(rim, 0.45);
+          const glow = hexToRgba(rim, 0.2);
           return (
-            <div key={p.name} className="group relative rounded-2xl transition-transform duration-300 hover:scale-[1.02]">
-              <div
-                className="rounded-2xl border bg-card/95 p-4 sm:p-5 md:p-6 text-center shadow-sm min-w-[90px] sm:min-w-[100px] md:min-w-[120px]"
-                style={{ borderColor: border, boxShadow: `0 0 0 1px ${border} inset, 0 0 26px ${glow}` }}
-              >
-                <div className="mx-auto grid h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 place-items-center">
-                  <Image
-                    src={withBasePath(p.src)}
-                    alt={p.name}
-                    width={64}
-                    height={64}
-                    className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 transition-transform duration-200 group-hover:scale-110"
-                    style={p.name === 'Kafka' ? { filter: 'brightness(0) saturate(100%) invert(69%) sepia(36%) saturate(726%) hue-rotate(208deg) brightness(102%) contrast(103%)' } : undefined}
-                    draggable={false}
-                  />
-                </div>
-                <div className="mt-2 sm:mt-3 text-xs sm:text-sm text-white/75">{p.name}</div>
+            <div key={p.name} className="relative rounded-2xl border bg-card/95 p-3 sm:p-4 text-center shadow-sm min-w-[90px] sm:min-w-[100px]" style={{ borderColor: border, boxShadow: `0 0 0 1px ${border} inset, 0 0 20px ${glow}` }}>
+              <div className="mx-auto grid h-10 w-10 place-items-center">
+                <Image
+                  src={withBasePath(p.src)}
+                  alt={p.name}
+                  width={40}
+                  height={40}
+                  className="h-8 w-8"
+                  style={p.name === "Kafka" ? { filter: "brightness(0) saturate(100%) invert(69%) sepia(36%) saturate(726%) hue-rotate(208deg) brightness(102%) contrast(103%)" } : undefined}
+                  draggable={false}
+                />
               </div>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute -inset-2 -z-10 rounded-3xl blur-2xl opacity-30 transition-opacity duration-300 group-hover:opacity-50"
-                style={{ background: `radial-gradient(60% 60% at 50% 85%, ${glow}, transparent 60%)` }}
-              />
+              <div className="mt-2 text-[11px] sm:text-xs text-white/75">{p.name}</div>
             </div>
           );
         })}
-      </div>
-
-      {/* Владение языками */}
-      <div className="mt-8 flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 justify-center items-stretch max-w-4xl mx-auto">
-        {/* Languages card: dark rim style */}
-        <div className="group relative rounded-3xl h-full transition-transform duration-300 hover:scale-[1.02] flex-1 max-w-xs w-full">
-          <div
-            className="rounded-3xl border bg-card/95 p-4 sm:p-6 md:p-8 shadow-sm h-full"
-            style={{
-              borderColor: hexToRgba('#A78BFA', 0.55),
-              boxShadow: `0 0 0 1px ${hexToRgba('#A78BFA', 0.55)} inset, 0 0 36px ${hexToRgba('#A78BFA', 0.25)}`,
-            }}
-          >
-            <h3 className="text-sm sm:text-base font-semibold text-white/80">Владение языками</h3>
-            <div className="mt-3 sm:mt-4">
-              {profile.languages.slice(0, 3).map((l) => (
-                <div key={l.name} className="mt-2 sm:mt-3 first:mt-0">
-                  <div className="flex items-center justify-between text-xs sm:text-sm">
-                    <span className="text-white/80">{l.name}</span>
-                    <span className="text-white/60">{l.level}</span>
-                  </div>
-                  <div className="mt-1 sm:mt-2 h-2 sm:h-2.5 w-full rounded-full bg-white/10">
-                    <div className="h-2 sm:h-2.5 rounded-full bg-[hsl(var(--accent-purple))]" style={{ width: `${l.value}%` }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-            {/* decorative chart removed by request */}
-          </div>
-          <span
-            aria-hidden
-            className="pointer-events-none absolute -inset-2 -z-10 rounded-[2rem] blur-2xl opacity-30 transition-opacity duration-300 group-hover:opacity-50"
-            style={{ background: `radial-gradient(60% 60% at 50% 85%, ${hexToRgba('#A78BFA', 0.25)}, transparent 60%)` }}
-          />
-        </div>
-
-        {/* Processes card: dark rim style */}
-        <div className="group relative rounded-3xl h-full transition-transform duration-300 hover:scale-[1.02] flex-1 max-w-xs w-full">
-          <div
-            className="rounded-3xl border bg-card/95 p-4 sm:p-6 md:p-8 shadow-sm h-full"
-            style={{
-              borderColor: hexToRgba('#A78BFA', 0.55),
-              boxShadow: `0 0 0 1px ${hexToRgba('#A78BFA', 0.55)} inset, 0 0 36px ${hexToRgba('#A78BFA', 0.25)}`,
-            }}
-          >
-            <h3 className="text-sm sm:text-base font-semibold text-white/80">Владение процессами</h3>
-            <p className="mt-2 text-xs sm:text-sm text-white/70">Командные методологии и планирование</p>
-            <div className="mt-4 sm:mt-6 mb-2 min-h-20 flex flex-wrap gap-2 sm:gap-3 md:gap-4 justify-center items-center">
-              <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/10 bg-white/5 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 text-xs sm:text-base md:text-lg text-white/80">
-                <RefreshCw className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-[hsl(var(--accent-purple))]" aria-hidden />
-                Scrum
-              </span>
-              <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/10 bg-white/5 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 text-xs sm:text-base md:text-lg text-white/80">
-                <Workflow className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-[hsl(var(--accent-purple))]" aria-hidden />
-                Agile
-              </span>
-              <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/10 bg-white/5 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 text-xs sm:text-base md:text-lg text-white/80">
-                <KanbanSquare className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-[hsl(var(--accent-purple))]" aria-hidden />
-                Kanban
-              </span>
-            </div>
-          </div>
-          <span
-            aria-hidden
-            className="pointer-events-none absolute -inset-2 -z-10 rounded-[2rem] blur-2xl opacity-30 transition-opacity duration-300 group-hover:opacity-50"
-            style={{ background: `radial-gradient(60% 60% at 50% 85%, ${hexToRgba('#A78BFA', 0.25)}, transparent 60%)` }}
-          />
-        </div>
       </div>
     </section>
   );

@@ -1,6 +1,5 @@
 "use client";
 
-import { ThemeProvider } from "next-themes";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
@@ -44,15 +43,5 @@ export function Providers({ children }: ProvidersProps) {
       mo.disconnect();
     };
   }, [pathname]);
-  return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem={false}
-      themes={["light", "dark"]}
-      disableTransitionOnChange
-    >
-      {children}
-    </ThemeProvider>
-  );
+  return <>{children}</>;
 }
