@@ -1,54 +1,39 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { withBasePath } from "@/lib/paths";
-import AuroraBackground from "@/components/AuroraBackground";
 import { useState, useEffect } from "react";
 
 export default function HomePage() {
-  const [showImage, setShowImage] = useState(false);
-  const [showAurora, setShowAurora] = useState(false);
+  const [time, setTime] = useState("");
 
   useEffect(() => {
-    // Последовательная анимация: текст -> изображение -> подсветка
-    const imageTimer = setTimeout(() => setShowImage(true), 800); // После появления текста
-    const auroraTimer = setTimeout(() => setShowAurora(true), 1600); // После появления изображения
-
-    return () => {
-      clearTimeout(imageTimer);
-      clearTimeout(auroraTimer);
+    const update = () => {
+      setTime(
+        new Date().toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        })
+      );
     };
+    update();
+    const interval = setInterval(update, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <main className="relative min-h-[100svh] overflow-visible">
+    <main className="relative min-h-[100svh] overflow-visible text-[#b48eec]">
       {/* Start */}
       <section id="intro" className="min-h-[100svh] grid place-items-center relative">
-        <AnimatePresence>
-          {showAurora && <AuroraBackground key="aurora" />}
-        </AnimatePresence>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          viewport={{ once: false, amount: 0.6 }}
-          className="relative text-center"
-        >
+        <div className="relative w-full min-h-[100svh]">
           {/* Фоновое изображение под текстом с плавным затуханием снизу */}
-          <motion.div
+          <div
             aria-hidden
             className="pointer-events-none absolute w-full max-w-[720px] sm:max-w-[960px] md:max-w-[1200px] lg:max-w-[1440px] aspect-square"
-            initial={{ opacity: 0, scale: 0.95, x: "-50%", y: "-50%" }}
-            animate={
-              showImage
-                ? { opacity: 0.2, scale: 1.2, x: "-50%", y: "-50%" }
-                : { opacity: 0, scale: 0.95, x: "-50%", y: "-50%" }
-            }
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              willChange: "opacity, transform",
+              opacity: 0.2,
+              transform: "translate(-50%, -50%) scale(1.2)",
               left: "50%",
               top: "50%",
             }}
@@ -71,55 +56,30 @@ export default function HomePage() {
                 className="object-contain"
               />
             </div>
-          </motion.div>
+          </div>
 
-          <motion.h1
-            className="relative z-10 mt-12 sm:mt-16 text-[8rem] xs:text-[12rem] sm:text-[20rem] md:text-[28rem] lg:text-[35rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)] select-none leading-none"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          <h1
+            className="absolute bottom-5 left-3 sm:bottom-6 sm:left-6 z-10 text-[5.5rem] xs:text-[8.5rem] sm:text-[13.5rem] md:text-[20rem] lg:text-[24.5rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)] select-none leading-none"
             style={{
               userSelect: "none",
               WebkitUserSelect: "none",
-              willChange: "opacity, transform",
             }}
           >
-            <motion.span
-              initial={{ color: "hsl(var(--accent-purple))" }}
-              animate={{
-                color: showImage
-                  ? "hsl(var(--fg))"
-                  : "hsl(var(--accent-purple))",
-              }}
-              transition={{ duration: 7, ease: [0.25, 0.46, 0.45, 0.95] }}
-              style={{ willChange: "color" }}
-            >
-              ba
-            </motion.span>
-            <motion.span
-              initial={{ color: "hsl(var(--accent-purple))" }}
-              animate={{
-                color: "hsl(var(--accent-purple))",
-              }}
-              transition={{ duration: 7, ease: [0.25, 0.46, 0.45, 0.95] }}
-              style={{ willChange: "color" }}
-            >
-              6
-            </motion.span>
-            <motion.span
-              initial={{ color: "hsl(var(--accent-purple))" }}
-              animate={{
-                color: showImage
-                  ? "hsl(var(--fg))"
-                  : "hsl(var(--accent-purple))",
-              }}
-              transition={{ duration: 7, ease: [0.25, 0.46, 0.45, 0.95] }}
-              style={{ willChange: "color" }}
-            >
-              kir
-            </motion.span>
-          </motion.h1>
-        </motion.div>
+            <span>ba</span>
+            <span>6</span>
+            <span>kir</span>
+          </h1>
+
+          <div className="pointer-events-none fixed left-[35%] top-6 text-[0.95rem] sm:text-lg tracking-[0.35em]">
+            {time}
+          </div>
+
+          <span className="pointer-events-none fixed bottom-3 right-3 z-50 text-[0.95rem] sm:text-[1.05rem] tracking-[0.08em] drop-shadow-[0_2px_8px_rgba(0,0,0,0.55)] text-right leading-snug">
+            Backend
+            <br />
+            Java Developer
+          </span>
+        </div>
       </section>
 
     </main>
