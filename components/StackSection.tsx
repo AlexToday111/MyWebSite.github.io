@@ -1,205 +1,506 @@
-import Image from "next/image";
 import { withBasePath } from "@/lib/paths";
-import GlassCard from "./GlassCard";
 import { profile } from "@/data/profile";
-import { RefreshCw, Workflow, KanbanSquare } from "lucide-react";
+import {
+  CheckCircle2,
+  Gauge,
+  KanbanSquare,
+  Languages,
+  RefreshCw,
+  Workflow,
+} from "lucide-react";
 
-const PRIMARY = [
-  { name: "Java", src: "/icons/java-original-8x.png", color: "#007396" },
-  { name: "Spring", src: "/icons/spring-original-8x.png", color: "#6DB33F" },
-  { name: "C++", src: "/icons/c-plusplus-8x.png", color: "#00599C" },
-  { name: "Python", src: "/icons/python-8x.png", color: "#3776AB" },
+type StackItem = {
+  id: string;
+  name: string;
+  icon: string;
+  color: string;
+};
+
+type GraphNode = {
+  id: string;
+  x: number;
+  y: number;
+  size?: "hub" | "normal" | "small";
+};
+
+type GraphGroup = {
+  title: string;
+  accent: string;
+  nodes: GraphNode[];
+  edges: Array<[string, string]>;
+};
+
+const STACK: StackItem[] = [
+  { id: "java", name: "Java", icon: "/icons/stack/java.svg", color: "#007396" },
+  {
+    id: "spring",
+    name: "Spring",
+    icon: "/icons/stack/spring.svg",
+    color: "#6DB33F",
+  },
+  {
+    id: "hibernate",
+    name: "Hibernate",
+    icon: "/icons/stack/hibernate.svg",
+    color: "#BCAE79",
+  },
+  {
+    id: "docker",
+    name: "Docker",
+    icon: "/icons/stack/docker.svg",
+    color: "#2496ED",
+  },
+  {
+    id: "github",
+    name: "GitHub",
+    icon: "/icons/stack/github.svg",
+    color: "#F5F5F5",
+  },
+  { id: "git", name: "Git", icon: "/icons/stack/git.svg", color: "#F05032" },
+  {
+    id: "maven",
+    name: "Maven",
+    icon: "/icons/stack/maven.svg",
+    color: "#C71A36",
+  },
+  {
+    id: "kafka",
+    name: "Kafka",
+    icon: "/icons/stack/kafka.svg",
+    color: "#A78BFA",
+  },
+  {
+    id: "rabbitmq",
+    name: "RabbitMQ",
+    icon: "/icons/stack/rabbitmq.svg",
+    color: "#FF6600",
+  },
+  {
+    id: "junit",
+    name: "JUnit",
+    icon: "/icons/stack/junit.svg",
+    color: "#25A162",
+  },
+  {
+    id: "nginx",
+    name: "Nginx",
+    icon: "/icons/stack/nginx.svg",
+    color: "#009639",
+  },
+  {
+    id: "prometheus",
+    name: "Prometheus",
+    icon: "/icons/stack/prometheus.svg",
+    color: "#E6522C",
+  },
+  {
+    id: "grafana",
+    name: "Grafana",
+    icon: "/icons/stack/grafana.svg",
+    color: "#F46800",
+  },
+  {
+    id: "mysql",
+    name: "MySQL",
+    icon: "/icons/stack/mysql.svg",
+    color: "#4479A1",
+  },
+  {
+    id: "githubactions",
+    name: "GitHub Actions",
+    icon: "/icons/stack/githubactions.svg",
+    color: "#2088FF",
+  },
+  {
+    id: "postgres",
+    name: "Postgres",
+    icon: "/icons/stack/postgres.svg",
+    color: "#4169E1",
+  },
+  {
+    id: "mongodb",
+    name: "MongoDB",
+    icon: "/icons/stack/mongodb.svg",
+    color: "#47A248",
+  },
+  {
+    id: "redis",
+    name: "Redis",
+    icon: "/icons/stack/redis.svg",
+    color: "#DC382D",
+  },
+  {
+    id: "fastapi",
+    name: "FastAPI",
+    icon: "/icons/stack/fastapi.svg",
+    color: "#009688",
+  },
+  { id: "grpc", name: "gRPC", icon: "/icons/stack/grpc.svg", color: "#4A7DFF" },
 ] as const;
 
-const SECONDARY = [
-  { name: "Kafka", src: "/icons/kafka.png", color: "#231F20" },
-  { name: "Redis", src: "/icons/redis-original-8x.png", color: "#DC382D" },
-  { name: "Hibernate", src: "/icons/hibernate-8x.png", color: "#59666C" },
-  { name: "Git", src: "/icons/git-icon-8x.png", color: "#F05032" },
-  { name: "JUnit", src: "/icons/junit-plain-8x.png", color: "#25A162" },
+const STACK_BY_ID = Object.fromEntries(STACK.map((item) => [item.id, item]));
+
+const GRAPH_GROUPS: GraphGroup[] = [
+  {
+    title: "Backend Core",
+    accent: "#A78BFA",
+    nodes: [
+      { id: "java", x: 50, y: 50, size: "hub" },
+      { id: "spring", x: 31, y: 28 },
+      { id: "hibernate", x: 22, y: 68 },
+      { id: "maven", x: 73, y: 25 },
+      { id: "junit", x: 78, y: 68 },
+      { id: "grpc", x: 51, y: 17, size: "small" },
+      { id: "fastapi", x: 52, y: 84, size: "small" },
+    ],
+    edges: [
+      ["java", "spring"],
+      ["spring", "hibernate"],
+      ["java", "maven"],
+      ["java", "junit"],
+      ["spring", "grpc"],
+      ["java", "fastapi"],
+      ["hibernate", "junit"],
+    ],
+  },
+  {
+    title: "Data & Messaging",
+    accent: "#34D399",
+    nodes: [
+      { id: "postgres", x: 50, y: 50, size: "hub" },
+      { id: "mysql", x: 24, y: 28 },
+      { id: "mongodb", x: 78, y: 30 },
+      { id: "redis", x: 26, y: 72 },
+      { id: "kafka", x: 73, y: 72 },
+      { id: "rabbitmq", x: 50, y: 18, size: "small" },
+    ],
+    edges: [
+      ["postgres", "mysql"],
+      ["postgres", "mongodb"],
+      ["postgres", "redis"],
+      ["postgres", "kafka"],
+      ["kafka", "rabbitmq"],
+      ["redis", "kafka"],
+    ],
+  },
+  {
+    title: "Delivery & Observability",
+    accent: "#38BDF8",
+    nodes: [
+      { id: "docker", x: 50, y: 50, size: "hub" },
+      { id: "git", x: 22, y: 27 },
+      { id: "github", x: 50, y: 18, size: "small" },
+      { id: "githubactions", x: 78, y: 30 },
+      { id: "nginx", x: 23, y: 72 },
+      { id: "prometheus", x: 73, y: 72 },
+      { id: "grafana", x: 50, y: 84, size: "small" },
+    ],
+    edges: [
+      ["git", "github"],
+      ["github", "githubactions"],
+      ["githubactions", "docker"],
+      ["docker", "nginx"],
+      ["docker", "prometheus"],
+      ["prometheus", "grafana"],
+      ["nginx", "grafana"],
+    ],
+  },
 ] as const;
 
-function LangBars() {
-  return (
-    <div className="mt-4 space-y-3">
-      {profile.languages.map((l) => (
-        <div key={l.name}>
-          <div className="flex items-center justify-between text-sm">
-            <span>{l.name}</span>
-            <span className="text-white/60">{l.level}</span>
-          </div>
-          <div className="mt-1 h-2 w-full rounded-full bg-white/10">
-            <div className="h-2 rounded-full bg-[hsl(var(--accent-purple))]" style={{ width: `${l.value}%` }} />
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function rimFor(name: string): string {
-  const n = name.toLowerCase();
-  if (n.includes("java")) return "#3B82F6"; // blue
-  if (n.includes("spring")) return "#22C55E"; // green
-  if (n.includes("c++")) return "#3B82F6"; // blue
-  if (n.includes("python")) return "#FBBF24"; // yellow/amber
-  if (n.includes("kafka")) return "#A78BFA"; // violet
-  if (n.includes("redis")) return "#EF4444"; // red
-  if (n.includes("hibernate")) return "#D6C59A"; // sand
-  if (n.includes("git")) return "#EF4444"; // red
-  if (n.includes("junit")) return "#EF4444"; // red (as requested)
-  return "#8B5CF6"; // default violet
-}
+const PROCESS_ITEMS = [
+  {
+    name: "Scrum",
+    description: "спринты, ретро, планирование",
+    icon: RefreshCw,
+    color: "#A78BFA",
+  },
+  {
+    name: "Agile",
+    description: "итеративная поставка ценности",
+    icon: Workflow,
+    color: "#38BDF8",
+  },
+  {
+    name: "Kanban",
+    description: "прозрачный поток задач",
+    icon: KanbanSquare,
+    color: "#34D399",
+  },
+] as const;
 
 function hexToRgba(hex: string, alpha = 1) {
-  const h = hex.replace('#','');
-  const bigint = parseInt(h.length === 3 ? h.split('').map(c=>c+c).join('') : h, 16);
+  const h = hex.replace("#", "");
+  const bigint = parseInt(
+    h.length === 3
+      ? h
+          .split("")
+          .map((c) => c + c)
+          .join("")
+      : h,
+    16,
+  );
   const r = (bigint >> 16) & 255;
   const g = (bigint >> 8) & 255;
   const b = bigint & 255;
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
+function nodeSizeClass(size: GraphNode["size"]) {
+  if (size === "hub") return "h-[4.75rem] w-[4.75rem] sm:h-24 sm:w-24";
+  if (size === "small") return "h-14 w-14 sm:h-16 sm:w-16";
+  return "h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]";
+}
+
+function GraphCard({ group }: { group: GraphGroup }) {
+  return (
+    <div className="group/card relative rounded-[2rem] transition-transform duration-300 hover:-translate-y-1">
+      <div
+        className="relative overflow-hidden rounded-[2rem] border bg-card/95 p-4 shadow-sm sm:p-5"
+        style={{
+          borderColor: hexToRgba(group.accent, 0.45),
+          boxShadow: `0 0 0 1px ${hexToRgba(group.accent, 0.28)} inset, 0 0 40px ${hexToRgba(group.accent, 0.16)}`,
+        }}
+      >
+        <div
+          className="pointer-events-none absolute inset-0 opacity-70"
+          style={{
+            background: `radial-gradient(circle at 50% 42%, ${hexToRgba(group.accent, 0.2)}, transparent 42%), radial-gradient(circle at 20% 10%, rgba(255,255,255,0.08), transparent 24%)`,
+          }}
+        />
+
+        <div className="relative z-10">
+          <h3 className="text-xl font-bold text-white">{group.title}</h3>
+        </div>
+
+        <div className="relative z-10 mt-5 h-[22rem] sm:h-[24rem]">
+          <svg
+            className="absolute inset-0 h-full w-full"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            aria-hidden
+          >
+            <defs>
+              <filter
+                id={`glow-${group.title.replace(/\W/g, "-")}`}
+                x="-60%"
+                y="-60%"
+                width="220%"
+                height="220%"
+              >
+                <feGaussianBlur stdDeviation="1.2" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            {group.edges.map(([from, to]) => {
+              const source = group.nodes.find((node) => node.id === from);
+              const target = group.nodes.find((node) => node.id === to);
+              const sourceItem = STACK_BY_ID[from];
+
+              if (!source || !target || !sourceItem) return null;
+
+              return (
+                <line
+                  key={`${from}-${to}`}
+                  x1={source.x}
+                  y1={source.y}
+                  x2={target.x}
+                  y2={target.y}
+                  stroke={hexToRgba(sourceItem.color, 0.42)}
+                  strokeWidth="0.45"
+                  strokeDasharray="1.2 1.6"
+                  filter={`url(#glow-${group.title.replace(/\W/g, "-")})`}
+                />
+              );
+            })}
+          </svg>
+
+          {group.nodes.map((node) => {
+            const item = STACK_BY_ID[node.id];
+            if (!item) return null;
+
+            return (
+              <div
+                key={node.id}
+                className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center"
+                style={{ left: `${node.x}%`, top: `${node.y}%` }}
+              >
+                <div
+                  className={`grid place-items-center rounded-[1.35rem] border bg-[#11101b]/95 p-2 shadow-lg transition-transform duration-300 group-hover/card:scale-[1.03] ${nodeSizeClass(node.size)}`}
+                  style={{
+                    borderColor: hexToRgba(item.color, 0.5),
+                    boxShadow: `0 0 0 1px ${hexToRgba(item.color, 0.24)} inset, 0 0 24px ${hexToRgba(item.color, 0.24)}`,
+                  }}
+                >
+                  <img
+                    src={withBasePath(item.icon)}
+                    alt={`${item.name} logo`}
+                    className="h-4/5 w-4/5 object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.18)]"
+                    draggable={false}
+                  />
+                </div>
+                <span className="mt-2 max-w-24 rounded-full border border-white/10 bg-black/40 px-2 py-1 text-center text-[0.68rem] font-semibold leading-none text-white/75 backdrop-blur sm:text-xs">
+                  {item.name}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -inset-2 -z-10 rounded-[2.25rem] blur-2xl opacity-30 transition-opacity duration-300 group-hover/card:opacity-50"
+        style={{
+          background: `radial-gradient(60% 60% at 50% 85%, ${hexToRgba(group.accent, 0.22)}, transparent 65%)`,
+        }}
+      />
+    </div>
+  );
+}
+
 export default function StackSection() {
   return (
     <section id="stack" className="container py-10 sm:py-14 md:py-16">
-      <div className="mb-4 sm:mb-6 text-center reveal">
-        <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3.75rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)]">Стэк</h2>
+      <div className="mb-5 text-center reveal sm:mb-8">
+        <p className="text-xs uppercase tracking-[0.34em] text-white/35">
+          connected skills
+        </p>
+        <h2 className="mt-2 text-[2rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)] sm:text-[2.5rem] md:text-[3.75rem]">
+          Стэк
+        </h2>
       </div>
 
-      {/* Primary icons */}
-      <div className="flex flex-wrap justify-center gap-4 sm:gap-5 md:gap-6 reveal-grid">
-        {PRIMARY.map((p) => {
-          const rim = rimFor(p.name);
-          const border = hexToRgba(rim, 0.55);
-          const glow = hexToRgba(rim, 0.25);
-          return (
-            <div key={p.name} className="group relative rounded-2xl transition-transform duration-300 hover:scale-[1.02]">
-              <div
-                className="rounded-2xl border bg-card/95 p-4 sm:p-6 md:p-8 text-center shadow-sm min-w-[100px] sm:min-w-[120px] md:min-w-[140px]"
-                style={{ borderColor: border, boxShadow: `0 0 0 1px ${border} inset, 0 0 30px ${glow}` }}
-              >
-                <div className="mx-auto grid h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem] md:h-20 md:w-20 place-items-center">
-                  <Image
-                    src={withBasePath(p.src)}
-                    alt={p.name}
-                    width={80}
-                    height={80}
-                    className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 transition-transform duration-200 group-hover:scale-110"
-                    draggable={false}
-                  />
-                </div>
-                <div className="mt-3 sm:mt-4 text-sm sm:text-base font-medium text-white/80">{p.name}</div>
-              </div>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute -inset-2 -z-10 rounded-3xl blur-2xl opacity-30 transition-opacity duration-300 group-hover:opacity-50"
-                style={{ background: `radial-gradient(60% 60% at 50% 85%, ${glow}, transparent 60%)` }}
-              />
-            </div>
-          );
-        })}
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-5 reveal-grid lg:grid-cols-3">
+        {GRAPH_GROUPS.map((group) => (
+          <GraphCard key={group.title} group={group} />
+        ))}
       </div>
 
-      {/* Secondary brand tiles */}
-      <div className="mt-6 flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-5 reveal-grid">
-        {SECONDARY.map((p) => {
-          const rim = rimFor(p.name);
-          const border = hexToRgba(rim, 0.55);
-          const glow = hexToRgba(rim, 0.25);
-          return (
-            <div key={p.name} className="group relative rounded-2xl transition-transform duration-300 hover:scale-[1.02]">
-              <div
-                className="rounded-2xl border bg-card/95 p-4 sm:p-5 md:p-6 text-center shadow-sm min-w-[90px] sm:min-w-[100px] md:min-w-[120px]"
-                style={{ borderColor: border, boxShadow: `0 0 0 1px ${border} inset, 0 0 26px ${glow}` }}
-              >
-                <div className="mx-auto grid h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 place-items-center">
-                  <Image
-                    src={withBasePath(p.src)}
-                    alt={p.name}
-                    width={64}
-                    height={64}
-                    className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 transition-transform duration-200 group-hover:scale-110"
-                    style={p.name === 'Kafka' ? { filter: 'brightness(0) saturate(100%) invert(69%) sepia(36%) saturate(726%) hue-rotate(208deg) brightness(102%) contrast(103%)' } : undefined}
-                    draggable={false}
-                  />
-                </div>
-                <div className="mt-2 sm:mt-3 text-xs sm:text-sm text-white/75">{p.name}</div>
-              </div>
-              <span
-                aria-hidden
-                className="pointer-events-none absolute -inset-2 -z-10 rounded-3xl blur-2xl opacity-30 transition-opacity duration-300 group-hover:opacity-50"
-                style={{ background: `radial-gradient(60% 60% at 50% 85%, ${glow}, transparent 60%)` }}
-              />
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Владение языками */}
-      <div className="mt-8 flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 justify-center items-stretch max-w-4xl mx-auto">
-        {/* Languages card: dark rim style */}
-        <div className="group relative rounded-3xl h-full transition-transform duration-300 hover:scale-[1.02] flex-1 max-w-xs w-full">
+      <div className="mx-auto mt-8 grid max-w-5xl grid-cols-1 gap-4 sm:mt-10 sm:gap-6 md:grid-cols-2 md:gap-8">
+        <div className="group relative rounded-3xl transition-transform duration-300 hover:-translate-y-1">
           <div
-            className="rounded-3xl border bg-card/95 p-4 sm:p-6 md:p-8 shadow-sm h-full"
+            className="h-full overflow-hidden rounded-3xl border bg-card/95 p-5 shadow-sm sm:p-7"
             style={{
-              borderColor: hexToRgba('#A78BFA', 0.55),
-              boxShadow: `0 0 0 1px ${hexToRgba('#A78BFA', 0.55)} inset, 0 0 36px ${hexToRgba('#A78BFA', 0.25)}`,
+              borderColor: hexToRgba("#A78BFA", 0.55),
+              boxShadow: `0 0 0 1px ${hexToRgba("#A78BFA", 0.45)} inset, 0 0 38px ${hexToRgba("#A78BFA", 0.22)}`,
             }}
           >
-            <h3 className="text-sm sm:text-base font-semibold text-white/80">Владение языками</h3>
-            <div className="mt-3 sm:mt-4">
-              {profile.languages.slice(0, 3).map((l) => (
-                <div key={l.name} className="mt-2 sm:mt-3 first:mt-0">
-                  <div className="flex items-center justify-between text-xs sm:text-sm">
-                    <span className="text-white/80">{l.name}</span>
-                    <span className="text-white/60">{l.level}</span>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-white/40">
+                  Communication
+                </p>
+                <h3 className="mt-2 text-xl font-bold text-white sm:text-2xl">
+                  Владение языками
+                </h3>
+              </div>
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-violet-300/25 bg-violet-300/10 text-violet-200">
+                <Languages className="h-6 w-6" aria-hidden />
+              </div>
+            </div>
+
+            <div className="mt-6 space-y-4">
+              {profile.languages.map((language) => (
+                <div
+                  key={language.name}
+                  className="rounded-2xl border border-white/10 bg-white/[0.04] p-4"
+                >
+                  <div className="flex items-center justify-between gap-3 text-sm">
+                    <div>
+                      <p className="font-semibold text-white">
+                        {language.name}
+                      </p>
+                      <p className="mt-1 text-xs text-white/45">
+                        уровень владения
+                      </p>
+                    </div>
+                    <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-white/75">
+                      {language.level}
+                    </span>
                   </div>
-                  <div className="mt-1 sm:mt-2 h-2 sm:h-2.5 w-full rounded-full bg-white/10">
-                    <div className="h-2 sm:h-2.5 rounded-full bg-[hsl(var(--accent-purple))]" style={{ width: `${l.value}%` }} />
+                  <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-white/10">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-violet-300 via-fuchsia-300 to-sky-300"
+                      style={{ width: `${language.value}%` }}
+                    />
                   </div>
                 </div>
               ))}
             </div>
-            {/* decorative chart removed by request */}
           </div>
           <span
             aria-hidden
-            className="pointer-events-none absolute -inset-2 -z-10 rounded-[2rem] blur-2xl opacity-30 transition-opacity duration-300 group-hover:opacity-50"
-            style={{ background: `radial-gradient(60% 60% at 50% 85%, ${hexToRgba('#A78BFA', 0.25)}, transparent 60%)` }}
+            className="pointer-events-none absolute -inset-2 -z-10 rounded-[2rem] bg-violet-400/20 blur-2xl opacity-30 transition-opacity duration-300 group-hover:opacity-50"
           />
         </div>
 
-        {/* Processes card: dark rim style */}
-        <div className="group relative rounded-3xl h-full transition-transform duration-300 hover:scale-[1.02] flex-1 max-w-xs w-full">
+        <div className="group relative rounded-3xl transition-transform duration-300 hover:-translate-y-1">
           <div
-            className="rounded-3xl border bg-card/95 p-4 sm:p-6 md:p-8 shadow-sm h-full"
+            className="h-full overflow-hidden rounded-3xl border bg-card/95 p-5 shadow-sm sm:p-7"
             style={{
-              borderColor: hexToRgba('#A78BFA', 0.55),
-              boxShadow: `0 0 0 1px ${hexToRgba('#A78BFA', 0.55)} inset, 0 0 36px ${hexToRgba('#A78BFA', 0.25)}`,
+              borderColor: hexToRgba("#38BDF8", 0.5),
+              boxShadow: `0 0 0 1px ${hexToRgba("#38BDF8", 0.35)} inset, 0 0 38px ${hexToRgba("#38BDF8", 0.18)}`,
             }}
           >
-            <h3 className="text-sm sm:text-base font-semibold text-white/80">Владение процессами</h3>
-            <p className="mt-2 text-xs sm:text-sm text-white/70">Командные методологии и планирование</p>
-            <div className="mt-4 sm:mt-6 mb-2 min-h-20 flex flex-wrap gap-2 sm:gap-3 md:gap-4 justify-center items-center">
-              <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/10 bg-white/5 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 text-xs sm:text-base md:text-lg text-white/80">
-                <RefreshCw className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-[hsl(var(--accent-purple))]" aria-hidden />
-                Scrum
-              </span>
-              <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/10 bg-white/5 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 text-xs sm:text-base md:text-lg text-white/80">
-                <Workflow className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-[hsl(var(--accent-purple))]" aria-hidden />
-                Agile
-              </span>
-              <span className="inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-white/10 bg-white/5 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 text-xs sm:text-base md:text-lg text-white/80">
-                <KanbanSquare className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 text-[hsl(var(--accent-purple))]" aria-hidden />
-                Kanban
-              </span>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-white/40">
+                  Delivery
+                </p>
+                <h3 className="mt-2 text-xl font-bold text-white sm:text-2xl">
+                  Владение процессами
+                </h3>
+              </div>
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border border-sky-300/25 bg-sky-300/10 text-sky-200">
+                <Gauge className="h-6 w-6" aria-hidden />
+              </div>
+            </div>
+
+            <div className="mt-6 space-y-3">
+              {PROCESS_ITEMS.map((process) => {
+                const Icon = process.icon;
+                return (
+                  <div
+                    key={process.name}
+                    className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4"
+                  >
+                    <div
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border"
+                      style={{
+                        borderColor: hexToRgba(process.color, 0.35),
+                        background: hexToRgba(process.color, 0.12),
+                      }}
+                    >
+                      <Icon
+                        className="h-5 w-5"
+                        style={{ color: process.color }}
+                        aria-hidden
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <p className="font-semibold text-white">
+                          {process.name}
+                        </p>
+                        <CheckCircle2
+                          className="h-4 w-4 text-emerald-300"
+                          aria-hidden
+                        />
+                      </div>
+                      <p className="mt-1 text-xs text-white/50 sm:text-sm">
+                        {process.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
           <span
             aria-hidden
-            className="pointer-events-none absolute -inset-2 -z-10 rounded-[2rem] blur-2xl opacity-30 transition-opacity duration-300 group-hover:opacity-50"
-            style={{ background: `radial-gradient(60% 60% at 50% 85%, ${hexToRgba('#A78BFA', 0.25)}, transparent 60%)` }}
+            className="pointer-events-none absolute -inset-2 -z-10 rounded-[2rem] bg-sky-400/20 blur-2xl opacity-25 transition-opacity duration-300 group-hover:opacity-45"
           />
         </div>
       </div>

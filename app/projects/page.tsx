@@ -1,12 +1,20 @@
 "use client";
 
-import Image from "next/image";
 import { withBasePath } from "@/lib/paths";
 import { useMemo, useState } from "react";
-import { projects } from "@/data/projects";
+import { projectCategories, projects, type Project } from "@/data/projects";
 import { motion } from "framer-motion";
+import ProjectToolIcons from "@/components/ProjectToolIcons";
 
-function Tag({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
+function Tag({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
   return (
     <button
       onClick={onClick}
@@ -18,67 +26,132 @@ function Tag({ label, active, onClick }: { label: string; active: boolean; onCli
   );
 }
 
+function projectInitials(title: string) {
+  return title
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 3)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+}
+
+function ProjectLogo({ project }: { project: Project }) {
+  return (
+    <div className="grid h-24 w-24 shrink-0 place-items-center rounded-3xl border border-violet-300/25 bg-black/25 p-2">
+      {project.logo ? (
+        <img
+          src={withBasePath(project.logo)}
+          alt={`${project.title} logo`}
+          className={`object-contain ${project.logoClassName ?? "h-full w-full"}`}
+          draggable={false}
+        />
+      ) : (
+        <div className="text-center">
+          <div className="text-xl font-black text-white">
+            {projectInitials(project.title)}
+          </div>
+          <div className="mt-1 text-[0.55rem] uppercase tracking-[0.18em] text-white/35">
+            logo
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ProjectsPage() {
   const [active, setActive] = useState<string | null>(null);
-  const tags = useMemo(() => Array.from(new Set(projects.flatMap((p) => p.stack))).sort(), []);
+  const tags = useMemo(
+    () => Array.from(new Set(projects.flatMap((p) => p.stack))).sort(),
+    [],
+  );
   const sorted = useMemo(() => {
     const list = [...projects];
-    list.sort((a, b) => Number(b.featured ?? 0) - Number(a.featured ?? 0));
+    list.sort((a, b) => {
+      const categoryDiff =
+        projectCategories.indexOf(a.category) -
+        projectCategories.indexOf(b.category);
+      if (categoryDiff !== 0) return categoryDiff;
+      return Number(b.featured ?? 0) - Number(a.featured ?? 0);
+    });
     return active ? list.filter((p) => p.stack.includes(active)) : list;
   }, [active]);
 
   return (
-    <main id="projects-page" className="container py-8 sm:py-12 md:py-16 reveal">
-      <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">Проекты</h1>
-      <div className="mt-4 sm:mt-6 flex flex-wrap gap-2">
-        <Tag label="Все" active={active === null} onClick={() => setActive(null)} />
+    <main
+      id="projects-page"
+      className="container py-8 sm:py-12 md:py-16 reveal"
+    >
+      <h1 className="text-2xl font-bold sm:text-3xl md:text-4xl">Проекты</h1>
+      <div className="mt-4 flex flex-wrap gap-2 sm:mt-6">
+        <Tag
+          label="Все"
+          active={active === null}
+          onClick={() => setActive(null)}
+        />
         {tags.map((t) => (
-          <Tag key={t} label={t} active={active === t} onClick={() => setActive(t)} />
+          <Tag
+            key={t}
+            label={t}
+            active={active === t}
+            onClick={() => setActive(t)}
+          />
         ))}
       </div>
 
-      <div className="mt-6 sm:mt-8 grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 reveal-grid">
-        {sorted.map((p) => (
-          <motion.article
-            key={p.title}
-            whileHover={{ y: -4 }}
-            className="group rounded-2xl border border-white/10 bg-card/60 p-3 shadow-soft transition-shadow"
-          >
-            <div className="overflow-hidden rounded-xl">
-              <Image
-                src={withBasePath(p.image)}
-                alt={p.title}
-                width={800}
-                height={500}
-                className="h-44 w-full object-cover transition-transform duration-200 will-change-transform group-hover:scale-[1.03]"
-                priority={p.featured}
-              />
-            </div>
-            <div className="p-3">
-              <h3 className="text-lg font-semibold">{p.title}</h3>
-              <p className="mt-1 text-sm text-muted font-readable">{p.description}</p>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {p.stack.map((s) => (
-                  <span key={s} className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-muted font-mono">
-                    {s}
+      <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 reveal-grid">
+        {sorted.map((p) => {
+          const repo = p.links?.repo;
+          const content = (
+            <>
+              <div className="flex items-start gap-4">
+                <ProjectLogo project={p} />
+                <div className="min-w-0 flex-1">
+                  <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-white/45">
+                    {p.category}
                   </span>
-                ))}
+                  <h3 className="mt-3 text-lg font-semibold leading-tight">
+                    {p.title}
+                  </h3>
+                </div>
               </div>
-              <div className="mt-4 flex gap-3">
-                {p.links?.demo && (
-                  <a className="rounded-xl px-3 py-1.5 text-sm bg-[hsl(var(--accent-purple))]/15 hover:bg-[hsl(var(--accent-purple))]/25" href={p.links.demo} target="_blank" rel="noreferrer">
-                    Demo
-                  </a>
-                )}
-                {p.links?.repo && (
-                  <a className="rounded-xl px-3 py-1.5 text-sm bg-[hsl(var(--accent-green))]/15 hover:bg-[hsl(var(--accent-green))]/25" href={p.links.repo} target="_blank" rel="noreferrer">
-                    Repo
-                  </a>
-                )}
+
+              <p className="mt-4 text-sm text-muted font-readable">
+                {p.description}
+              </p>
+              <div className="mt-4">
+                <ProjectToolIcons stack={p.stack} />
               </div>
-            </div>
-          </motion.article>
-        ))}
+            </>
+          );
+
+          if (repo) {
+            return (
+              <motion.a
+                key={p.title}
+                href={repo}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${p.title} repository`}
+                whileHover={{ y: -4 }}
+                className="group block rounded-3xl border border-white/10 bg-card/75 p-4 shadow-soft transition-shadow hover:border-violet-300/35 focus:outline-none focus:ring-2 focus:ring-violet-300/70"
+              >
+                {content}
+              </motion.a>
+            );
+          }
+
+          return (
+            <motion.article
+              key={p.title}
+              whileHover={{ y: -4 }}
+              className="group rounded-3xl border border-white/10 bg-card/75 p-4 shadow-soft transition-shadow"
+            >
+              {content}
+            </motion.article>
+          );
+        })}
       </div>
     </main>
   );
