@@ -25,6 +25,28 @@ export const projectCategories: ProjectCategory[] = [
 
 export const projects: Project[] = [
   {
+    title: "ATLAS",
+    description:
+      "Персональная AI-система для управления режимом, спортом, восстановлением, привычками, питанием и прогрессом.",
+    stack: [
+      "Java 21",
+      "Spring Boot",
+      "PostgreSQL",
+      "Flyway",
+      "Maven",
+      "Docker",
+      "Telegram Bot API",
+      "JUnit 5",
+    ],
+    image: "/projects/flowstate.jpg",
+    logo: "/Logos/projects/atlas.svg",
+    category: "Commercial Experience",
+    links: {
+      repo: "https://github.com/ATLAS-lifeops/ATLAS",
+    },
+    featured: true,
+  },
+  {
     title: "Notification Subscription Platform",
     description:
       "Событийная платформа уведомлений с подписками и доставкой через несколько каналов.",

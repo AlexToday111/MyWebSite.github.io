@@ -83,21 +83,21 @@ function ProjectMiniCard({ project }: { project: Project }) {
       <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-violet-300/70 to-transparent" />
       <LogoSlot project={project} />
 
-      <h4 className="mt-6 text-base font-bold leading-tight text-white sm:text-lg">
+      <h4 className="mt-6 flex min-h-[2.75rem] items-center justify-center text-base font-bold leading-tight text-white sm:text-lg">
         {project.title}
       </h4>
-      <p className="mt-3 min-h-[4.5rem] text-sm leading-relaxed text-white/58 font-readable">
+      <p className="mt-3 min-h-[5.5rem] text-sm leading-relaxed text-white/58 font-readable">
         {project.description}
       </p>
 
-      <div className="mt-4">
+      <div className="mt-auto pt-4">
         <ProjectToolIcons stack={project.stack} limit={8} />
       </div>
     </>
   );
 
   const className =
-    "group/project relative block h-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.045] p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-violet-300/35 hover:bg-white/[0.065] focus:outline-none focus:ring-2 focus:ring-violet-300/70 sm:p-5";
+    "group/project relative flex h-full min-h-[23rem] flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.045] p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-violet-300/35 hover:bg-white/[0.065] focus:outline-none focus:ring-2 focus:ring-violet-300/70 sm:p-5";
 
   if (repo) {
     return (

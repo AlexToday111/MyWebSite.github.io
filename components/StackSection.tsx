@@ -1,7 +1,6 @@
 import { withBasePath } from "@/lib/paths";
 import { profile } from "@/data/profile";
 import {
-  CheckCircle2,
   Gauge,
   KanbanSquare,
   Languages,
@@ -21,6 +20,7 @@ type GraphNode = {
   x: number;
   y: number;
   size?: "hub" | "normal" | "small";
+  labelPosition?: "top" | "right" | "bottom" | "left";
 };
 
 type GraphGroup = {
@@ -33,9 +33,21 @@ type GraphGroup = {
 const STACK: StackItem[] = [
   { id: "java", name: "Java", icon: "/icons/stack/java.svg", color: "#007396" },
   {
+    id: "kotlin",
+    name: "Kotlin",
+    icon: "/icons/stack/kotlin.svg",
+    color: "#A97BFF",
+  },
+  {
     id: "spring",
     name: "Spring",
     icon: "/icons/stack/spring.svg",
+    color: "#6DB33F",
+  },
+  {
+    id: "springsecurity",
+    name: "Spring Security",
+    icon: "/icons/stack/springsecurity.svg",
     color: "#6DB33F",
   },
   {
@@ -51,6 +63,12 @@ const STACK: StackItem[] = [
     color: "#2496ED",
   },
   {
+    id: "kubernetes",
+    name: "Kubernetes",
+    icon: "/icons/stack/kubernetes.svg",
+    color: "#326CE5",
+  },
+  {
     id: "github",
     name: "GitHub",
     icon: "/icons/stack/github.svg",
@@ -62,6 +80,12 @@ const STACK: StackItem[] = [
     name: "Maven",
     icon: "/icons/stack/maven.svg",
     color: "#C71A36",
+  },
+  {
+    id: "gradle",
+    name: "Gradle",
+    icon: "/icons/stack/gradle.svg",
+    color: "#02303A",
   },
   {
     id: "kafka",
@@ -130,12 +154,48 @@ const STACK: StackItem[] = [
     color: "#DC382D",
   },
   {
+    id: "swagger",
+    name: "Swagger",
+    icon: "/icons/stack/swagger.svg",
+    color: "#85EA2D",
+  },
+  {
+    id: "websocket",
+    name: "WebSocket",
+    icon: "/icons/stack/websocket.svg",
+    color: "#F59E0B",
+  },
+  {
     id: "fastapi",
     name: "FastAPI",
     icon: "/icons/stack/fastapi.svg",
     color: "#009688",
   },
   { id: "grpc", name: "gRPC", icon: "/icons/stack/grpc.svg", color: "#4A7DFF" },
+  {
+    id: "clickhouse",
+    name: "ClickHouse",
+    icon: "/icons/stack/clickhouse.svg",
+    color: "#FFCC01",
+  },
+  {
+    id: "linux",
+    name: "Linux",
+    icon: "/icons/stack/linux.svg",
+    color: "#FCC624",
+  },
+  {
+    id: "postman",
+    name: "Postman",
+    icon: "/icons/stack/postman.svg",
+    color: "#FF6C37",
+  },
+  {
+    id: "jira",
+    name: "Jira",
+    icon: "/icons/stack/jira.svg",
+    color: "#0052CC",
+  },
 ] as const;
 
 const STACK_BY_ID = Object.fromEntries(STACK.map((item) => [item.id, item]));
@@ -145,20 +205,30 @@ const GRAPH_GROUPS: GraphGroup[] = [
     title: "Backend Core",
     accent: "#A78BFA",
     nodes: [
-      { id: "java", x: 50, y: 50, size: "hub" },
-      { id: "spring", x: 31, y: 28 },
-      { id: "hibernate", x: 22, y: 68 },
-      { id: "maven", x: 73, y: 25 },
-      { id: "junit", x: 78, y: 68 },
-      { id: "grpc", x: 51, y: 17, size: "small" },
-      { id: "fastapi", x: 52, y: 84, size: "small" },
+      { id: "java", x: 50, y: 50, size: "hub", labelPosition: "bottom" },
+      { id: "websocket", x: 50, y: 13, size: "small", labelPosition: "bottom" },
+      { id: "kotlin", x: 14, y: 18, size: "small", labelPosition: "right" },
+      { id: "fastapi", x: 86, y: 18, size: "small", labelPosition: "bottom" },
+      { id: "spring", x: 27, y: 36, labelPosition: "bottom" },
+      { id: "springsecurity", x: 73, y: 36, size: "small", labelPosition: "bottom" },
+      { id: "hibernate", x: 16, y: 60, labelPosition: "bottom" },
+      { id: "maven", x: 84, y: 60, labelPosition: "bottom" },
+      { id: "swagger", x: 16, y: 86, size: "small", labelPosition: "bottom" },
+      { id: "grpc", x: 38, y: 86, size: "small", labelPosition: "bottom" },
+      { id: "junit", x: 62, y: 86, labelPosition: "bottom" },
+      { id: "gradle", x: 86, y: 86, size: "small", labelPosition: "bottom" },
     ],
     edges: [
       ["java", "spring"],
+      ["java", "kotlin"],
       ["spring", "hibernate"],
+      ["spring", "springsecurity"],
       ["java", "maven"],
+      ["java", "gradle"],
       ["java", "junit"],
       ["spring", "grpc"],
+      ["spring", "swagger"],
+      ["java", "websocket"],
       ["java", "fastapi"],
       ["hibernate", "junit"],
     ],
@@ -167,12 +237,13 @@ const GRAPH_GROUPS: GraphGroup[] = [
     title: "Data & Messaging",
     accent: "#34D399",
     nodes: [
-      { id: "postgres", x: 50, y: 50, size: "hub" },
-      { id: "mysql", x: 24, y: 28 },
-      { id: "mongodb", x: 78, y: 30 },
-      { id: "redis", x: 26, y: 72 },
-      { id: "kafka", x: 73, y: 72 },
-      { id: "rabbitmq", x: 50, y: 18, size: "small" },
+      { id: "postgres", x: 50, y: 50, size: "hub", labelPosition: "bottom" },
+      { id: "rabbitmq", x: 50, y: 17, size: "small", labelPosition: "bottom" },
+      { id: "mysql", x: 21, y: 35, labelPosition: "bottom" },
+      { id: "mongodb", x: 79, y: 35, labelPosition: "bottom" },
+      { id: "redis", x: 22, y: 74, labelPosition: "bottom" },
+      { id: "kafka", x: 78, y: 74, labelPosition: "bottom" },
+      { id: "clickhouse", x: 50, y: 88, size: "small", labelPosition: "bottom" },
     ],
     edges: [
       ["postgres", "mysql"],
@@ -180,6 +251,7 @@ const GRAPH_GROUPS: GraphGroup[] = [
       ["postgres", "redis"],
       ["postgres", "kafka"],
       ["kafka", "rabbitmq"],
+      ["postgres", "clickhouse"],
       ["redis", "kafka"],
     ],
   },
@@ -187,20 +259,28 @@ const GRAPH_GROUPS: GraphGroup[] = [
     title: "Delivery & Observability",
     accent: "#38BDF8",
     nodes: [
-      { id: "docker", x: 50, y: 50, size: "hub" },
-      { id: "git", x: 22, y: 27 },
-      { id: "github", x: 50, y: 18, size: "small" },
-      { id: "githubactions", x: 78, y: 30 },
-      { id: "nginx", x: 23, y: 72 },
-      { id: "prometheus", x: 73, y: 72 },
-      { id: "grafana", x: 50, y: 84, size: "small" },
+      { id: "docker", x: 50, y: 50, size: "hub", labelPosition: "bottom" },
+      { id: "kubernetes", x: 50, y: 14, labelPosition: "bottom" },
+      { id: "git", x: 15, y: 22, labelPosition: "right" },
+      { id: "githubactions", x: 85, y: 22, labelPosition: "bottom" },
+      { id: "github", x: 23, y: 45, size: "small", labelPosition: "bottom" },
+      { id: "jira", x: 77, y: 45, size: "small", labelPosition: "bottom" },
+      { id: "linux", x: 16, y: 72, size: "small", labelPosition: "bottom" },
+      { id: "postman", x: 84, y: 72, size: "small", labelPosition: "top" },
+      { id: "nginx", x: 30, y: 89, labelPosition: "bottom" },
+      { id: "grafana", x: 53, y: 89, size: "small", labelPosition: "bottom" },
+      { id: "prometheus", x: 76, y: 89, labelPosition: "bottom" },
     ],
     edges: [
       ["git", "github"],
       ["github", "githubactions"],
       ["githubactions", "docker"],
+      ["docker", "kubernetes"],
+      ["docker", "linux"],
       ["docker", "nginx"],
       ["docker", "prometheus"],
+      ["githubactions", "jira"],
+      ["docker", "postman"],
       ["prometheus", "grafana"],
       ["nginx", "grafana"],
     ],
@@ -246,9 +326,28 @@ function hexToRgba(hex: string, alpha = 1) {
 }
 
 function nodeSizeClass(size: GraphNode["size"]) {
-  if (size === "hub") return "h-[4.75rem] w-[4.75rem] sm:h-24 sm:w-24";
+  if (size === "hub") return "h-20 w-20 sm:h-24 sm:w-24";
   if (size === "small") return "h-14 w-14 sm:h-16 sm:w-16";
   return "h-16 w-16 sm:h-[4.5rem] sm:w-[4.5rem]";
+}
+
+function labelPositionClass(position: GraphNode["labelPosition"]) {
+  if (position === "top") {
+    return "bottom-full left-1/2 mb-1.5 -translate-x-1/2";
+  }
+  if (position === "left") {
+    return "right-full top-1/2 mr-2 -translate-y-1/2";
+  }
+  if (position === "right") {
+    return "left-full top-1/2 ml-2 -translate-y-1/2";
+  }
+  return "left-1/2 top-full mt-1.5 -translate-x-1/2";
+}
+
+function graphTitleClass(title: GraphGroup["title"]) {
+  if (title === "Data & Messaging") return "text-center";
+  if (title === "Delivery & Observability") return "text-right";
+  return "text-left";
 }
 
 function GraphCard({ group }: { group: GraphGroup }) {
@@ -268,11 +367,11 @@ function GraphCard({ group }: { group: GraphGroup }) {
           }}
         />
 
-        <div className="relative z-10">
+        <div className={`relative z-10 ${graphTitleClass(group.title)}`}>
           <h3 className="text-xl font-bold text-white">{group.title}</h3>
         </div>
 
-        <div className="relative z-10 mt-5 h-[22rem] sm:h-[24rem]">
+        <div className="relative z-10 mt-5 h-[27rem] sm:h-[29rem]">
           <svg
             className="absolute inset-0 h-full w-full"
             viewBox="0 0 100 100"
@@ -324,26 +423,32 @@ function GraphCard({ group }: { group: GraphGroup }) {
             return (
               <div
                 key={node.id}
-                className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center"
+                className="absolute -translate-x-1/2 -translate-y-1/2"
                 style={{ left: `${node.x}%`, top: `${node.y}%` }}
               >
                 <div
-                  className={`grid place-items-center rounded-[1.35rem] border bg-[#11101b]/95 p-2 shadow-lg transition-transform duration-300 group-hover/card:scale-[1.03] ${nodeSizeClass(node.size)}`}
-                  style={{
-                    borderColor: hexToRgba(item.color, 0.5),
-                    boxShadow: `0 0 0 1px ${hexToRgba(item.color, 0.24)} inset, 0 0 24px ${hexToRgba(item.color, 0.24)}`,
-                  }}
+                  className={`relative grid place-items-center rounded-[1.35rem] border bg-[#11101b]/95 p-2 shadow-lg transition-transform duration-300 group-hover/card:scale-[1.03] ${nodeSizeClass(node.size)}`}
                 >
+                  <span
+                    className={`pointer-events-none absolute z-20 w-max max-w-[5.6rem] rounded-full border border-white/10 bg-black/55 px-2 py-1 text-center text-[0.62rem] font-semibold leading-tight text-white/80 backdrop-blur sm:max-w-[6.5rem] sm:text-[0.68rem] ${labelPositionClass(node.labelPosition)}`}
+                  >
+                    {item.name}
+                  </span>
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 rounded-[1.35rem] border"
+                    style={{
+                      borderColor: hexToRgba(item.color, 0.5),
+                      boxShadow: `0 0 0 1px ${hexToRgba(item.color, 0.24)} inset, 0 0 24px ${hexToRgba(item.color, 0.24)}`,
+                    }}
+                  />
                   <img
                     src={withBasePath(item.icon)}
                     alt={`${item.name} logo`}
-                    className="h-4/5 w-4/5 object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.18)]"
+                    className="relative h-4/5 w-4/5 object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.18)]"
                     draggable={false}
                   />
                 </div>
-                <span className="mt-2 max-w-24 rounded-full border border-white/10 bg-black/40 px-2 py-1 text-center text-[0.68rem] font-semibold leading-none text-white/75 backdrop-blur sm:text-xs">
-                  {item.name}
-                </span>
               </div>
             );
           })}
@@ -364,15 +469,12 @@ export default function StackSection() {
   return (
     <section id="stack" className="container py-10 sm:py-14 md:py-16">
       <div className="mb-5 text-center reveal sm:mb-8">
-        <p className="text-xs uppercase tracking-[0.34em] text-white/35">
-          connected skills
-        </p>
-        <h2 className="mt-2 text-[2rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)] sm:text-[2.5rem] md:text-[3.75rem]">
+        <h2 className="text-[2rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)] sm:text-[2.5rem] md:text-[3.75rem]">
           Стэк
         </h2>
       </div>
 
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-5 reveal-grid lg:grid-cols-3">
+      <div className="mx-auto grid w-full max-w-[92rem] grid-cols-1 gap-5 reveal-grid lg:grid-cols-3">
         {GRAPH_GROUPS.map((group) => (
           <GraphCard key={group.title} group={group} />
         ))}
@@ -389,9 +491,6 @@ export default function StackSection() {
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.28em] text-white/40">
-                  Communication
-                </p>
                 <h3 className="mt-2 text-xl font-bold text-white sm:text-2xl">
                   Владение языками
                 </h3>
@@ -411,9 +510,6 @@ export default function StackSection() {
                     <div>
                       <p className="font-semibold text-white">
                         {language.name}
-                      </p>
-                      <p className="mt-1 text-xs text-white/45">
-                        уровень владения
                       </p>
                     </div>
                     <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold text-white/75">
@@ -446,9 +542,6 @@ export default function StackSection() {
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="text-xs uppercase tracking-[0.28em] text-white/40">
-                  Delivery
-                </p>
                 <h3 className="mt-2 text-xl font-bold text-white sm:text-2xl">
                   Владение процессами
                 </h3>
@@ -484,10 +577,6 @@ export default function StackSection() {
                         <p className="font-semibold text-white">
                           {process.name}
                         </p>
-                        <CheckCircle2
-                          className="h-4 w-4 text-emerald-300"
-                          aria-hidden
-                        />
                       </div>
                       <p className="mt-1 text-xs text-white/50 sm:text-sm">
                         {process.description}

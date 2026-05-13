@@ -117,10 +117,10 @@ export default function ProjectsPage() {
                 </div>
               </div>
 
-              <p className="mt-4 text-sm text-muted font-readable">
+              <p className="mt-4 min-h-[4.5rem] text-sm text-muted font-readable">
                 {p.description}
               </p>
-              <div className="mt-4">
+              <div className="mt-auto pt-4">
                 <ProjectToolIcons stack={p.stack} />
               </div>
             </>
@@ -135,7 +135,7 @@ export default function ProjectsPage() {
                 rel="noreferrer"
                 aria-label={`Open ${p.title} repository`}
                 whileHover={{ y: -4 }}
-                className="group block rounded-3xl border border-white/10 bg-card/75 p-4 shadow-soft transition-shadow hover:border-violet-300/35 focus:outline-none focus:ring-2 focus:ring-violet-300/70"
+                className="group flex h-full flex-col rounded-3xl border border-white/10 bg-card/75 p-4 shadow-soft transition-shadow hover:border-violet-300/35 focus:outline-none focus:ring-2 focus:ring-violet-300/70"
               >
                 {content}
               </motion.a>
@@ -146,7 +146,7 @@ export default function ProjectsPage() {
             <motion.article
               key={p.title}
               whileHover={{ y: -4 }}
-              className="group rounded-3xl border border-white/10 bg-card/75 p-4 shadow-soft transition-shadow"
+              className="group flex h-full flex-col rounded-3xl border border-white/10 bg-card/75 p-4 shadow-soft transition-shadow"
             >
               {content}
             </motion.article>
