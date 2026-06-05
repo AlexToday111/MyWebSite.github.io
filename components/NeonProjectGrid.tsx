@@ -83,10 +83,10 @@ function ProjectMiniCard({ project }: { project: Project }) {
       <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-violet-300/70 to-transparent" />
       <LogoSlot project={project} />
 
-      <h4 className="mt-6 flex min-h-[2.75rem] items-center justify-center text-base font-bold leading-tight text-white sm:text-lg">
+      <h4 className="clamp-2 mt-6 flex min-h-[2.75rem] items-center justify-center text-base font-bold leading-tight text-white sm:text-lg">
         {project.title}
       </h4>
-      <p className="mt-3 min-h-[5.5rem] text-sm leading-relaxed text-white/58 font-readable">
+      <p className="clamp-3 mt-3 min-h-[5.5rem] text-sm leading-relaxed text-white/58 font-readable">
         {project.description}
       </p>
 
@@ -167,7 +167,7 @@ export default function NeonProjectGrid() {
                   </h3>
                 </div>
 
-                <div className="space-y-4">
+                <div className="grid auto-rows-fr gap-4">
                   {items.map((project) => (
                     <ProjectMiniCard key={project.title} project={project} />
                   ))}

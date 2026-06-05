@@ -39,7 +39,7 @@ export const projects: Project[] = [
       "JUnit 5",
     ],
     image: "/projects/flowstate.jpg",
-    logo: "/Logos/projects/atlas.svg",
+    logo: "/Logos/projects/WhiteLogo.png",
     category: "Commercial Experience",
     links: {
       repo: "https://github.com/ATLAS-lifeops/ATLAS",

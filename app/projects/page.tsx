@@ -100,7 +100,7 @@ export default function ProjectsPage() {
         ))}
       </div>
 
-      <div className="mt-6 grid grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 reveal-grid">
+      <div className="mt-6 grid auto-rows-fr grid-cols-1 gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 reveal-grid">
         {sorted.map((p) => {
           const repo = p.links?.repo;
           const content = (
@@ -111,13 +111,13 @@ export default function ProjectsPage() {
                   <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-white/45">
                     {p.category}
                   </span>
-                  <h3 className="mt-3 text-lg font-semibold leading-tight">
+                  <h3 className="clamp-2 mt-3 text-lg font-semibold leading-tight">
                     {p.title}
                   </h3>
                 </div>
               </div>
 
-              <p className="mt-4 min-h-[4.5rem] text-sm text-muted font-readable">
+              <p className="clamp-3 mt-4 min-h-[4.5rem] text-sm text-muted font-readable">
                 {p.description}
               </p>
               <div className="mt-auto pt-4">
@@ -135,7 +135,7 @@ export default function ProjectsPage() {
                 rel="noreferrer"
                 aria-label={`Open ${p.title} repository`}
                 whileHover={{ y: -4 }}
-                className="group flex h-full flex-col rounded-3xl border border-white/10 bg-card/75 p-4 shadow-soft transition-shadow hover:border-violet-300/35 focus:outline-none focus:ring-2 focus:ring-violet-300/70"
+                className="group flex h-full min-h-[20rem] flex-col overflow-hidden rounded-3xl border border-white/10 bg-card/75 p-4 shadow-soft transition-shadow hover:border-violet-300/35 focus:outline-none focus:ring-2 focus:ring-violet-300/70"
               >
                 {content}
               </motion.a>
@@ -146,7 +146,7 @@ export default function ProjectsPage() {
             <motion.article
               key={p.title}
               whileHover={{ y: -4 }}
-              className="group flex h-full flex-col rounded-3xl border border-white/10 bg-card/75 p-4 shadow-soft transition-shadow"
+              className="group flex h-full min-h-[20rem] flex-col overflow-hidden rounded-3xl border border-white/10 bg-card/75 p-4 shadow-soft transition-shadow"
             >
               {content}
             </motion.article>
