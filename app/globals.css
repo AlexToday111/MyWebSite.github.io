@@ -172,8 +172,6 @@ html::-webkit-scrollbar {
 .clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 
 /* Replace headings text visually without touching markup */
-#stack h2 { color: transparent !important; position: relative; text-align: center; text-wrap: balance; }
-#stack h2::before { content: "Technical Stack"; color: hsl(var(--fg)); display: inline-block; }
 
 #projects h2 { color: transparent !important; position: relative; text-align: center; }
 #projects h2::before { content: "Projects"; color: hsl(var(--fg)); display: inline-block; }
@@ -185,7 +183,6 @@ html::-webkit-scrollbar {
 /* Local fonts are loaded via next/font/local in layout; no manual @font-face needed */
 
 /* Heading label fixes: absolute centered pseudo text */
-#stack h2::before { content: "Technical Stack" !important; position: absolute; left: 50%; transform: translateX(-50%); }
 #projects h2::before { content: "Projects" !important; position: absolute; left: 50%; transform: translateX(-50%); }
 #projects-page h1::before { content: "Projects" !important; position: absolute; left: 50%; transform: translateX(-50%); }
 
@@ -224,4 +221,9 @@ html::-webkit-scrollbar {
   opacity: 0.6;
   z-index: -1;
   pointer-events: none;
+}
+
+/* Restrain the ambient light around the constellation on phones. */
+@media (max-width: 900px) {
+  #work > .stack-ambient > div { width: 30rem; height: 30rem; opacity: .12; animation: none; }
 }

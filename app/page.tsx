@@ -138,7 +138,7 @@ export default function HomePage() {
           <motion.div
             key="orb-left"
             aria-hidden
-            className="pointer-events-none absolute left-[25%] top-[13%] -z-10"
+            className="stack-ambient pointer-events-none absolute left-[25%] top-[13%] -z-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -170,14 +170,7 @@ export default function HomePage() {
           </motion.div>
         </AnimatePresence>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          viewport={{ once: false, amount: 0.4 }}
-        >
-          <StackSection />
-        </motion.div>
+        <StackSection />
 
         <section id="projects" className="container py-10 sm:py-14 md:py-16 relative">
           <div className="mb-4 sm:mb-6 text-center relative">

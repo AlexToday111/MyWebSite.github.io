@@ -53,7 +53,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru" suppressHydrationWarning>
-      <body className={`${gendy.className} ${gendy.variable}`}>
+      <body className={`${gendy.className} ${gendy.variable} ${inter.variable}`}>
         <a href="#content" className="skip-link">
           Сразу к контенту
         </a>
