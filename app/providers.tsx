@@ -4,6 +4,8 @@ import { ThemeProvider } from "next-themes";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import ScheduledTheme from "@/components/ScheduledTheme";
+import { themeBootstrapScript } from "@/lib/theme-schedule";
 
 type ProvidersProps = {
   children: React.ReactNode;
@@ -12,24 +14,26 @@ type ProvidersProps = {
 export function Providers({ children }: ProvidersProps) {
   const pathname = usePathname();
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const selector = '.reveal, .reveal-grid';
+    if (typeof window === "undefined") return;
+    const selector = ".reveal, .reveal-grid";
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const el = entry.target as HTMLElement;
           if (entry.isIntersecting) {
-            el.classList.add('is-visible');
+            el.classList.add("is-visible");
           } else {
-            el.classList.remove('is-visible');
+            el.classList.remove("is-visible");
           }
         });
       },
-      { threshold: 0.18, rootMargin: '0px 0px -10% 0px' }
+      { threshold: 0.18, rootMargin: "0px 0px -10% 0px" },
     );
 
     const observeAll = () => {
-      const elements = Array.from(document.querySelectorAll<HTMLElement>(selector));
+      const elements = Array.from(
+        document.querySelectorAll<HTMLElement>(selector),
+      );
       elements.forEach((el) => observer.observe(el));
     };
 
@@ -52,6 +56,8 @@ export function Providers({ children }: ProvidersProps) {
       themes={["light", "dark"]}
       disableTransitionOnChange
     >
+      <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
+      <ScheduledTheme />
       {children}
     </ThemeProvider>
   );

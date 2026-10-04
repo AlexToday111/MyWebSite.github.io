@@ -28,10 +28,7 @@ const gendy = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://example.com"),
-  title: {
-    default: "ba6kir — Java Backend",
-    template: "%s | ba6kir",
-  },
+  title: "Backend dev.",
   description:
     "Персональный сайт портфолио: Java Backend (Spring, PostgreSQL, Docker)",
   icons: {

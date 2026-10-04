@@ -1,0 +1,385 @@
+﻿.section {
+  position: relative;
+  padding: 64px 0 32px;
+  font-family: var(--font-inter), Arial, sans-serif;
+  scroll-margin-top: 24px;
+}
+.container {
+  max-width: 1280px;
+}
+.heading {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  margin-bottom: 40px;
+}
+.heading h2 {
+  font-family: var(--ff-exotica);
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+.section[lang="ru"] .heading h2 {
+  font-family: var(--font-inter), Arial, sans-serif;
+  font-weight: 650;
+}
+.heading h2 span {
+  color: hsl(var(--accent-blue));
+}
+.languageToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid hsl(var(--border));
+  border-radius: 6px;
+  background: transparent;
+  color: hsl(var(--muted));
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.languageToggle:hover {
+  border-color: hsl(var(--accent-blue) / 0.5);
+}
+.languageToggle:focus-visible,
+.tabs button:focus-visible,
+.experienceBody:focus-visible {
+  outline: 2px solid hsl(var(--accent-blue));
+  outline-offset: 4px;
+  box-shadow: none;
+}
+.languageToggle span[data-active="true"] {
+  color: hsl(var(--fg));
+}
+.languageDivider {
+  opacity: 0.45;
+}
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  grid-template-areas: "bio bio" "experience education" "toolbox achievements" "focus focus";
+  gap: 36px 64px;
+}
+.card {
+  min-width: 0;
+  padding: 0;
+}
+.card h3 {
+  font-size: 22px;
+  font-weight: 550;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+}
+.card .label {
+  margin-bottom: 24px;
+  color: hsl(var(--muted));
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+.secondary {
+  color: hsl(var(--muted));
+  font-size: 13px;
+  line-height: 1.7;
+}
+.bio {
+  grid-area: bio;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  gap: 48px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid hsl(var(--border));
+}
+.bio h3 {
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.25;
+  font-weight: 500;
+}
+.bioCopy {
+  max-width: 640px;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.bioCopy > p + p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+.experience {
+  grid-area: experience;
+}
+.experienceBody {
+  display: grid;
+  grid-area: 1 / 1;
+  min-width: 0;
+  align-content: start;
+}
+.experienceBody[aria-hidden="true"] {
+  display: none;
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  border-bottom: 1px solid hsl(var(--border));
+  margin-bottom: 24px;
+}
+.tabs button {
+  padding: 0 0 12px;
+  color: hsl(var(--muted));
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    color 0.18s,
+    border-color 0.18s;
+}
+.tabs button:hover,
+.tabs button[aria-selected="true"] {
+  color: hsl(var(--fg));
+}
+.tabs button[aria-selected="true"] {
+  border-bottom-color: hsl(var(--fg));
+}
+.experiencePanels {
+  display: grid;
+}
+.jobHeading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+.jobHeading h3 {
+  font-size: 20px;
+}
+.jobDomain {
+  margin-top: 6px;
+  color: hsl(var(--muted));
+  font-size: 13px;
+  line-height: 1.7;
+}
+.responsibilities {
+  margin-top: 18px;
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: hsl(var(--muted));
+  list-style: disc;
+  padding-left: 18px;
+}
+.responsibilities li::marker {
+  color: hsl(var(--muted) / 0.5);
+}
+.jobStack {
+  font-size: 12px;
+  line-height: 1.7;
+  color: hsl(var(--muted));
+  margin-top: 20px;
+}
+.education {
+  grid-area: education;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px;
+  column-gap: 16px;
+  align-content: start;
+}
+.education .label {
+  margin-bottom: 0;
+}
+.education .status {
+  width: 80px;
+  text-align: center;
+}
+.educationContent {
+  grid-column: 1;
+  grid-row: 2;
+  min-width: 0;
+}
+.universityLogo {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+  align-self: start;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  object-position: right center;
+}
+.cardHeader {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.status {
+  color: hsl(var(--muted));
+  font-size: 12px;
+}
+.degree {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 8px 0 4px;
+}
+.subjects {
+  color: hsl(var(--muted));
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 16px 0;
+}
+.link {
+  display: inline-block;
+  font-size: 12px;
+  color: hsl(var(--muted));
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--muted) / 0.35);
+  text-underline-offset: 4px;
+}
+.link:hover {
+  color: hsl(var(--fg));
+}
+.achievements {
+  grid-area: achievements;
+  padding-top: 28px;
+  border-top: 1px solid hsl(var(--border));
+}
+.awards {
+  display: grid;
+  gap: 18px;
+}
+.awards h4 {
+  font-size: 14px;
+  font-weight: 500;
+}
+.awards p {
+  max-width: 340px;
+  color: hsl(var(--muted));
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 4px;
+}
+.toolbox {
+  grid-area: toolbox;
+  padding-top: 28px;
+  border-top: 1px solid hsl(var(--border));
+}
+.tools {
+  display: grid;
+  gap: 14px;
+}
+.tools > div {
+  display: grid;
+  grid-template-columns: 145px minmax(0, 1fr);
+  gap: 16px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.tools dt {
+  color: hsl(var(--muted));
+}
+.tools dd {
+  overflow-wrap: anywhere;
+}
+.focus {
+  grid-area: focus;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 12px 32px;
+  padding-top: 24px;
+  border-top: 1px solid hsl(var(--border));
+}
+.focus .label {
+  margin-bottom: 0;
+  font-weight: 600;
+}
+.interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.interests li {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.interests strong {
+  font-weight: 600;
+}
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    column-gap: 36px;
+  }
+  .tools > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+}
+@media (max-width: 767px) {
+  .section {
+    padding-top: 40px;
+  }
+  .heading {
+    gap: 12px 16px;
+    margin-bottom: 28px;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "bio" "experience" "education" "toolbox" "achievements" "focus";
+    gap: 28px;
+  }
+  .bio {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    padding-bottom: 28px;
+  }
+  .bio h3 {
+    max-width: none;
+  }
+  .bioCopy {
+    font-size: 15px;
+  }
+  .education {
+    padding-top: 28px;
+    border-top: 1px solid hsl(var(--border));
+  }
+  .jobHeading {
+    flex-wrap: wrap;
+    gap: 6px 16px;
+  }
+  .card .label {
+    margin-bottom: 18px;
+  }
+  .education .label {
+    margin-bottom: 0;
+  }
+  .cardHeader {
+    margin-bottom: 18px;
+  }
+  .focus .label {
+    margin-bottom: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .languageToggle,
+  .tabs button {
+    transition: none;
+  }
+}

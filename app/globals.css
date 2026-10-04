@@ -12,6 +12,21 @@
   --accent-purple: 270 100% 65%;
   --card: 258 25% 10%;
   --border: 0 0% 100% / 0.08;
+  --project-surface: rgba(255, 255, 255, 0.045);
+  --project-hover: rgba(255, 255, 255, 0.065);
+  --contact-surface: hsl(258 25% 10% / 0.9);
+  --contact-button: rgba(255, 255, 255, 0.05);
+  --leetcode: #ffa116;
+  --telegram: #38bdf8;
+  --linkedin: #5a9ee6;
+  --difficulty-easy: #66cbb4;
+  --difficulty-medium: #e8b561;
+  --difficulty-hard: #f08d9b;
+  --heatmap-0: #22202e;
+  --heatmap-1: #493468;
+  --heatmap-2: #7550a4;
+  --heatmap-3: #a178d7;
+  --heatmap-4: #c4a5f5;
   /* Use Next local font var so basePath works on Pages */
   --ff-exotica: var(--font-gendy), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --ff-ouroboros: var(--font-gendy), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
@@ -30,6 +45,67 @@
   /* Keep using Next local font variable in dark mode too */
   --ff-exotica: var(--font-gendy), system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
 }
+
+.light {
+  --bg: 255 30% 99%;
+  --fg: 252 26% 16%;
+  --muted: 251 12% 43%;
+  --accent-green: 264 65% 48%;
+  --accent-blue: 262 64% 48%;
+  --accent-purple: 266 67% 51%;
+  --card: 0 0% 100%;
+  --border: 254 21% 79% / 0.65;
+  --project-surface: rgba(255, 255, 255, 0.94);
+  --project-hover: #faf7ff;
+  --contact-surface: rgba(255, 255, 255, 0.9);
+  --contact-button: #f4f0fb;
+  --leetcode: #976000;
+  --telegram: #0878ae;
+  --linkedin: #0a66c2;
+  --difficulty-easy: #167d68;
+  --difficulty-medium: #976000;
+  --difficulty-hard: #b83e55;
+  --heatmap-0: #ebe7f1;
+  --heatmap-1: #d7c7eb;
+  --heatmap-2: #b89bd8;
+  --heatmap-3: #926bc1;
+  --heatmap-4: #694295;
+}
+
+.project-title { color: hsl(var(--fg)); }
+.project-description { color: hsl(var(--muted)); }
+.project-card {
+  border-color: hsl(var(--border));
+  background: var(--project-surface);
+}
+.project-card:hover {
+  border-color: hsl(var(--accent-blue) / 0.35);
+  background: var(--project-hover);
+}
+.light .project-logo {
+  background: #f0ebf8;
+  border-color: #d8c9ed;
+  box-shadow: 0 0 30px rgba(141, 102, 196, 0.12);
+}
+.light .project-logo img[data-logo-tone="light"] {
+  filter: brightness(0);
+}
+.light .tool-icon img {
+  filter: drop-shadow(0 3px 5px rgba(49, 33, 72, 0.1));
+}
+.contact-card { background: var(--contact-surface); }
+.contact-caption { color: hsl(var(--muted)); }
+.contact-link {
+  background: var(--contact-button);
+  border-color: hsl(var(--border));
+}
+.light .intro-ambient > div { opacity: 0.25; }
+.light .contact-ambient { opacity: 0.35; }
+.final-ambient {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 28%, #000 75%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 28%, #000 75%, transparent);
+}
+.light .final-ambient { opacity: 0.4; }
 
 html:focus-within { scroll-behavior: smooth; }
 
@@ -173,9 +249,6 @@ html::-webkit-scrollbar {
 
 /* Replace headings text visually without touching markup */
 
-#projects h2 { color: transparent !important; position: relative; text-align: center; }
-#projects h2::before { content: "Projects"; color: hsl(var(--fg)); display: inline-block; }
-
 #projects-page h1 { color: transparent !important; position: relative; text-align: center; }
 #projects-page h1::before { content: "Projects"; color: hsl(var(--fg)); display: inline-block; }
 
@@ -183,7 +256,6 @@ html::-webkit-scrollbar {
 /* Local fonts are loaded via next/font/local in layout; no manual @font-face needed */
 
 /* Heading label fixes: absolute centered pseudo text */
-#projects h2::before { content: "Projects" !important; position: absolute; left: 50%; transform: translateX(-50%); }
 #projects-page h1::before { content: "Projects" !important; position: absolute; left: 50%; transform: translateX(-50%); }
 
 /* Dynamic glow animation for FinalCallout */
@@ -221,9 +293,4 @@ html::-webkit-scrollbar {
   opacity: 0.6;
   z-index: -1;
   pointer-events: none;
-}
-
-/* Restrain the ambient light around the constellation on phones. */
-@media (max-width: 900px) {
-  #work > .stack-ambient > div { width: 30rem; height: 30rem; opacity: .12; animation: none; }
 }

@@ -14,12 +14,8 @@ export default function EducationPage() {
               </div>
               <div className="text-xs sm:text-sm text-muted sm:whitespace-nowrap">{e.from}–{e.to}</div>
             </div>
+            <p className="mt-2 text-xs sm:text-sm text-muted">GPA {e.gpa}</p>
             <p className="mt-2 text-xs sm:text-sm text-muted">{e.description}</p>
-            {e.link && (
-              <a className="mt-2 sm:mt-3 inline-block text-xs sm:text-sm text-[hsl(var(--accent-blue))] hover:underline" href={e.link} target="_blank" rel="noreferrer">
-                Подробнее
-              </a>
-            )}
           </li>
         ))}
       </ul>

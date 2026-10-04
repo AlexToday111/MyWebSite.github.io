@@ -53,17 +53,18 @@ function projectInitials(title: string) {
 
 function LogoSlot({ project }: { project: Project }) {
   return (
-    <div className="relative mx-auto grid h-28 w-28 place-items-center rounded-3xl border border-violet-300/25 bg-black/25 p-2 shadow-[0_0_30px_rgba(167,139,250,0.2)] backdrop-blur sm:h-32 sm:w-32">
+    <div className="project-logo relative mx-auto grid h-28 w-28 place-items-center rounded-3xl border border-violet-300/25 bg-black/25 p-2 shadow-[0_0_30px_rgba(167,139,250,0.2)] backdrop-blur sm:h-32 sm:w-32">
       {project.logo ? (
         <img
           src={withBasePath(project.logo)}
           alt={`${project.title} logo`}
+          data-logo-tone={project.logoTone}
           className={`object-contain ${project.logoClassName ?? "h-full w-full"}`}
           draggable={false}
         />
       ) : (
         <div className="text-center">
-          <div className="text-xl font-black tracking-tight text-white sm:text-2xl">
+          <div className="project-title text-xl font-black tracking-tight sm:text-2xl">
             {projectInitials(project.title)}
           </div>
           <div className="mt-1 text-[0.55rem] uppercase tracking-[0.18em] text-white/35">
@@ -83,10 +84,10 @@ function ProjectMiniCard({ project }: { project: Project }) {
       <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-violet-300/70 to-transparent" />
       <LogoSlot project={project} />
 
-      <h4 className="clamp-2 mt-6 flex min-h-[2.75rem] items-center justify-center text-base font-bold leading-tight text-white sm:text-lg">
+      <h4 className="project-title clamp-2 mt-6 flex min-h-[2.75rem] items-center justify-center text-base font-bold leading-tight sm:text-lg">
         {project.title}
       </h4>
-      <p className="clamp-3 mt-3 min-h-[5.5rem] text-sm leading-relaxed text-white/58 font-readable">
+      <p className="project-description clamp-3 mt-3 min-h-[5.5rem] text-sm leading-relaxed font-readable">
         {project.description}
       </p>
 
@@ -97,7 +98,7 @@ function ProjectMiniCard({ project }: { project: Project }) {
   );
 
   const className =
-    "group/project relative flex h-full min-h-[23rem] flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.045] p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-violet-300/35 hover:bg-white/[0.065] focus:outline-none focus:ring-2 focus:ring-violet-300/70 sm:p-5";
+    "project-card group/project relative flex h-full min-h-[23rem] flex-col overflow-hidden rounded-3xl border p-4 text-center transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-violet-300/70 sm:p-5";
 
   if (repo) {
     return (
@@ -141,7 +142,6 @@ export default function NeonProjectGrid() {
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
         {grouped.map(({ category, items }) => {
           const violet = "#A78BFA";
-          const border = hexToRgba(violet, 0.5);
           const glow = hexToRgba(violet, 0.22);
 
           return (
@@ -155,14 +155,13 @@ export default function NeonProjectGrid() {
               variants={variants}
             >
               <div
-                className="h-full rounded-[2rem] border bg-card/90 p-4 shadow-sm sm:p-5"
+                className="h-full rounded-[2rem] p-4 sm:p-5"
                 style={{
-                  borderColor: border,
-                  boxShadow: `0 0 0 1px ${border} inset, 0 0 34px ${glow}`,
+                  boxShadow: `0 0 34px ${glow}`,
                 }}
               >
                 <div className="mb-5 text-center">
-                  <h3 className="text-lg font-black text-white sm:text-xl">
+                  <h3 className="project-title text-lg font-black sm:text-xl">
                     {category}
                   </h3>
                 </div>

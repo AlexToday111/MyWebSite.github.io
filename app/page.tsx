@@ -4,12 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { withBasePath } from "@/lib/paths";
 import AuroraBackground from "@/components/AuroraBackground";
-import Link from "next/link";
-import ProjectHero from "@/components/ProjectHero";
 import NeonProjectGrid from "@/components/NeonProjectGrid";
-import StackSection from "@/components/StackSection";
+import ProfileSection from "@/components/ProfileSection";
 import FinalCallout from "@/components/FinalCallout";
-import { profile } from "@/data/profile";
 import { useState, useEffect } from "react";
 
 export default function HomePage() {
@@ -33,7 +30,10 @@ export default function HomePage() {
       className="relative h-screen overflow-y-scroll overflow-x-hidden scroll-smooth"
     >
       {/* Раздел 1: Ник */}
-      <section id="intro" className="min-h-screen grid place-items-center relative">
+      <section
+        id="intro"
+        className="min-h-screen grid place-items-center relative"
+      >
         <AnimatePresence>
           {showAurora && <AuroraBackground key="aurora" />}
         </AnimatePresence>
@@ -131,54 +131,14 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* Раздел 2: Стек + проекты */}
+      {/* Profile and selected projects */}
       <section id="work" className="relative min-h-screen">
-        {/* Шар слева сверху от Technical Stack */}
-        <AnimatePresence>
-          <motion.div
-            key="orb-left"
-            aria-hidden
-            className="stack-ambient pointer-events-none absolute left-[25%] top-[13%] -z-10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="h-[64rem] w-[64rem] rounded-full bg-gradient-to-br from-violet-500/40 to-fuchsia-500/30 blur-3xl animate-soft-blink animate-orb-1" />
-          </motion.div>
-        </AnimatePresence>
+        <ProfileSection />
 
-        {/* Шар справа от Projects */}
-        <AnimatePresence>
-          <motion.div
-            key="orb-right"
-            aria-hidden
-            className="pointer-events-none absolute right-[30%] top-[50%] -z-10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{
-              duration: 1.5,
-              ease: [0.22, 1, 0.36, 1],
-              delay: 0.2,
-            }}
-          >
-            <div
-              className="h-[64rem] w-[64rem] rounded-full bg-gradient-to-bl from-fuchsia-500/35 to-purple-500/30 blur-3xl animate-soft-blink animate-orb-2"
-              style={{ animationDelay: "0.5s" }}
-            />
-          </motion.div>
-        </AnimatePresence>
-
-        <StackSection />
-
-        <section id="projects" className="container py-10 sm:py-14 md:py-16 relative">
-          <div className="mb-4 sm:mb-6 text-center relative">
-            <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3.75rem] font-extrabold tracking-tight [font-family:var(--ff-exotica)]">
-              Проекты
-            </h2>
-          </div>
-
+        <section
+          id="projects"
+          className="container max-w-[1280px] py-10 sm:py-14 md:py-16 relative"
+        >
           {/* Hero tile removed as requested */}
           <div className="mt-6">
             <NeonProjectGrid />
@@ -187,15 +147,18 @@ export default function HomePage() {
       </section>
 
       {/* Раздел 3: Заключение */}
-      <section id="final" className="relative min-h-[100svh] grid place-items-center overflow-hidden">
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute left-[-10%] top-[15%] h-[85rem] w-[85rem] rounded-full bg-gradient-to-tr from-violet-500/35 to-fuchsia-500/25 blur-3xl animate-soft-blink" />
+      <section
+        id="final"
+        className="relative min-h-[100svh] grid place-items-center overflow-hidden"
+      >
         <div
-          className="absolute right-[-10%] bottom-[-15%] h-[85rem] w-[85rem] rounded-full bg-gradient-to-bl from-fuchsia-500/30 to-purple-500/25 blur-3xl animate-soft-blink"
-        />
-      </div>
+          aria-hidden
+          className="final-ambient pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        >
+          <div className="absolute left-[-10%] top-[15%] h-[85rem] w-[85rem] rounded-full bg-gradient-to-tr from-violet-500/35 to-fuchsia-500/25 blur-3xl animate-soft-blink" />
+          <div className="absolute right-[-10%] bottom-[-15%] h-[85rem] w-[85rem] rounded-full bg-gradient-to-bl from-fuchsia-500/30 to-purple-500/25 blur-3xl animate-soft-blink" />
+        </div>
 
-        
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

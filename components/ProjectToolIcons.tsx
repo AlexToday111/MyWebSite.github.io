@@ -113,7 +113,7 @@ export default function ProjectToolIcons({
           <span
             key={tool}
             title={tool}
-            className="grid h-10 w-10 place-items-center transition duration-200 hover:scale-110 sm:h-12 sm:w-12"
+            className="tool-icon grid h-10 w-10 place-items-center transition duration-200 hover:scale-110 sm:h-12 sm:w-12"
           >
             <img
               src={withBasePath(icon)}

@@ -13,7 +13,7 @@ export default function FinalCallout() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           viewport={{ once: false, amount: 0.5 }}
-          className="group relative mx-auto max-w-[42rem] w-full overflow-hidden rounded-2xl sm:rounded-3xl border bg-card/90 p-6 sm:p-8 md:p-12 lg:p-[4.5rem] text-center shadow-sm transition-transform duration-300 hover:scale-[1.02] final-callout-border-glow"
+          className="contact-card group relative mx-auto max-w-[42rem] w-full overflow-hidden rounded-2xl sm:rounded-3xl border p-6 pt-10 pb-12 sm:p-8 sm:pt-12 sm:pb-14 md:p-12 lg:p-[4.5rem] text-center shadow-sm transition-transform duration-300 hover:scale-[1.02] final-callout-border-glow"
           style={{ borderColor: "rgba(167,139,250,.55)", boxShadow: "0 0 0 1px rgba(167,139,250,.55) inset" }}
         >
           {/* Боковое свечение ЗА плашкой */}
@@ -24,7 +24,7 @@ export default function FinalCallout() {
             <div className="h-[28rem] w-[28rem] rounded-full bg-gradient-to-l from-fuchsia-500/35 to-purple-500/30 blur-3xl animate-soft-blink" style={{ animationDelay: '0.5s' }} />
           </div>
           {/* violet soft glows on sides (like other sections) */}
-          <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+          <div aria-hidden className="contact-ambient pointer-events-none absolute inset-0 z-0">
             <div className="absolute -left-10 top-1/4 h-[22rem] w-[22rem] rounded-full blur-[90px] hidden sm:block" style={{ background: "radial-gradient(60% 60% at 50% 50%, rgba(167,139,250,0.45), transparent 70%)" }} />
             <div className="absolute -right-10 bottom-1/4 h-[22rem] w-[22rem] rounded-full blur-[90px] hidden sm:block" style={{ background: "radial-gradient(60% 60% at 50% 50%, rgba(167,139,250,0.45), transparent 70%)" }} />
           </div>
@@ -35,45 +35,36 @@ export default function FinalCallout() {
             whileInView={{ opacity: 1, x: 0, y: 0 }}
             transition={{ delay: 0.15, duration: 0.5, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.5 }}
-            className="pointer-events-none absolute bottom-3 left-3 sm:bottom-5 sm:left-6 z-10 text-xs sm:text-sm text-white/60"
+            className="contact-caption pointer-events-none absolute bottom-3 left-3 sm:bottom-5 sm:left-6 z-10 text-xs sm:text-sm"
           >
-            Innopolis University
+            From Ufa, Republic of <strong>Bashkortostan</strong>
           </motion.span>
           <motion.span
             initial={{ opacity: 0, x: 12, y: -12 }}
             whileInView={{ opacity: 1, x: 0, y: 0 }}
             transition={{ delay: 0.15, duration: 0.5, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.5 }}
-            className="pointer-events-none absolute top-3 right-3 sm:top-5 sm:right-5 z-10 text-xs sm:text-sm text-white/60"
+            className="contact-caption pointer-events-none absolute top-3 right-3 sm:top-5 sm:right-5 z-10 text-xs sm:text-sm"
           >
             54.7431, 55.9678
           </motion.span>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05, duration: 0.5, ease: "easeOut" }}
-            viewport={{ once: false, amount: 0.6 }}
-            className="relative z-10 md:text-[3.5rem] lg:text-[4.25rem] xl:text-[4.75rem] font-extrabold tracking-[-0.09em] [font-family:var(--ff-exotica)] leading-tight"
-          >
-            I can be your joker
-          </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.6 }}
-            className="relative z-10 mt-6 sm:mt-8 md:mt-10 flex items-center justify-center gap-3 sm:gap-4 md:gap-5"
+            className="relative z-10 flex items-center justify-center gap-3 sm:gap-4 md:gap-5"
           >
             {/* Telegram */}
             <Link
               href={profile.links.telegram}
               aria-label="Open Telegram"
-              className="group/icon inline-flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-[4rem] lg:w-[4rem] items-center justify-center rounded-full border border-white/10 bg-white/5 transition-all duration-200 hover:bg-sky-400 hover:scale-110 hover:ring-2 hover:ring-sky-400/60 hover:ring-offset-2 hover:ring-offset-[hsl(var(--bg))] hover:shadow-[0_0_28px_rgba(56,189,248,0.85)]"
+              className="contact-link group/icon inline-flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-[4rem] lg:w-[4rem] items-center justify-center rounded-full border text-[var(--telegram)] transition-all duration-200 hover:bg-sky-400 hover:scale-110 hover:ring-2 hover:ring-sky-400/60 hover:ring-offset-2 hover:ring-offset-[hsl(var(--bg))] hover:shadow-[0_0_28px_rgba(56,189,248,0.85)]"
             >
               <svg
                 aria-hidden
-                className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-sky-400 transition-colors duration-200 group-hover/icon:text-black"
+                className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 transition-colors duration-200 group-hover/icon:text-black"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
@@ -85,7 +76,7 @@ export default function FinalCallout() {
             <Link
               href={profile.links.github}
               aria-label="Open GitHub"
-              className="inline-flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-[4rem] lg:w-[4rem] items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-200 hover:bg-white hover:text-black hover:scale-110 hover:ring-2 hover:ring-white/70 hover:ring-offset-2 hover:ring-offset-[hsl(var(--bg))] hover:shadow-[0_0_28px_rgba(255,255,255,0.9)]"
+              className="contact-link inline-flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-[4rem] lg:w-[4rem] items-center justify-center rounded-full border text-[hsl(var(--fg))] transition-all duration-200 hover:bg-white hover:text-black hover:scale-110 hover:ring-2 hover:ring-white/70 hover:ring-offset-2 hover:ring-offset-[hsl(var(--bg))] hover:shadow-[0_0_28px_rgba(255,255,255,0.9)]"
               target="_blank"
               rel="noreferrer"
             >
@@ -107,7 +98,7 @@ export default function FinalCallout() {
             <Link
               href={profile.links.leetcode}
               aria-label="Open LeetCode"
-              className="group inline-flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-[4rem] lg:w-[4rem] items-center justify-center rounded-full border border-white/10 bg-white/5 text-[#FFA116] transition-all duration-200 hover:bg-[#FFA116] hover:text-black hover:scale-110 hover:ring-2 hover:ring-[#FFA116]/70 hover:ring-offset-2 hover:ring-offset-[hsl(var(--bg))] hover:shadow-[0_0_28px_rgba(255,161,22,0.85)]"
+              className="contact-link group inline-flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-[4rem] lg:w-[4rem] items-center justify-center rounded-full border text-[var(--leetcode)] transition-all duration-200 hover:bg-[#FFA116] hover:text-black hover:scale-110 hover:ring-2 hover:ring-[#FFA116]/70 hover:ring-offset-2 hover:ring-offset-[hsl(var(--bg))] hover:shadow-[0_0_28px_rgba(255,161,22,0.85)]"
               target="_blank"
               rel="noreferrer"
             >
@@ -120,6 +111,24 @@ export default function FinalCallout() {
               <path d="M13.483 2.5a1.25 1.25 0 0 1 .884.366l.767.768a1.25 1.25 0 0 1 0 1.768l-6.59 6.59 6.59 6.59a1.25 1.25 0 0 1 0 1.768l-.767.768a1.25 1.25 0 0 1-1.768 0l-7.947-7.947a1.25 1.25 0 0 1 0-1.768L12.599 2.866a1.25 1.25 0 0 1 .884-.366Z" />
               <path d="M17.25 10h-5.5a2 2 0 1 0 0 4h5.5a2 2 0 1 0 0-4Z" />
             </svg>
+            </Link>
+            {/* LinkedIn */}
+            <Link
+              href={profile.links.linkedin}
+              aria-label="Open LinkedIn"
+              title="LinkedIn"
+              target="_blank"
+              rel="noreferrer"
+              className="contact-link inline-flex h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 lg:h-[4rem] lg:w-[4rem] items-center justify-center rounded-full border text-[var(--linkedin)] transition-all duration-200 hover:bg-[#0A66C2] hover:text-white hover:scale-110 hover:ring-2 hover:ring-[#0A66C2]/70 hover:ring-offset-2 hover:ring-offset-[hsl(var(--bg))] hover:shadow-[0_0_28px_rgba(10,102,194,0.85)]"
+            >
+              <svg
+                aria-hidden
+                className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
             </Link>
           </motion.div>
         </motion.div>

@@ -38,17 +38,18 @@ function projectInitials(title: string) {
 
 function ProjectLogo({ project }: { project: Project }) {
   return (
-    <div className="grid h-24 w-24 shrink-0 place-items-center rounded-3xl border border-violet-300/25 bg-black/25 p-2">
+    <div className="project-logo grid h-24 w-24 shrink-0 place-items-center rounded-3xl border border-violet-300/25 bg-black/25 p-2">
       {project.logo ? (
         <img
           src={withBasePath(project.logo)}
           alt={`${project.title} logo`}
+          data-logo-tone={project.logoTone}
           className={`object-contain ${project.logoClassName ?? "h-full w-full"}`}
           draggable={false}
         />
       ) : (
         <div className="text-center">
-          <div className="text-xl font-black text-white">
+          <div className="project-title text-xl font-black">
             {projectInitials(project.title)}
           </div>
           <div className="mt-1 text-[0.55rem] uppercase tracking-[0.18em] text-white/35">
@@ -108,7 +109,7 @@ export default function ProjectsPage() {
               <div className="flex items-start gap-4">
                 <ProjectLogo project={p} />
                 <div className="min-w-0 flex-1">
-                  <span className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-white/45">
+                  <span className="project-description rounded-full border border-[hsl(var(--border))] px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em]">
                     {p.category}
                   </span>
                   <h3 className="clamp-2 mt-3 text-lg font-semibold leading-tight">
@@ -135,7 +136,7 @@ export default function ProjectsPage() {
                 rel="noreferrer"
                 aria-label={`Open ${p.title} repository`}
                 whileHover={{ y: -4 }}
-                className="group flex h-full min-h-[20rem] flex-col overflow-hidden rounded-3xl border border-white/10 bg-card/75 p-4 shadow-soft transition-shadow hover:border-violet-300/35 focus:outline-none focus:ring-2 focus:ring-violet-300/70"
+                className="project-card group flex h-full min-h-[20rem] flex-col overflow-hidden rounded-3xl border p-4 shadow-soft transition-shadow focus:outline-none focus:ring-2 focus:ring-violet-300/70"
               >
                 {content}
               </motion.a>
@@ -146,7 +147,7 @@ export default function ProjectsPage() {
             <motion.article
               key={p.title}
               whileHover={{ y: -4 }}
-              className="group flex h-full min-h-[20rem] flex-col overflow-hidden rounded-3xl border border-white/10 bg-card/75 p-4 shadow-soft transition-shadow"
+              className="project-card group flex h-full min-h-[20rem] flex-col overflow-hidden rounded-3xl border p-4 shadow-soft transition-shadow"
             >
               {content}
             </motion.article>

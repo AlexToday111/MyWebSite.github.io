@@ -12,6 +12,7 @@ export type Project = {
   category: ProjectCategory;
   logo?: string;
   logoClassName?: string;
+  logoTone?: "light";
   links?: { demo?: string; repo?: string };
   featured?: boolean;
 };
@@ -40,6 +41,7 @@ export const projects: Project[] = [
     ],
     image: "/projects/flowstate.jpg",
     logo: "/Logos/projects/WhiteLogo.png",
+    logoTone: "light",
     category: "Commercial Experience",
     links: {
       repo: "https://github.com/ATLAS-lifeops/ATLAS",
@@ -145,6 +147,7 @@ export const projects: Project[] = [
     ],
     image: "/projects/flowstate.jpg",
     logo: "/PingTower.png",
+    logoTone: "light",
     category: "Hackathons",
     links: { repo: "https://github.com/AlexToday111/T1-Hackathon" },
     featured: true,
