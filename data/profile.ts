@@ -62,7 +62,7 @@ export const homeProfile = {
   experiences: [
     {
       id: "tbank",
-      role: "Java Backend Developer Intern",
+      role: "Java Backend Developer",
       company: "T-Bank",
       signal: "FinTech",
       result: null,

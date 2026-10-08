@@ -11,7 +11,7 @@ const russianProfile = {
   experiences: [
     {
       ...homeProfile.experiences[0],
-      role: "Java Backend Developer Intern",
+      role: "Java Backend Developer",
       company: "Т-Банк",
       highlights: [
         "Мигрировал 7 сервисов на обновлённый стек Java и Spring Boot, адаптировал Helm-чарты и Kubernetes-конфигурации.",
