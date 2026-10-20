@@ -35,8 +35,23 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Restore last valid LeetCode snapshot
+        uses: actions/cache/restore@v4
+        with:
+          path: .cache/leetcode
+          key: leetcode-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: leetcode-v1-
+
       - name: Update LeetCode statistics
+        env:
+          LEETCODE_CACHE_PATH: .cache/leetcode/leetcode.json
         run: npm run update:leetcode
+
+      - name: Save validated LeetCode snapshot
+        uses: actions/cache/save@v4
+        with:
+          path: .cache/leetcode
+          key: leetcode-v1-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Compute base path for project pages
         id: basepath

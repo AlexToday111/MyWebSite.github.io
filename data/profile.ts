@@ -82,8 +82,8 @@ export const homeProfile = {
         "Reduced average service response time by 3–5 times (from 800–1000 ms to 200–300 ms) by optimizing SQL queries and business logic.",
       stack: ["Java", "Go", "Spring Boot", "PostgreSQL", "JSON"],
       highlights: [
-        "Developed and maintained backend services and REST APIs in a Java and Go system.",
-        "Contributed to a microservice for data transformation and visualization.",
+        "Implemented and maintained REST APIs and backend services in a Java and Go system.",
+        "Contributed to data transformation in a visualization microservice.",
         "Covered critical business logic with unit tests and participated in code reviews.",
       ],
     },
@@ -97,14 +97,14 @@ export const homeProfile = {
       highlights: [
         "Built a multi-service platform for algorithmic strategy research and backtesting.",
         "Designed the Spring Boot API for datasets, versioned strategies and reproducible executions.",
-        "Integrated Java, Python and PostgreSQL services for backtest orchestration and result persistence.",
+        "Connected the Java API to the Python engine to orchestrate backtests and persist results in PostgreSQL.",
         "Set up automated CI and Docker-based integration checks.",
       ],
     },
   ],
   achievements: [
     {
-      title: "1st and 2nd place",
+      title: "1st and 2nd places",
       description: "Scientific & Practical Conference in Informatics",
     },
     {

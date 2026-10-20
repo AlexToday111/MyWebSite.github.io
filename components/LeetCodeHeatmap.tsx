@@ -50,6 +50,9 @@ const copy = {
   en: {
     heading: "Algorithm practice",
     solved: "Solved · all time",
+    easy: "Easy",
+    medium: "Medium",
+    hard: "Hard",
     submissions: "submissions",
     activeDays: "active days",
     streak: "days · longest streak",
@@ -62,6 +65,9 @@ const copy = {
   ru: {
     heading: "Практика алгоритмов",
     solved: "Решено · за всё время",
+    easy: "Лёгкие",
+    medium: "Средние",
+    hard: "Сложные",
     submissions: "отправок решений",
     activeDays: "активных дней",
     streak: "дней · максимальная серия",
@@ -89,6 +95,14 @@ export default function LeetCodeHeatmap({
     day: "numeric",
     month: "short",
     year: "numeric",
+    timeZone: "UTC",
+  });
+  const updatedFormat = new Intl.DateTimeFormat(locale, {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
     timeZone: "UTC",
   });
 
@@ -120,15 +134,15 @@ export default function LeetCodeHeatmap({
           <dd>{snapshot.solved.total.toLocaleString(locale)}</dd>
         </div>
         <div>
-          <dt className={styles.easy}>Easy</dt>
+          <dt className={styles.easy}>{labels.easy}</dt>
           <dd>{snapshot.solved.easy.toLocaleString(locale)}</dd>
         </div>
         <div>
-          <dt className={styles.medium}>Medium</dt>
+          <dt className={styles.medium}>{labels.medium}</dt>
           <dd>{snapshot.solved.medium.toLocaleString(locale)}</dd>
         </div>
         <div>
-          <dt className={styles.hard}>Hard</dt>
+          <dt className={styles.hard}>{labels.hard}</dt>
           <dd>{snapshot.solved.hard.toLocaleString(locale)}</dd>
         </div>
       </dl>
@@ -208,7 +222,9 @@ export default function LeetCodeHeatmap({
           {labels.period}
           <span aria-hidden="true"> · </span>
           {labels.updated}{" "}
-          <time dateTime={snapshot.updatedAt}>{dateFormat.format(end)}</time>
+          <time dateTime={snapshot.updatedAt}>
+            {updatedFormat.format(new Date(snapshot.updatedAt))} UTC
+          </time>
         </p>
         <div className={styles.legend} aria-hidden="true">
           <span>{labels.less}</span>

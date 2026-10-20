@@ -4,6 +4,7 @@ import { ThemeProvider } from "next-themes";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { PortfolioLanguage } from "@/components/PortfolioLanguage";
 import ScheduledTheme from "@/components/ScheduledTheme";
 import { themeBootstrapScript } from "@/lib/theme-schedule";
 
@@ -58,7 +59,7 @@ export function Providers({ children }: ProvidersProps) {
     >
       <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
       <ScheduledTheme />
-      {children}
+      <PortfolioLanguage>{children}</PortfolioLanguage>
     </ThemeProvider>
   );
 }

@@ -1,0 +1,104 @@
+.heading {
+  justify-content: space-between;
+  align-items: center;
+  min-height: 62px;
+}
+.controls {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 8px;
+  align-items: center;
+}
+.progress {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: hsl(var(--muted));
+  white-space: nowrap;
+  margin-right: 8px;
+}
+.controls[hidden] {
+  display: none;
+}
+.controls button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid hsl(var(--accent-blue) / 0.3);
+  border-radius: 50%;
+  color: hsl(var(--accent-blue));
+  background: hsl(var(--accent-blue) / 0.04);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    opacity 180ms ease;
+}
+.controls button:hover:not(:disabled) {
+  border-color: hsl(var(--accent-blue) / 0.4);
+  background: hsl(var(--accent-blue) / 0.06);
+}
+.controls button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.controls svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.track {
+  --carousel-gap: 24px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - var(--carousel-gap)) / 2);
+  gap: var(--carousel-gap);
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 2px 0 4px;
+}
+.track::-webkit-scrollbar {
+  display: none;
+}
+.slide {
+  display: flex;
+  min-width: 0;
+  scroll-snap-align: start;
+}
+.slide > article {
+  flex: 1;
+}
+.controls button:focus-visible,
+.track:focus-visible {
+  outline: 2px solid hsl(var(--accent-blue));
+  outline-offset: 4px;
+  box-shadow: none;
+}
+@media (max-width: 767px) {
+  .heading {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .controls {
+    margin-left: auto;
+  }
+  .track {
+    grid-auto-columns: 100%;
+  }
+}
+@media (max-width: 639px) {
+  .track {
+    --carousel-gap: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .controls button {
+    transition: none;
+  }
+}

@@ -183,7 +183,7 @@
   color: hsl(var(--muted) / 0.5);
 }
 .jobStack {
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.7;
   color: hsl(var(--muted));
   margin-top: 20px;
@@ -382,4 +382,13 @@
   .tabs button {
     transition: none;
   }
+}
+
+.tabs button { min-height: 44px; }
+.tabs button[aria-selected="true"] {
+  color: hsl(var(--accent-blue));
+  border-bottom-color: hsl(var(--accent-blue));
+}
+@media (min-width: 1101px) {
+  .tools > div { grid-template-columns: 130px minmax(0, 1fr); }
 }

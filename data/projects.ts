@@ -26,9 +26,74 @@ export const projectCategories: ProjectCategory[] = [
 
 export const projects: Project[] = [
   {
+    title: "Distributed Job Processing Platform",
+    description:
+      "Распределённая платформа фоновых задач с gRPC-воркерами и транзакционной очередью в PostgreSQL. Аренды и проверка токенов защищают задания от устаревших исполнителей.",
+    stack: [
+      "Go",
+      "PostgreSQL",
+      "gRPC",
+      "Docker",
+      "Prometheus",
+      "Grafana",
+      "Jaeger",
+    ],
+    image: "/Logos/projects/distributed-jobs.svg",
+    logo: "/Logos/projects/distributed-jobs.svg",
+    category: "Pet Projects",
+    links: {
+      repo: "https://github.com/AlexToday111/Distributed-Job-Processing-Platform",
+    },
+    featured: true,
+  },
+  {
+    title: "High-performance API Gateway",
+    description:
+      "Обратный прокси на Go с балансировкой нагрузки и ограничением конкурентных запросов. Атомарные снимки конфигурации позволяют обновлять маршруты без перезапуска.",
+    stack: ["Go", "HTTP", "Docker", "Prometheus", "Grafana", "Jaeger"],
+    image: "/Logos/projects/api-gateway.svg",
+    logo: "/Logos/projects/api-gateway.svg",
+    category: "Pet Projects",
+    links: {
+      repo: "https://github.com/AlexToday111/High-performance-API-Gateway",
+    },
+    featured: true,
+  },
+  {
+    title: "FlagForge",
+    description:
+      "Платформа feature flags с локальным вычислением правил в Go SDK. Конфигурация доставляется через SSE, а SDK сохраняет последний снимок при потере связи.",
+    stack: ["Go", "PostgreSQL", "Redis", "SSE", "Docker", "Prometheus"],
+    image: "/Logos/projects/flagforge.svg",
+    logo: "/Logos/projects/flagforge.svg",
+    category: "Pet Projects",
+    links: { repo: "https://github.com/AlexToday111/FlagForge" },
+    featured: true,
+  },
+  {
+    title: "SaveOps",
+    description:
+      "Микросервисная платформа накопительных счетов с журналом операций и целями. gRPC связывает сервисы, а Redis обеспечивает идемпотентность денежных операций.",
+    stack: [
+      "Java 21",
+      "Spring Boot",
+      "PostgreSQL",
+      "RabbitMQ",
+      "Redis",
+      "gRPC",
+      "Docker",
+      "Grafana",
+    ],
+    image: "/Logos/projects/saveops.png",
+    logo: "/Logos/projects/saveops.png",
+    category: "Pet Projects",
+    links: { repo: "https://github.com/AlexToday111/SaveOps" },
+    featured: true,
+  },
+  {
     title: "ATLAS",
     description:
-      "Персональная AI-система для управления режимом, спортом, восстановлением, привычками, питанием и прогрессом.",
+      "Telegram-продукт для планирования, привычек и тренировок на модульном монолите. Разделяет сценарии и состояние диалогов, сохраняя детерминированный fallback при недоступности LLM.",
     stack: [
       "Java 21",
       "Spring Boot",
@@ -51,7 +116,7 @@ export const projects: Project[] = [
   {
     title: "Notification Subscription Platform",
     description:
-      "Событийная платформа уведомлений с подписками и доставкой через несколько каналов.",
+      "Платформа уведомлений с JSON-правилами подписок и дедупликацией событий. Transactional outbox связывает сохранение события с его публикацией в RabbitMQ.",
     stack: [
       "Java",
       "Spring Boot",
@@ -71,9 +136,46 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    title: "FlashSale Tickets",
+    description:
+      "Микросервисная система бронирования с истечением резервов и управлением заказами. События RabbitMQ связывают заказ, симулятор платежей и уведомления.",
+    stack: [
+      "Java",
+      "Spring Boot",
+      "PostgreSQL",
+      "RabbitMQ",
+      "Redis",
+      "Docker",
+      "Prometheus",
+      "Grafana",
+    ],
+    image: "/Logos/projects/flashsale-tickets.png",
+    logo: "/Logos/projects/flashsale-tickets.png",
+    category: "Pet Projects",
+    links: { repo: "https://github.com/AlexToday111/FlashSale-Tickets" },
+  },
+  {
+    title: "Link2Action",
+    description:
+      "Telegram-платформа расшифровки видео и аудио с отдельным Python-воркером. Готовит транскрипты и структурированные пакеты для ручной работы с LLM.",
+    stack: [
+      "Kotlin",
+      "Spring Boot",
+      "Python",
+      "PostgreSQL",
+      "RabbitMQ",
+      "Docker",
+      "Whisper",
+    ],
+    image: "/Logos/projects/link2action.png",
+    logo: "/Logos/projects/link2action.png",
+    category: "Pet Projects",
+    links: { repo: "https://github.com/AlexToday111/Link2Action" },
+  },
+  {
     title: "Smart Activity Tracker",
     description:
-      "Сервис для сбора пользовательских событий и расчёта базовой продуктовой аналитики.",
+      "Сервис приёма событий с идемпотентной записью и JSONB-метаданными. Рассчитывает retention, когорты и воронки, поддерживает пакетную загрузку.",
     stack: [
       "Java",
       "Spring Boot",
@@ -92,7 +194,7 @@ export const projects: Project[] = [
   {
     title: "Porta Trading System",
     description:
-      "Распределённая MVP-система для трейдинга с дашбордом, Kafka-событиями и состоянием портфеля.",
+      "Распределённый торговый MVP с Java BFF и событиями Kafka. Сервис trading-core оркестрирует заказы и сохраняет состояние портфеля в PostgreSQL.",
     stack: [
       "Java",
       "Spring Boot",
@@ -112,9 +214,19 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    title: "Language Compiler",
+    description:
+      "Фронтенд компилятора с ручным лексером и рекурсивным спуском. Строит неизменяемый типизированный AST и сообщает позицию первой синтаксической ошибки.",
+    stack: ["Java", "Maven", "JUnit"],
+    image: "/Logos/projects/language-compiler.svg",
+    logo: "/Logos/projects/language-compiler.svg",
+    category: "University Projects",
+    links: { repo: "https://github.com/AlexToday111/language-compiler" },
+  },
+  {
     title: "Visual Circuit Designer",
     description:
-      "Веб-инструмент для проектирования, симуляции и управления цифровыми логическими схемами.",
+      "Браузерный редактор цифровых схем с интерактивной сборкой и симуляцией. Сохранение через backend API восстанавливает структуру схемы, входы и расположение элементов.",
     stack: [
       "Next.js",
       "React",
@@ -133,9 +245,19 @@ export const projects: Project[] = [
     links: { repo: "https://github.com/AlexToday111/Visual-Circuit-Designer" },
   },
   {
+    title: "Secure DevOps Pipeline",
+    description:
+      "Конвейер GitHub Actions для контейнерного Go-приложения с gosec и Trivy. Проверки безопасности блокируют уязвимый образ, а отчёты сохраняются как артефакты.",
+    stack: ["Go", "GitHub Actions", "Docker", "gosec", "Trivy", "ELK"],
+    image: "/Logos/projects/secure-devops.png",
+    logo: "/Logos/projects/secure-devops.png",
+    category: "University Projects",
+    links: { repo: "https://github.com/AlexToday111/SNA-proj.-DevSecOps" },
+  },
+  {
     title: "PingTower",
     description:
-      "Система мониторинга сайтов и сервисов с дашбордом, алертами и статистикой надёжности.",
+      "Мониторинг сайтов и API с расписаниями проверок и оповещениями. PostgreSQL хранит актуальные результаты, ClickHouse используется для истории и аналитики временных рядов.",
     stack: [
       "Java 21",
       "Spring Boot",
@@ -155,7 +277,7 @@ export const projects: Project[] = [
   {
     title: "DatsPulse",
     description:
-      "Python-бот с модульной архитектурой для автоматизации и реализации пользовательских стратегий.",
+      "Python-бот с отдельными модулями ядра, стратегий и конфигурации. Сценарии расширяются через bot_strat.py без объединения всей логики в точке входа.",
     stack: ["Python"],
     image: "/projects/flowstate.jpg",
     logo: "/DatsPulse.png",
@@ -166,7 +288,7 @@ export const projects: Project[] = [
   {
     title: "Trade360Lab",
     description:
-      "Платформа для исследования, подготовки данных, запуска и сравнения торговых сценариев.",
+      "Платформа исследования торговых стратегий с Java API и Python-движком. Запуски бэктестов, их статусы и результаты сохраняются в PostgreSQL для последующего сравнения.",
     stack: [
       "Java",
       "Spring Boot",

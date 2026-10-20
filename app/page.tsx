@@ -132,43 +132,26 @@ export default function HomePage() {
       </section>
 
       {/* Profile and selected projects */}
-      <section id="work" className="relative min-h-screen">
-        <ProfileSection />
+      <div className="portfolio-body">
+        <section id="work" className="relative min-h-screen">
+          <ProfileSection />
 
-        <section
-          id="projects"
-          className="container max-w-[1280px] py-10 sm:py-14 md:py-16 relative"
-        >
-          {/* Hero tile removed as requested */}
-          <div className="mt-6">
-            <NeonProjectGrid />
-          </div>
+          <section
+            id="projects"
+            className="container max-w-[1280px] py-10 sm:py-14 md:py-16 relative"
+          >
+            {/* Hero tile removed as requested */}
+            <div className="mt-6">
+              <NeonProjectGrid />
+            </div>
+          </section>
         </section>
-      </section>
 
-      {/* Раздел 3: Заключение */}
-      <section
-        id="final"
-        className="relative min-h-[100svh] grid place-items-center overflow-hidden"
-      >
-        <div
-          aria-hidden
-          className="final-ambient pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-        >
-          <div className="absolute left-[-10%] top-[15%] h-[85rem] w-[85rem] rounded-full bg-gradient-to-tr from-violet-500/35 to-fuchsia-500/25 blur-3xl animate-soft-blink" />
-          <div className="absolute right-[-10%] bottom-[-15%] h-[85rem] w-[85rem] rounded-full bg-gradient-to-bl from-fuchsia-500/30 to-purple-500/25 blur-3xl animate-soft-blink" />
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          viewport={{ once: false, amount: 0.5 }}
-          className="w-full"
-        >
+        {/* Раздел 3: Заключение */}
+        <section id="final" className="portfolio-contact relative">
           <FinalCallout />
-        </motion.div>
-      </section>
+        </section>
+      </div>
     </main>
   );
 }

@@ -1,12 +1,17 @@
 import { withBasePath } from "@/lib/paths";
+import { usePortfolioLanguage } from "./PortfolioLanguage";
 
 const TOOL_ICONS: Record<string, string> = {
+  jwt: "/icons/stack/jwt.svg",
+  openapi: "/icons/stack/openapi.svg",
   java: "/icons/stack/java.svg",
   "java 21": "/icons/stack/java.svg",
   spring: "/icons/stack/spring.svg",
   "spring boot": "/icons/stack/spring.svg",
   python: "/icons/stack/python.svg",
   go: "/icons/stack/go.svg",
+  grpc: "/icons/stack/grpc.svg",
+  kotlin: "/icons/stack/kotlin.svg",
   typescript: "/icons/stack/typescript.svg",
   "next.js": "/icons/stack/nextjs.svg",
   "node.js": "/icons/stack/nodejs.svg",
@@ -31,100 +36,33 @@ const TOOL_ICONS: Record<string, string> = {
   react: "/icons/stack/react.svg",
 };
 
-const CORE_TOOL_PRIORITY = [
-  "java",
-  "java 21",
-  "spring boot",
-  "spring",
-  "maven",
-  "flyway",
-  "junit",
-  "junit 5",
-  "fastapi",
-  "python",
-  "go",
-  "kafka",
-  "rabbitmq",
-  "postgresql",
-  "postgres",
-  "mongodb",
-  "mysql",
-  "redis",
-  "clickhouse",
-  "docker",
-  "react",
-  "next.js",
-  "typescript",
-  "node.js",
-  "nginx",
-  "prometheus",
-  "grafana",
-  "github actions",
-] as const;
-
-function normalizeTool(tool: string) {
-  return tool.trim().toLowerCase();
-}
-
-function selectCoreTools(stack: string[], limit: number) {
-  const indexed = stack.map((tool, index) => ({
-    tool,
-    index,
-    normalized: normalizeTool(tool),
-  }));
-
-  return indexed
-    .filter(({ normalized }) => TOOL_ICONS[normalized])
-    .sort((a, b) => {
-      const aPriority = CORE_TOOL_PRIORITY.indexOf(
-        a.normalized as (typeof CORE_TOOL_PRIORITY)[number],
-      );
-      const bPriority = CORE_TOOL_PRIORITY.indexOf(
-        b.normalized as (typeof CORE_TOOL_PRIORITY)[number],
-      );
-      const safeA = aPriority === -1 ? Number.MAX_SAFE_INTEGER : aPriority;
-      const safeB = bPriority === -1 ? Number.MAX_SAFE_INTEGER : bPriority;
-
-      if (safeA !== safeB) return safeA - safeB;
-      return a.index - b.index;
-    })
-    .slice(0, limit)
-    .map(({ tool }) => tool);
-}
-
-export default function ProjectToolIcons({
-  stack,
-  limit = 4,
-}: {
-  stack: string[];
-  limit?: number;
-}) {
-  const visible = selectCoreTools(stack, limit);
-
+export default function ProjectToolIcons({ stack }: { stack: string[] }) {
+  const { language } = usePortfolioLanguage();
   return (
-    <div
-      className="flex flex-wrap justify-center gap-3"
-      aria-label="Project stack"
+    <ul
+      className="project-stack"
+      aria-label={
+        language === "en" ? "Technology stack" : "Технологический стек"
+      }
     >
-      {visible.map((tool) => {
-        const icon = TOOL_ICONS[normalizeTool(tool)];
-
+      {stack.map((tool) => {
+        const icon = TOOL_ICONS[tool.trim().toLowerCase()];
         return (
-          <span
-            key={tool}
-            title={tool}
-            className="tool-icon grid h-10 w-10 place-items-center transition duration-200 hover:scale-110 sm:h-12 sm:w-12"
-          >
-            <img
-              src={withBasePath(icon)}
-              alt=""
-              className="h-8 w-8 object-contain drop-shadow-[0_0_12px_rgba(255,255,255,0.18)] sm:h-10 sm:w-10"
-              draggable={false}
-            />
-            <span className="sr-only">{tool}</span>
-          </span>
+          <li key={tool} className="project-tool" title={tool}>
+            {icon && (
+              <img
+                src={withBasePath(icon)}
+                alt=""
+                width={16}
+                height={16}
+                loading="lazy"
+                draggable={false}
+              />
+            )}
+            <span>{tool}</span>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 }

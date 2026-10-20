@@ -157,3 +157,15 @@
     font-size: 18px;
   }
 }
+
+/* Keep the summary visually primary without changing the calendar or its data. */
+.solved { align-items: end; }
+.solved > div:first-child dd {
+  font-size: 44px;
+  color: hsl(var(--accent-blue));
+  font-variant-numeric: tabular-nums;
+}
+.solved dd, .stats dd { font-variant-numeric: tabular-nums; }
+@media (max-width: 767px) {
+  .solved > div:first-child dd { font-size: 36px; }
+}

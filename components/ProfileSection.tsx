@@ -2,15 +2,12 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState, type ReactNode } from "react";
-import {
-  profileContent,
-  profileLabels,
-  type ProfileLanguage,
-} from "@/data/profile-language";
+import { useState, type ReactNode } from "react";
+import { profileContent, profileLabels } from "@/data/profile-language";
 import { education } from "@/data/education";
 import { withBasePath } from "@/lib/paths";
 import styles from "./ProfileSection.module.css";
+import { usePortfolioLanguage } from "./PortfolioLanguage";
 import ExperienceTabs from "./ExperienceTabs";
 import LeetCodeHeatmap from "./LeetCodeHeatmap";
 
@@ -42,30 +39,12 @@ function ProfileCard({
 }
 
 export default function ProfileSection() {
-  const [language, setLanguage] = useState<ProfileLanguage>("en");
+  const { language, toggleLanguage } = usePortfolioLanguage();
   const [universityLogoLoaded, setUniversityLogoLoaded] = useState(false);
   const homeProfile = profileContent[language];
   const labels = profileLabels[language];
   const university = education[0];
 
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem("ba6kir:profile-language:v1");
-      if (saved === "en" || saved === "ru") setLanguage(saved);
-    } catch {
-      // The switch still works when browser storage is unavailable.
-    }
-  }, []);
-
-  function toggleLanguage() {
-    const next = language === "en" ? "ru" : "en";
-    setLanguage(next);
-    try {
-      localStorage.setItem("ba6kir:profile-language:v1", next);
-    } catch {
-      // Persistence is optional.
-    }
-  }
   return (
     <section
       id="profile"
@@ -85,7 +64,7 @@ export default function ProfileSection() {
             aria-label={
               language === "en"
                 ? "Переключить профиль на русский"
-                : "Switch profile to English"
+                : "Switch website to English"
             }
             title={
               language === "en" ? "Переключить на русский" : "Switch to English"
@@ -140,7 +119,7 @@ export default function ProfileSection() {
             <div className={styles.educationContent}>
               <h3>{labels.university}</h3>
               <p className={styles.degree}>{labels.degree}</p>
-              <p className={styles.secondary}>GPA {university.gpa}</p>
+              <p className={styles.secondary}>GPA {university.gpa} / 5.0</p>
               <p className={styles.subjects}>
                 {labels.subjects.map((subject) => (
                   <span key={subject} className="block">
