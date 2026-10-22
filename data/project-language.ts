@@ -5,13 +5,13 @@ export const projectCategoryLabels: Record<
   Record<ProjectCategory, string>
 > = {
   en: {
-    "Pet Projects": "Pet Projects",
+    "Pet Projects": "Personal Projects",
     "University Projects": "University Projects",
     Hackathons: "Hackathons",
     "Commercial Experience": "Commercial Experience",
   },
   ru: {
-    "Pet Projects": "pet-проекты",
+    "Pet Projects": "Личные проекты",
     "University Projects": "Университетские проекты",
     Hackathons: "Хакатоны",
     "Commercial Experience": "Коммерческий опыт",

@@ -156,7 +156,9 @@ export default function ProjectCarousel({
   return (
     <section className="project-category" aria-labelledby={headingId}>
       <header className={`project-category-heading ${styles.heading}`}>
-        <h3 id={headingId}>{title}</h3>
+        <h3 id={headingId} className={styles.title}>
+          {title}
+        </h3>
         <div className={styles.controls} hidden={!navigation.overflow}>
           <span className={styles.progress} aria-hidden="true">
             {String(navigation.index + 1).padStart(2, "0")}–

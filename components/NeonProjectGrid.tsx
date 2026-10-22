@@ -9,7 +9,7 @@ export default function NeonProjectGrid() {
   const { language } = usePortfolioLanguage();
   return (
     <div className="project-gallery" lang={language}>
-      <header className="project-gallery-heading">
+      <header className="project-gallery-heading project-section-heading">
         <h2>{language === "en" ? "Projects" : "Проекты"}</h2>
       </header>
       {projectCategories.map((category, index) => (

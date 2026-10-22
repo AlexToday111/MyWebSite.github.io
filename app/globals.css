@@ -362,6 +362,9 @@ html::-webkit-scrollbar {
   padding: 32px 0;
   border-top: 1px solid hsl(var(--border));
 }
+.project-section-heading {
+  padding: 24px 0 8px;
+}
 .project-category + .project-category { margin-top: 40px; }
 .project-category-heading {
   display: flex;
@@ -672,6 +675,7 @@ html::-webkit-scrollbar {
   .contact-footer { grid-template-columns: minmax(0, 1fr); gap: 28px; }
 }
 @media (max-width: 639px) {
+  .project-section-heading { padding-top: 20px; }
   .project-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .project-preview { padding: 16px; }
   .project-artwork { height: 184px; padding: 8px 12px; }
