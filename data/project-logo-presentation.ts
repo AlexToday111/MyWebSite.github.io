@@ -1,18 +1,21 @@
-// Optical compensation for whitespace inside the original artwork.
-// These values change presentation only; source files and proportions stay intact.
+// Optical compensation only for artwork with generous transparent margins.
+// The hover transform is on a separate wrapper and preserves these proportions.
 export const projectLogoPresentation: Record<
   string,
   { maxWidth: number; height: number; scale?: number }
 > = {
-  PingTower: { maxWidth: 280, height: 160, scale: 1.9 },
-  DatsPulse: { maxWidth: 240, height: 144, scale: 2.1 },
-  "Porta Trading System": { maxWidth: 240, height: 120 },
-  ATLAS: { maxWidth: 160, height: 120 },
-  Trade360Lab: { maxWidth: 220, height: 124 },
-  "Notification Subscription Platform": { maxWidth: 176, height: 144 },
-  "Smart Activity Tracker": { maxWidth: 176, height: 144 },
-  "Visual Circuit Designer": { maxWidth: 160, height: 120 },
-  SaveOps: { maxWidth: 280, height: 144, scale: 1.5 },
-  "Secure DevOps Pipeline": { maxWidth: 240, height: 144, scale: 1.5 },
-  Link2Action: { maxWidth: 288, height: 144 },
+  "Distributed Job Processing Platform": { maxWidth: 320, height: 180 },
+  "High-performance API Gateway": { maxWidth: 340, height: 180 },
+  FlagForge: { maxWidth: 320, height: 180 },
+  PingTower: { maxWidth: 340, height: 180, scale: 1.9 },
+  DatsPulse: { maxWidth: 340, height: 180, scale: 2.1 },
+  "Porta Trading System": { maxWidth: 280, height: 160 },
+  ATLAS: { maxWidth: 192, height: 160 },
+  Trade360Lab: { maxWidth: 280, height: 164 },
+  "Notification Subscription Platform": { maxWidth: 220, height: 180 },
+  "Smart Activity Tracker": { maxWidth: 220, height: 180 },
+  "Visual Circuit Designer": { maxWidth: 200, height: 152 },
+  SaveOps: { maxWidth: 340, height: 180, scale: 1.5 },
+  "Secure DevOps Pipeline": { maxWidth: 340, height: 180, scale: 1.5 },
+  Link2Action: { maxWidth: 340, height: 180 },
 };

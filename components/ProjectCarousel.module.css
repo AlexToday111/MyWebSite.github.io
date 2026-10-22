@@ -61,7 +61,8 @@
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  padding: 2px 0 4px;
+  /* Leave room for the raised edge and shadow inside the scroll viewport. */
+  padding: 6px 0 20px;
 }
 .track::-webkit-scrollbar {
   display: none;
@@ -73,6 +74,21 @@
 }
 .slide > article {
   flex: 1;
+}
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 768px) {
+    .track {
+      grid-template-rows: repeat(6, auto);
+      row-gap: 0;
+    }
+    .slide,
+    .slide > article {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 6;
+      row-gap: 0;
+    }
+  }
 }
 .controls button:focus-visible,
 .track:focus-visible {

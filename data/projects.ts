@@ -38,8 +38,8 @@ export const projects: Project[] = [
       "Grafana",
       "Jaeger",
     ],
-    image: "/Logos/projects/distributed-jobs.svg",
-    logo: "/Logos/projects/distributed-jobs.svg",
+    image: "/Logos/projects/distributedJob.png",
+    logo: "/Logos/projects/distributedJob.png",
     category: "Pet Projects",
     links: {
       repo: "https://github.com/AlexToday111/Distributed-Job-Processing-Platform",
@@ -51,8 +51,8 @@ export const projects: Project[] = [
     description:
       "Обратный прокси на Go с балансировкой нагрузки и ограничением конкурентных запросов. Атомарные снимки конфигурации позволяют обновлять маршруты без перезапуска.",
     stack: ["Go", "HTTP", "Docker", "Prometheus", "Grafana", "Jaeger"],
-    image: "/Logos/projects/api-gateway.svg",
-    logo: "/Logos/projects/api-gateway.svg",
+    image: "/Logos/projects/highPerf.png",
+    logo: "/Logos/projects/highPerf.png",
     category: "Pet Projects",
     links: {
       repo: "https://github.com/AlexToday111/High-performance-API-Gateway",
@@ -64,8 +64,8 @@ export const projects: Project[] = [
     description:
       "Платформа feature flags с локальным вычислением правил в Go SDK. Конфигурация доставляется через SSE, а SDK сохраняет последний снимок при потере связи.",
     stack: ["Go", "PostgreSQL", "Redis", "SSE", "Docker", "Prometheus"],
-    image: "/Logos/projects/flagforge.svg",
-    logo: "/Logos/projects/flagforge.svg",
+    image: "/Logos/projects/flagforge.png",
+    logo: "/Logos/projects/flagforge.png",
     category: "Pet Projects",
     links: { repo: "https://github.com/AlexToday111/FlagForge" },
     featured: true,

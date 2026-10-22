@@ -35,7 +35,7 @@ it("keeps every project logo, full stack and repository while switching editoria
       const link = card.querySelector(".project-actions a");
       expect(link?.getAttribute("href")).toBe(project.links?.repo);
       expect(link?.textContent).toContain(
-        language === "en" ? "Source code" : "Исходный код",
+        language === "en" ? "View on GitHub" : "Смотреть на GitHub",
       );
       expect(
         card.querySelector(".project-highlight")?.textContent?.length,

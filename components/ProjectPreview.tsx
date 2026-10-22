@@ -1,6 +1,7 @@
 "use client";
 
 import type { Project } from "@/data/projects";
+import type { CSSProperties } from "react";
 import {
   projectDescriptionsEn,
   projectHighlights,
@@ -17,24 +18,28 @@ export default function ProjectPreview({ project }: { project: Project }) {
   return (
     <article className="project-preview">
       <div className="project-artwork">
-        <img
-          src={withBasePath(project.logo ?? project.image)}
-          alt={project.title}
-          data-logo-tone={project.logoTone}
-          loading="lazy"
-          width={240}
-          height={144}
-          draggable={false}
+        <div
+          className="project-artwork-image"
           style={
             logo
-              ? {
-                  maxWidth: logo.maxWidth,
-                  height: logo.height,
-                  transform: logo.scale ? `scale(${logo.scale})` : undefined,
-                }
+              ? ({
+                  "--logo-width": `${logo.maxWidth}px`,
+                  "--logo-height": `${logo.height}px`,
+                  "--logo-scale": logo.scale ?? 1,
+                } as CSSProperties)
               : undefined
           }
-        />
+        >
+          <img
+            src={withBasePath(project.logo ?? project.image)}
+            alt=""
+            data-logo-tone={project.logoTone}
+            loading="lazy"
+            width={320}
+            height={176}
+            draggable={false}
+          />
+        </div>
       </div>
       <div className="project-copy">
         <h4>{project.title}</h4>
@@ -52,7 +57,7 @@ export default function ProjectPreview({ project }: { project: Project }) {
                 href={project.links.repo}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={`${project.title}: ${language === "en" ? "Source code on GitHub" : "Исходный код на GitHub"}`}
+                aria-label={`${project.title}: ${language === "en" ? "View on GitHub" : "Смотреть на GitHub"}`}
               >
                 <img
                   src={withBasePath("/icons/stack/github.svg")}
@@ -61,7 +66,7 @@ export default function ProjectPreview({ project }: { project: Project }) {
                   height={16}
                   className="project-source-icon"
                 />
-                {language === "en" ? "Source code" : "Исходный код"}{" "}
+                {language === "en" ? "View on GitHub" : "Смотреть на GitHub"}{" "}
                 <span aria-hidden="true">↗</span>
               </a>
             )}
