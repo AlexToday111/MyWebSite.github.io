@@ -10,6 +10,7 @@ export const projectLogoPresentation: Record<
   PingTower: { maxWidth: 340, height: 180, scale: 1.9 },
   DatsPulse: { maxWidth: 340, height: 180, scale: 2.1 },
   "Porta Trading System": { maxWidth: 280, height: 160 },
+  "Anti-Fraud Detector": { maxWidth: 220, height: 180 },
   ATLAS: { maxWidth: 192, height: 160 },
   Trade360Lab: { maxWidth: 280, height: 164 },
   "Notification Subscription Platform": { maxWidth: 220, height: 180 },

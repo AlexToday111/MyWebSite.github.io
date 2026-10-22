@@ -23,7 +23,7 @@ it("keeps every project logo, full stack and repository while switching editoria
   );
   const inspect = (language: "en" | "ru") => {
     const cards = view.container.querySelectorAll(".project-preview");
-    expect(cards.length).toBe(16);
+    expect(cards.length).toBe(projects.length);
     for (const [index, card] of Array.from(cards).entries()) {
       const project = projects[index];
       expect(

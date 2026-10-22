@@ -37,6 +37,8 @@ export const projectDescriptionsEn: Record<string, string> = {
     "An event ingestion service with idempotent writes and JSONB metadata. Supports batch ingestion, retention analysis, cohorts, and funnels.",
   "Porta Trading System":
     "A distributed trading MVP with a Java BFF and Kafka events. The trading-core service orchestrates orders and persists portfolio state in PostgreSQL.",
+  "Anti-Fraud Detector":
+    "A system for detecting suspicious refund transactions. Analyzes CSV data, builds a graph of relationships between transactions, and calculates explainable risk scores to investigate potential fraud.",
   "Language Compiler":
     "A compiler front-end with a handwritten lexer and recursive descent parser. Builds an immutable typed AST and reports the location of the first syntax error.",
   "Visual Circuit Designer":
@@ -89,6 +91,10 @@ export const projectHighlights: Record<string, { en: string; ru: string }> = {
   "Porta Trading System": {
     en: "Backend for frontend · Event streaming · Portfolio state",
     ru: "Backend for frontend · Потоки событий · Состояние портфеля",
+  },
+  "Anti-Fraud Detector": {
+    en: "Event-driven processing · Relationship graph · Explainable risk scoring",
+    ru: "Событийная обработка · Граф связей · Объяснимый risk scoring",
   },
   "Language Compiler": {
     en: "Recursive descent · Immutable AST · Source diagnostics",

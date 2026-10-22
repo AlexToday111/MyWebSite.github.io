@@ -214,6 +214,27 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    title: "Anti-Fraud Detector",
+    description:
+      "Система выявления подозрительных операций возврата. Анализирует CSV-данные, строит граф связей между операциями и рассчитывает объяснимые оценки риска для расследования потенциального мошенничества.",
+    stack: [
+      "Go",
+      "Kotlin",
+      "Spring Boot",
+      "React",
+      "TypeScript",
+      "PostgreSQL",
+      "RabbitMQ",
+      "MinIO",
+      "Docker",
+      "Nginx",
+    ],
+    image: "/Logos/projects/anti-fraud-logo-mark.png",
+    logo: "/Logos/projects/anti-fraud-logo-mark.png",
+    category: "University Projects",
+    links: { repo: "https://github.com/suxarikiii/Anti-Fraud-Detector" },
+  },
+  {
     title: "Language Compiler",
     description:
       "Фронтенд компилятора с ручным лексером и рекурсивным спуском. Строит неизменяемый типизированный AST и сообщает позицию первой синтаксической ошибки.",
