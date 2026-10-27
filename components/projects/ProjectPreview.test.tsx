@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render } from "@testing-library/react";
 import { afterEach, beforeEach, expect, it } from "vitest";
-import { PortfolioLanguage, usePortfolioLanguage } from "./PortfolioLanguage";
+import { PortfolioLanguage, usePortfolioLanguage } from "../providers/PortfolioLanguage";
 import ProjectPreview from "./ProjectPreview";
 import { projects } from "@/data/projects";
 

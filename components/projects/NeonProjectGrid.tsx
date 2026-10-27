@@ -2,7 +2,7 @@
 
 import { projectCategories, projects } from "@/data/projects";
 import { projectCategoryLabels } from "@/data/project-language";
-import { usePortfolioLanguage } from "./PortfolioLanguage";
+import { usePortfolioLanguage } from "../providers/PortfolioLanguage";
 import ProjectCarousel from "./ProjectCarousel";
 
 export default function NeonProjectGrid() {

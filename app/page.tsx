@@ -3,10 +3,10 @@
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { withBasePath } from "@/lib/paths";
-import AuroraBackground from "@/components/AuroraBackground";
-import NeonProjectGrid from "@/components/NeonProjectGrid";
-import ProfileSection from "@/components/ProfileSection";
-import FinalCallout from "@/components/FinalCallout";
+import AuroraBackground from "@/components/intro/AuroraBackground";
+import NeonProjectGrid from "@/components/projects/NeonProjectGrid";
+import ProfileSection from "@/components/profile/ProfileSection";
+import FinalCallout from "@/components/social/FinalCallout";
 import { useState, useEffect } from "react";
 
 export default function HomePage() {

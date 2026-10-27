@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { profile } from "@/data/profile";
-import { usePortfolioLanguage } from "./PortfolioLanguage";
+import { usePortfolioLanguage } from "../providers/PortfolioLanguage";
 
 const contactIcons = {
   Telegram: [

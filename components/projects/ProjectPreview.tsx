@@ -8,7 +8,7 @@ import {
 } from "@/data/project-language";
 import { projectLogoPresentation } from "@/data/project-logo-presentation";
 import { withBasePath } from "@/lib/paths";
-import { usePortfolioLanguage } from "./PortfolioLanguage";
+import { usePortfolioLanguage } from "../providers/PortfolioLanguage";
 import ProjectToolIcons from "./ProjectToolIcons";
 
 export default function ProjectPreview({ project }: { project: Project }) {

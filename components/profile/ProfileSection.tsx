@@ -7,7 +7,7 @@ import { profileContent, profileLabels } from "@/data/profile-language";
 import { education } from "@/data/education";
 import { withBasePath } from "@/lib/paths";
 import styles from "./ProfileSection.module.css";
-import { usePortfolioLanguage } from "./PortfolioLanguage";
+import { usePortfolioLanguage } from "../providers/PortfolioLanguage";
 import ExperienceTabs from "./ExperienceTabs";
 import LeetCodeHeatmap from "./LeetCodeHeatmap";
 

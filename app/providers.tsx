@@ -4,8 +4,8 @@ import { ThemeProvider } from "next-themes";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { PortfolioLanguage } from "@/components/PortfolioLanguage";
-import ScheduledTheme from "@/components/ScheduledTheme";
+import { PortfolioLanguage } from "@/components/providers/PortfolioLanguage";
+import ScheduledTheme from "@/components/providers/ScheduledTheme";
 import { themeBootstrapScript } from "@/lib/theme-schedule";
 
 type ProvidersProps = {

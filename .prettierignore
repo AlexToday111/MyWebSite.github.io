@@ -1,0 +1,9 @@
+node_modules/
+.next/
+.next-dev/
+out/
+.cache/
+.idea/
+package-lock.json
+*.tsbuildinfo
+public/

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import type { Project } from "@/data/projects";
 import ProjectPreview from "./ProjectPreview";
-import { usePortfolioLanguage } from "./PortfolioLanguage";
+import { usePortfolioLanguage } from "../providers/PortfolioLanguage";
 import styles from "./ProjectCarousel.module.css";
 
 function measure(track: HTMLDivElement) {

@@ -10,7 +10,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import ProjectCarousel from "./ProjectCarousel";
 import type { Project } from "@/data/projects";
 
-vi.mock("./PortfolioLanguage", () => ({
+vi.mock("../providers/PortfolioLanguage", () => ({
   usePortfolioLanguage: () => ({ language: "en" }),
 }));
 vi.mock("./ProjectPreview", () => ({

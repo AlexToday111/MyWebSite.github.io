@@ -3,8 +3,8 @@
 import { useMemo, useState } from "react";
 import { projectCategories, projects } from "@/data/projects";
 import { projectCategoryLabels } from "@/data/project-language";
-import ProjectPreview from "@/components/ProjectPreview";
-import { usePortfolioLanguage } from "@/components/PortfolioLanguage";
+import ProjectPreview from "@/components/projects/ProjectPreview";
+import { usePortfolioLanguage } from "@/components/providers/PortfolioLanguage";
 
 export default function ProjectsPage() {
   const [active, setActive] = useState<string | null>(null);

@@ -1,5 +1,5 @@
 import { withBasePath } from "@/lib/paths";
-import { usePortfolioLanguage } from "./PortfolioLanguage";
+import { usePortfolioLanguage } from "../providers/PortfolioLanguage";
 
 const TOOL_ICONS: Record<string, string> = {
   jwt: "/icons/stack/jwt.svg",
