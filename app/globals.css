@@ -307,24 +307,51 @@ html::-webkit-scrollbar {
 .portfolio-body {
   position: relative;
   isolation: isolate;
+  --ambient-width: 80%;
+  --ambient-height: 820px;
+  --ambient-opacity: 1;
 }
 .portfolio-body::before {
   content: "";
   position: absolute;
-  inset: -240px 0 0;
+  inset: -240px 0 -24px;
   z-index: -1;
   pointer-events: none;
   background-image:
-    radial-gradient(ellipse 85% 640px at 0% 0, rgba(139, 92, 246, 0.36), transparent 100%),
-    radial-gradient(ellipse 85% 640px at 0% 1200px, rgba(139, 92, 246, 0.36), transparent 100%),
-    radial-gradient(ellipse 85% 660px at 100% 600px, rgba(168, 85, 247, 0.32), transparent 100%),
-    linear-gradient(rgba(113, 52, 212, 0.045), rgba(113, 52, 212, 0.045));
-  background-size: 100% 1200px;
-  background-repeat: repeat-y;
+    radial-gradient(ellipse var(--ambient-width) var(--ambient-height) at -8% 12%, rgba(139, 92, 246, 0.60) 0%, rgba(139, 92, 246, 0.26) 40%, transparent 78%),
+    radial-gradient(ellipse var(--ambient-width) var(--ambient-height) at 108% 39%, rgba(168, 85, 247, 0.54) 0%, rgba(168, 85, 247, 0.22) 42%, transparent 80%),
+    radial-gradient(ellipse var(--ambient-width) var(--ambient-height) at -8% 68%, rgba(124, 92, 246, 0.56) 0%, rgba(124, 92, 246, 0.23) 42%, transparent 80%),
+    radial-gradient(ellipse var(--ambient-width) var(--ambient-height) at 108% 96%, rgba(159, 90, 232, 0.52) 0%, rgba(159, 90, 232, 0.21) 42%, transparent 80%),
+    linear-gradient(rgba(113, 52, 212, 0.055), rgba(113, 52, 212, 0.025));
+  background-repeat: no-repeat;
   -webkit-mask-image: linear-gradient(to bottom, transparent, #000 320px);
   mask-image: linear-gradient(to bottom, transparent, #000 320px);
+  animation: ambient-breathe 16s ease-in-out infinite;
 }
-.light .portfolio-body::before { opacity: 0.8; }
+.light .portfolio-body { --ambient-opacity: 0.94; }
+@keyframes ambient-breathe {
+  0%, 100% {
+    opacity: calc(var(--ambient-opacity) * 0.88);
+    transform: translateY(-10px);
+  }
+  50% {
+    opacity: var(--ambient-opacity);
+    transform: translateY(10px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-body::before {
+    animation: none;
+    opacity: var(--ambient-opacity);
+    transform: none;
+  }
+}
+@media (max-width: 767px) {
+  .portfolio-body {
+    --ambient-width: 135%;
+    --ambient-height: 680px;
+  }
+}
 /* Let the intro's existing aurora flow into one continuous content background. */
 .portfolio-body #work, .portfolio-body #final { background: transparent; }
 .light #work, .light #final, .light #projects-page {
