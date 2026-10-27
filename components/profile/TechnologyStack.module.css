@@ -1,0 +1,121 @@
+.stack {
+  min-width: 0;
+}
+.row {
+  display: grid;
+  grid-template-columns: 165px minmax(0, 1fr);
+  gap: 20px;
+  padding: 16px 0;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.row:first-child {
+  padding-top: 0;
+}
+.row + .row {
+  border-top: 1px solid hsl(var(--border));
+}
+.row dt {
+  color: hsl(var(--muted));
+}
+.row dd {
+  min-width: 0;
+}
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 0;
+  list-style: none;
+}
+.technologies li {
+  overflow-wrap: anywhere;
+}
+.technologies li:not(:last-child)::after {
+  content: "·";
+  margin: 0 8px;
+  color: hsl(var(--muted));
+  font-weight: 400;
+}
+.primary {
+  font-weight: 550;
+  color: hsl(var(--fg));
+}
+.additional {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  color: hsl(var(--muted));
+  transition:
+    grid-template-rows 225ms ease,
+    opacity 225ms ease,
+    visibility 0s 225ms;
+}
+.clip {
+  min-height: 0;
+  overflow: hidden;
+}
+.clip .technologies {
+  padding-top: 8px;
+}
+.stack[data-expanded="true"] .additional {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    grid-template-rows 225ms ease,
+    opacity 225ms ease,
+    visibility 0s;
+}
+.disclosure {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 0;
+  border-top: 1px solid hsl(var(--border));
+  background: transparent;
+  color: hsl(var(--muted));
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    color 225ms ease,
+    background-color 225ms ease;
+}
+.disclosure:hover {
+  color: hsl(var(--accent-blue));
+  background: hsl(var(--accent-purple) / 0.035);
+}
+.disclosure:focus-visible {
+  outline: 2px solid hsl(var(--accent-blue));
+  outline-offset: 4px;
+  box-shadow: none;
+}
+.disclosure svg {
+  flex-shrink: 0;
+}
+.chevron {
+  margin-left: auto;
+  transition: transform 225ms ease;
+}
+.stack[data-expanded="true"] .chevron {
+  transform: rotate(180deg);
+}
+@media (max-width: 639px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .additional,
+  .stack[data-expanded="true"] .additional,
+  .disclosure,
+  .chevron {
+    transition: none;
+  }
+}

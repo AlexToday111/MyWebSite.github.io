@@ -104,14 +104,16 @@ export const homeProfile = {
   ],
   achievements: [
     {
+      id: "science",
       title: "1st and 2nd places",
       description: "Scientific & Practical Conference in Informatics",
     },
     {
+      id: "t1",
       title: "Prize winner",
       description: "T1 hackathons",
     },
-    { title: "Winner", description: "MTS hackathon" },
+    { id: "mts", title: "Winner", description: "MTS hackathon" },
   ],
   interests: [
     "Distributed Systems",
@@ -123,24 +125,40 @@ export const homeProfile = {
   toolbox: [
     {
       category: "Languages",
-      tools: ["Java", "Go", "Kotlin", "Haskell"],
+      primary: ["Java", "Go"],
+      additional: ["Kotlin", "Python", "Haskell"],
     },
     {
-      category: "Backend",
-      tools: ["Spring Boot", "Spring Security", "Hibernate", "REST", "gRPC"],
+      category: "Backend & API",
+      primary: ["Spring Boot", "Spring Security", "Hibernate", "REST", "gRPC"],
+      additional: ["Spring Cloud", "GraphQL", "WebSocket", "SSE"],
     },
     {
-      category: "Data & Messaging",
-      tools: ["PostgreSQL", "Redis", "Kafka", "RabbitMQ", "ClickHouse"],
+      category: "Databases",
+      primary: ["PostgreSQL", "Redis"],
+      additional: ["MongoDB", "ClickHouse", "H2"],
     },
     {
-      category: "Infrastructure",
-      tools: [
-        "Docker",
-        "Kubernetes",
-        "GitHub Actions",
-        "Prometheus",
-        "Grafana",
+      category: "Messaging & Streaming",
+      primary: ["Kafka", "RabbitMQ"],
+      additional: ["Avro", "Schema Registry", "CDC", "Outbox Pattern"],
+    },
+    {
+      category: "DevOps & Infrastructure",
+      primary: ["Docker", "Kubernetes", "Helm"],
+      additional: ["GitHub Actions", "Maven", "Gradle", "Keycloak"],
+    },
+    {
+      category: "Observability & Testing",
+      primary: ["Prometheus", "Grafana"],
+      additional: [
+        "OpenTelemetry",
+        "Jaeger",
+        "ELK",
+        "JUnit 5",
+        "Testcontainers",
+        "WireMock",
+        "k6",
       ],
     },
   ],

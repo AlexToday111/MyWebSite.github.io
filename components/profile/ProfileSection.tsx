@@ -10,6 +10,7 @@ import styles from "./ProfileSection.module.css";
 import { usePortfolioLanguage } from "../providers/PortfolioLanguage";
 import ExperienceTabs from "./ExperienceTabs";
 import LeetCodeHeatmap from "./LeetCodeHeatmap";
+import TechnologyStack from "./TechnologyStack";
 
 function ProfileCard({
   className,
@@ -158,14 +159,7 @@ export default function ProfileSection() {
 
           <ProfileCard className={styles.toolbox} index={5}>
             <h3 className={styles.label}>{labels.toolbox}</h3>
-            <dl className={styles.tools}>
-              {homeProfile.toolbox.map((group) => (
-                <div key={group.category}>
-                  <dt>{group.category}</dt>
-                  <dd>{group.tools.join(" · ")}</dd>
-                </div>
-              ))}
-            </dl>
+            <TechnologyStack groups={homeProfile.toolbox} language={language} />
           </ProfileCard>
         </div>
         <LeetCodeHeatmap language={language} />
