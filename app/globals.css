@@ -534,12 +534,6 @@ html::-webkit-scrollbar {
   line-height: 1.7;
   color: hsl(var(--muted));
 }
-.contact-heading .contact-location {
-  margin-top: 22px;
-  color: hsl(var(--muted));
-  font-size: 12px;
-  line-height: 1.7;
-}
 .contact-footer nav {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -547,68 +541,52 @@ html::-webkit-scrollbar {
   min-width: 0;
 }
 .contact-footer a {
-  --social-color: hsl(var(--fg));
-  --social-glow: 167 139 250;
+  --social-color: #24292f;
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 82px;
+  gap: 14px;
+  min-height: 64px;
   min-width: 0;
-  padding: 14px;
+  padding: 16px 18px;
   border: 1px solid hsl(var(--border));
   border-radius: 14px;
-  background: hsl(var(--card) / 0.45);
-  font-size: 13px;
-  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+  background: var(--content-surface);
+  color: hsl(var(--fg));
+  transition: background-color 225ms ease, color 225ms ease, border-color 225ms ease, box-shadow 225ms ease;
 }
-.contact-footer a[data-social="Telegram"] {
-  --social-color: var(--telegram);
-  --social-glow: 56 189 248;
-}
-.contact-footer a[data-social="LeetCode"] {
-  --social-color: var(--leetcode);
-  --social-glow: 255 161 22;
-}
-.contact-footer a[data-social="LinkedIn"] {
-  --social-color: var(--linkedin);
-  --social-glow: 10 102 194;
-}
+.contact-footer a[data-social="Telegram"] { --social-color: #229ed9; }
+.contact-footer a[data-social="GitHub"] { --social-color: #24292f; }
+.contact-footer a[data-social="LeetCode"] { --social-color: #ffa116; }
+.contact-footer a[data-social="LinkedIn"] { --social-color: #0a66c2; }
 .contact-social-icon {
-  display: grid;
-  flex: 0 0 42px;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid rgb(var(--social-glow) / 0.22);
-  border-radius: 50%;
+  display: inline-flex;
+  flex: 0 0 24px;
+  align-items: center;
+  justify-content: center;
   color: var(--social-color);
-  background: rgb(var(--social-glow) / 0.07);
-  box-shadow: 0 0 18px rgb(var(--social-glow) / 0.16);
-  transition: box-shadow 180ms ease, background-color 180ms ease;
+  transition: color 225ms ease;
 }
-.contact-social-icon svg { width: 22px; height: 22px; }
-.contact-social-copy { display: grid; min-width: 0; gap: 3px; }
-.contact-social-copy strong { font-size: 13px; font-weight: 550; }
-.contact-social-copy > span { color: hsl(var(--muted)); font-size: 11px; line-height: 1.5; }
-.contact-social-arrow {
-  margin-left: auto;
-  color: hsl(var(--muted));
-  transition: color 180ms ease, transform 180ms ease;
+.contact-social-icon svg { width: 24px; height: 24px; }
+.contact-footer a strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+  font-weight: 550;
 }
-.contact-footer a:hover, .contact-footer a:focus-visible {
-  border-color: rgb(var(--social-glow) / 0.45);
-  background: rgb(var(--social-glow) / 0.06);
+.dark .contact-footer a[data-social="GitHub"]:not(:hover):not(:focus-visible) .contact-social-icon { color: #f0f6fc; }
+.contact-footer a:is(:hover, :focus-visible) {
+  color: #fff;
+  background: var(--social-color);
+  border-color: var(--social-color);
+  box-shadow:
+    0 0 14px color-mix(in srgb, var(--social-color) 42%, transparent),
+    0 0 32px color-mix(in srgb, var(--social-color) 24%, transparent);
 }
-.contact-footer a:hover .contact-social-icon, .contact-footer a:focus-visible .contact-social-icon {
-  background: rgb(var(--social-glow) / 0.14);
-  box-shadow: 0 0 24px rgb(var(--social-glow) / 0.32);
+.contact-footer a:is(:hover, :focus-visible) .contact-social-icon {
+  color: #fff;
 }
-.contact-footer a:hover .contact-social-arrow {
-  color: var(--social-color);
-  transform: translate(2px, -2px);
-}
-@media (hover: hover) {
-  .contact-footer a:hover { transform: translateY(-2px); }
+@media (max-width: 479px) {
+  .contact-footer nav { grid-template-columns: minmax(0, 1fr); }
 }
 #projects-page {
   max-width: 1280px;
@@ -669,7 +647,6 @@ html::-webkit-scrollbar {
     #work #projects { padding-bottom: 40px; }
   .contact-footer { padding: 32px 16px; }
   .contact-footer a { padding: 12px; gap: 10px; }
-  .contact-social-arrow { display: none; }
   #projects-page { padding: 32px 16px 48px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -679,7 +656,6 @@ html::-webkit-scrollbar {
     scroll-behavior: auto !important;
   }
   .project-preview:hover, .project-preview .project-artwork-image,
-  .project-actions a:is(:hover, :focus-visible) span,
-  .contact-footer a:hover, .contact-footer a:hover .contact-social-arrow { transform: none; }
+  .project-actions a:is(:hover, :focus-visible) span { transform: none; }
 
 }
