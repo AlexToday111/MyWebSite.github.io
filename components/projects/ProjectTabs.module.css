@@ -1,0 +1,97 @@
+﻿.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  max-width: 100%;
+  margin: 16px 0 24px;
+  border-bottom: 1px solid hsl(var(--border));
+}
+.tabs button {
+  position: relative;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 0;
+  color: hsl(var(--muted));
+  font-size: 16px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+  transition: color 180ms ease;
+}
+.tabs button:hover,
+.tabs button[aria-selected="true"] {
+  color: hsl(var(--fg));
+}
+.indicator {
+  position: absolute;
+  overflow: hidden;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  border-radius: 999px;
+  pointer-events: none;
+  background: linear-gradient(90deg, #8b5cf6, #b9a0fa 50%, #8b5cf6);
+  box-shadow:
+    inset 0 0 2px rgb(237 233 254 / 0.4),
+    0 0 6px rgb(139 92 246 / 0.25);
+}
+.indicator::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgb(237 233 254 / 0.45) 40%,
+    rgb(245 243 255 / 0.95) 50%,
+    rgb(237 233 254 / 0.45) 60%,
+    transparent 80%
+  );
+  animation: tab-shimmer 3.2s ease-in-out infinite;
+}
+@keyframes tab-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  65%,
+  100% {
+    transform: translateX(100%);
+  }
+}
+.tabs button:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+.tabs button:focus-visible {
+  box-shadow: none;
+}
+.tabs button:focus-visible,
+.panel:focus-visible {
+  outline: 2px solid hsl(var(--accent-purple));
+  outline-offset: 3px;
+}
+.panels,
+.panel {
+  min-width: 0;
+}
+.panel[hidden] {
+  display: none;
+}
+@media (max-width: 639px) {
+  .tabs {
+    gap: 4px 20px;
+  }
+  .tabs button {
+    font-size: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .indicator::after {
+    animation: none;
+    opacity: 0;
+  }
+  .tabs button {
+    transition: none;
+  }
+}

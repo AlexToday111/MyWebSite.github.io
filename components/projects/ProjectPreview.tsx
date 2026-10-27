@@ -57,7 +57,7 @@ export default function ProjectPreview({ project }: { project: Project }) {
                 href={project.links.repo}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={`${project.title}: ${language === "en" ? "View on GitHub" : "Смотреть на GitHub"}`}
+                aria-label={`${project.title}: GitHub`}
               >
                 <img
                   src={withBasePath("/icons/stack/github.svg")}
@@ -66,8 +66,7 @@ export default function ProjectPreview({ project }: { project: Project }) {
                   height={16}
                   className="project-source-icon"
                 />
-                {language === "en" ? "View on GitHub" : "Смотреть на GitHub"}{" "}
-                <span aria-hidden="true">↗</span>
+                GitHub
               </a>
             )}
             {project.links.demo && (

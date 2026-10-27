@@ -5,16 +5,16 @@ export const projectCategoryLabels: Record<
   Record<ProjectCategory, string>
 > = {
   en: {
-    "Pet Projects": "Personal Projects",
-    "University Projects": "University Projects",
-    Hackathons: "Hackathons",
-    "Commercial Experience": "Commercial Experience",
+    pet: "Personal Projects",
+    university: "University Projects",
+    hackathon: "Hackathon Projects",
+    "ai-bots": "AI & Bots",
   },
   ru: {
-    "Pet Projects": "Личные проекты",
-    "University Projects": "Университетские проекты",
-    Hackathons: "Хакатоны",
-    "Commercial Experience": "Коммерческий опыт",
+    pet: "Личные проекты",
+    university: "Университетские проекты",
+    hackathon: "Хакатоны",
+    "ai-bots": "ИИ и боты",
   },
 };
 
@@ -49,10 +49,14 @@ export const projectDescriptionsEn: Record<string, string> = {
     "Scheduled website and API monitoring with alerts. PostgreSQL holds current results while ClickHouse serves historical data and time-series analytics.",
   DatsPulse:
     "A Python bot separating its core, strategies, and configuration. Scenarios extend through bot_strat.py without concentrating all logic in the entry point.",
-  ATLAS:
-    "A Telegram product for planning, habits, and exercise built as a modular monolith. Separates use cases and dialogue state with a deterministic fallback when the LLM is unavailable.",
   Trade360Lab:
     "A trading strategy research platform with a Java API and Python engine. Persists backtest runs, statuses, and results in PostgreSQL for comparison.",
+  PortIQ:
+    "A Telegram-based investment research assistant for analyzing stocks, comparing financial indicators, and tracking investment portfolios.",
+  Liftory:
+    "A Telegram-based workout tracker for planning training sessions, logging exercises, and analyzing fitness progress.",
+  "Divergence Trading Bot":
+    "An automated trading bot using RSI divergence detection, risk management, and strategy backtesting.",
 };
 
 export const projectHighlights: Record<string, { en: string; ru: string }> = {
@@ -115,10 +119,6 @@ export const projectHighlights: Record<string, { en: string; ru: string }> = {
   DatsPulse: {
     en: "Modular strategies · Shared configuration",
     ru: "Модульные стратегии · Общая конфигурация",
-  },
-  ATLAS: {
-    en: "Bounded contexts · Dialogue state · Deterministic fallback",
-    ru: "Границы контекстов · Состояние диалогов · Детерминированный fallback",
   },
   Trade360Lab: {
     en: "Backtest orchestration · Persisted run results",

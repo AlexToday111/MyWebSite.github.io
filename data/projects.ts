@@ -1,8 +1,4 @@
-export type ProjectCategory =
-  | "Pet Projects"
-  | "University Projects"
-  | "Hackathons"
-  | "Commercial Experience";
+export type ProjectCategory = "pet" | "university" | "hackathon" | "ai-bots";
 
 export type Project = {
   title: string;
@@ -18,33 +14,31 @@ export type Project = {
 };
 
 export const projectCategories: ProjectCategory[] = [
-  "Pet Projects",
-  "University Projects",
-  "Hackathons",
-  "Commercial Experience",
+  "pet",
+  "university",
+  "hackathon",
+  "ai-bots",
 ];
 
 export const projects: Project[] = [
   {
-    title: "Distributed Job Processing Platform",
+    title: "FlashSale Tickets",
     description:
-      "Распределённая платформа фоновых задач с gRPC-воркерами и транзакционной очередью в PostgreSQL. Аренды и проверка токенов защищают задания от устаревших исполнителей.",
+      "Микросервисная система бронирования с истечением резервов и управлением заказами. События RabbitMQ связывают заказ, симулятор платежей и уведомления.",
     stack: [
-      "Go",
+      "Java",
+      "Spring Boot",
       "PostgreSQL",
-      "gRPC",
+      "RabbitMQ",
+      "Redis",
       "Docker",
       "Prometheus",
       "Grafana",
-      "Jaeger",
     ],
-    image: "/Logos/projects/distributedJob.png",
-    logo: "/Logos/projects/distributedJob.png",
-    category: "Pet Projects",
-    links: {
-      repo: "https://github.com/AlexToday111/Distributed-Job-Processing-Platform",
-    },
-    featured: true,
+    image: "/Logos/projects/flashsale-tickets.png",
+    logo: "/Logos/projects/flashsale-tickets.png",
+    category: "pet",
+    links: { repo: "https://github.com/AlexToday111/FlashSale-Tickets" },
   },
   {
     title: "High-performance API Gateway",
@@ -53,7 +47,7 @@ export const projects: Project[] = [
     stack: ["Go", "HTTP", "Docker", "Prometheus", "Grafana", "Jaeger"],
     image: "/Logos/projects/highPerf.png",
     logo: "/Logos/projects/highPerf.png",
-    category: "Pet Projects",
+    category: "pet",
     links: {
       repo: "https://github.com/AlexToday111/High-performance-API-Gateway",
     },
@@ -66,7 +60,7 @@ export const projects: Project[] = [
     stack: ["Go", "PostgreSQL", "Redis", "SSE", "Docker", "Prometheus"],
     image: "/Logos/projects/flagforge.png",
     logo: "/Logos/projects/flagforge.png",
-    category: "Pet Projects",
+    category: "pet",
     links: { repo: "https://github.com/AlexToday111/FlagForge" },
     featured: true,
   },
@@ -86,31 +80,8 @@ export const projects: Project[] = [
     ],
     image: "/Logos/projects/saveops.png",
     logo: "/Logos/projects/saveops.png",
-    category: "Pet Projects",
+    category: "pet",
     links: { repo: "https://github.com/AlexToday111/SaveOps" },
-    featured: true,
-  },
-  {
-    title: "ATLAS",
-    description:
-      "Telegram-продукт для планирования, привычек и тренировок на модульном монолите. Разделяет сценарии и состояние диалогов, сохраняя детерминированный fallback при недоступности LLM.",
-    stack: [
-      "Java 21",
-      "Spring Boot",
-      "PostgreSQL",
-      "Flyway",
-      "Maven",
-      "Docker",
-      "Telegram Bot API",
-      "JUnit 5",
-    ],
-    image: "/projects/flowstate.jpg",
-    logo: "/Logos/projects/WhiteLogo.png",
-    logoTone: "light",
-    category: "Commercial Experience",
-    links: {
-      repo: "https://github.com/ATLAS-lifeops/ATLAS",
-    },
     featured: true,
   },
   {
@@ -129,30 +100,52 @@ export const projects: Project[] = [
     ],
     image: "/projects/flowstate.jpg",
     logo: "/Notification.png",
-    category: "Pet Projects",
+    category: "pet",
     links: {
       repo: "https://github.com/AlexToday111/Notification-Subscription-Platform",
     },
     featured: true,
   },
   {
-    title: "FlashSale Tickets",
+    title: "Distributed Job Processing Platform",
     description:
-      "Микросервисная система бронирования с истечением резервов и управлением заказами. События RabbitMQ связывают заказ, симулятор платежей и уведомления.",
+      "Распределённая платформа фоновых задач с gRPC-воркерами и транзакционной очередью в PostgreSQL. Аренды и проверка токенов защищают задания от устаревших исполнителей.",
     stack: [
-      "Java",
-      "Spring Boot",
+      "Go",
       "PostgreSQL",
-      "RabbitMQ",
-      "Redis",
+      "gRPC",
       "Docker",
       "Prometheus",
       "Grafana",
+      "Jaeger",
     ],
-    image: "/Logos/projects/flashsale-tickets.png",
-    logo: "/Logos/projects/flashsale-tickets.png",
-    category: "Pet Projects",
-    links: { repo: "https://github.com/AlexToday111/FlashSale-Tickets" },
+    image: "/Logos/projects/distributedJob.png",
+    logo: "/Logos/projects/distributedJob.png",
+    category: "pet",
+    links: {
+      repo: "https://github.com/AlexToday111/Distributed-Job-Processing-Platform",
+    },
+    featured: true,
+  },
+  {
+    title: "Trade360Lab",
+    description:
+      "Платформа исследования торговых стратегий с Java API и Python-движком. Запуски бэктестов, их статусы и результаты сохраняются в PostgreSQL для последующего сравнения.",
+    stack: [
+      "Java",
+      "Spring Boot",
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Next.js",
+      "Docker",
+      "GitHub Actions",
+    ],
+    image: "/projects/flowstate.jpg",
+    logo: "/T360.png",
+    category: "ai-bots",
+    links: { repo: "https://github.com/Trade360Lab/Trade360Lab" },
+    featured: true,
   },
   {
     title: "Link2Action",
@@ -169,7 +162,7 @@ export const projects: Project[] = [
     ],
     image: "/Logos/projects/link2action.png",
     logo: "/Logos/projects/link2action.png",
-    category: "Pet Projects",
+    category: "ai-bots",
     links: { repo: "https://github.com/AlexToday111/Link2Action" },
   },
   {
@@ -188,7 +181,7 @@ export const projects: Project[] = [
     ],
     image: "/projects/flowstate.jpg",
     logo: "/SmartActivity.png",
-    category: "Pet Projects",
+    category: "pet",
     links: { repo: "https://github.com/AlexToday111/Smart-Activity-Tracker" },
   },
   {
@@ -207,7 +200,7 @@ export const projects: Project[] = [
     ],
     image: "/projects/flowstate.jpg",
     logo: "/porta-logo.svg",
-    category: "University Projects",
+    category: "university",
     links: {
       repo: "https://github.com/AlexToday111/DNP-proj.-Trading-system-",
     },
@@ -231,7 +224,7 @@ export const projects: Project[] = [
     ],
     image: "/Logos/projects/anti-fraud-logo-mark.png",
     logo: "/Logos/projects/anti-fraud-logo-mark.png",
-    category: "University Projects",
+    category: "university",
     links: { repo: "https://github.com/suxarikiii/Anti-Fraud-Detector" },
   },
   {
@@ -241,7 +234,7 @@ export const projects: Project[] = [
     stack: ["Java", "Maven", "JUnit"],
     image: "/Logos/projects/language-compiler.svg",
     logo: "/Logos/projects/language-compiler.svg",
-    category: "University Projects",
+    category: "university",
     links: { repo: "https://github.com/AlexToday111/language-compiler" },
   },
   {
@@ -262,7 +255,7 @@ export const projects: Project[] = [
     image: "/projects/flowstate.jpg",
     logo: "/VisualCircuit.svg",
     logoClassName: "h-1/3 w-1/3",
-    category: "University Projects",
+    category: "university",
     links: { repo: "https://github.com/AlexToday111/Visual-Circuit-Designer" },
   },
   {
@@ -272,7 +265,7 @@ export const projects: Project[] = [
     stack: ["Go", "GitHub Actions", "Docker", "gosec", "Trivy", "ELK"],
     image: "/Logos/projects/secure-devops.png",
     logo: "/Logos/projects/secure-devops.png",
-    category: "University Projects",
+    category: "university",
     links: { repo: "https://github.com/AlexToday111/SNA-proj.-DevSecOps" },
   },
   {
@@ -291,7 +284,7 @@ export const projects: Project[] = [
     image: "/projects/flowstate.jpg",
     logo: "/PingTower.png",
     logoTone: "light",
-    category: "Hackathons",
+    category: "hackathon",
     links: { repo: "https://github.com/AlexToday111/T1-Hackathon" },
     featured: true,
   },
@@ -303,27 +296,36 @@ export const projects: Project[] = [
     image: "/projects/flowstate.jpg",
     logo: "/DatsPulse.png",
     logoClassName: "h-full w-full scale-110",
-    category: "Hackathons",
+    category: "hackathon",
     links: { repo: "https://github.com/AlexToday111/DatsPulse" },
   },
   {
-    title: "Trade360Lab",
+    title: "PortIQ",
     description:
-      "Платформа исследования торговых стратегий с Java API и Python-движком. Запуски бэктестов, их статусы и результаты сохраняются в PostgreSQL для последующего сравнения.",
-    stack: [
-      "Java",
-      "Spring Boot",
-      "Python",
-      "FastAPI",
-      "PostgreSQL",
-      "Next.js",
-      "Docker",
-      "GitHub Actions",
-    ],
-    image: "/projects/flowstate.jpg",
-    logo: "/T360.png",
-    category: "Commercial Experience",
-    links: { repo: "https://github.com/Trade360Lab/Trade360Lab" },
-    featured: true,
+      "Telegram-помощник для инвестиционных исследований: анализ акций, сравнение финансовых показателей и отслеживание инвестиционных портфелей.",
+    stack: ["Java", "Spring Boot", "PostgreSQL", "Telegram", "T-Invest API"],
+    image: "/Logos/projects/portiq-logo.png",
+    logo: "/Logos/projects/portiq-logo.png",
+    category: "ai-bots",
+    links: { repo: "https://github.com/AlexToday111/PortIQ" },
+  },
+  {
+    title: "Liftory",
+    description:
+      "Telegram-трекер тренировок для планирования тренировочных сессий, записи упражнений и анализа прогресса в фитнесе.",
+    stack: ["Java", "Spring Boot", "PostgreSQL", "Flyway", "Docker"],
+    image: "/Logos/projects/liftory-logo.png",
+    logo: "/Logos/projects/liftory-logo.png",
+    category: "ai-bots",
+    links: { repo: "https://github.com/AlexToday111/Liftory" },
+  },
+  {
+    title: "Divergence Trading Bot",
+    description:
+      "Торговый бот с поиском дивергенций RSI, управлением риском и бэктестами торговой стратегии.",
+    stack: ["Python", "Pandas", "MetaTrader 5", "Backtrader"],
+    image: "/icons/stack/python.svg",
+    category: "ai-bots",
+    links: { repo: "https://github.com/AlexToday111/MT5-Divergence-Bot" },
   },
 ];

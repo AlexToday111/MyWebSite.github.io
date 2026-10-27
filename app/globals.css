@@ -365,18 +365,6 @@ html::-webkit-scrollbar {
 .project-section-heading {
   padding: 24px 0 8px;
 }
-.project-category + .project-category { margin-top: 40px; }
-.project-category-heading {
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  padding-bottom: 18px;
-}
-.project-category-heading h3 {
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: -0.015em;
-}
 .project-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -456,6 +444,7 @@ html::-webkit-scrollbar {
   padding-top: 20px;
 }
 .project-copy h4 {
+  text-align: center;
   color: var(--preview-title);
   font-size: 21px;
   font-weight: 600;
@@ -485,6 +474,7 @@ html::-webkit-scrollbar {
   align-items: start;
   gap: 7px;
   margin-top: 16px;
+  margin-bottom: 16px;
 }
 .project-tool {
   display: inline-flex;
@@ -502,10 +492,11 @@ html::-webkit-scrollbar {
 .project-tool span { overflow-wrap: anywhere; }
 .project-actions {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 4px 24px;
   border-top: 1px solid var(--preview-border);
-  margin-top: 16px;
+  margin-top: auto;
   padding-top: 8px;
 }
 .project-actions a {
@@ -642,23 +633,16 @@ html::-webkit-scrollbar {
 }
 .project-page-item { display: flex; flex-direction: column; min-width: 0; }
 .project-page-item .project-preview { flex: 1; }
-.project-category-label { font-size: 12px; color: hsl(var(--muted)); margin-bottom: 12px; }
-/* Share content rows without fixed heights or spacer blocks. */
+/* Align each pair of cards while letting every row size to its content. */
 @supports (grid-template-rows: subgrid) {
   @media (min-width: 768px) {
-    .project-page-item {
-      display: grid;
-      grid-template-rows: subgrid;
-      grid-row: span 7;
-      row-gap: 0;
-    }
-    .project-page-item > .project-preview {
+    .project-grid > .project-preview {
       display: grid;
       grid-template-rows: subgrid;
       grid-row: span 6;
       row-gap: 0;
     }
-    .project-copy {
+    .project-grid .project-copy {
       display: grid;
       grid-template-rows: subgrid;
       grid-row: span 5;
@@ -668,20 +652,21 @@ html::-webkit-scrollbar {
     .project-copy > p:not(.project-highlight) { grid-row: 2; }
     .project-highlight { grid-row: 3; align-self: start; }
     .project-stack { grid-row: 4; }
-    .project-actions { grid-row: 5; }
+    .project-actions { grid-row: 5; align-self: end; }
   }
 }
 @media (max-width: 1023px) {
   .contact-footer { grid-template-columns: minmax(0, 1fr); gap: 28px; }
 }
+@media (max-width: 767px) {
+  .project-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+}
 @media (max-width: 639px) {
   .project-section-heading { padding-top: 20px; }
-  .project-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .project-preview { padding: 16px; }
   .project-artwork { height: 184px; padding: 8px 12px; }
   .project-copy { padding-top: 18px; }
-  .project-category + .project-category { margin-top: 32px; }
-  #work #projects { padding-bottom: 40px; }
+    #work #projects { padding-bottom: 40px; }
   .contact-footer { padding: 32px 16px; }
   .contact-footer a { padding: 12px; gap: 10px; }
   .contact-social-arrow { display: none; }
@@ -696,4 +681,5 @@ html::-webkit-scrollbar {
   .project-preview:hover, .project-preview .project-artwork-image,
   .project-actions a:is(:hover, :focus-visible) span,
   .contact-footer a:hover, .contact-footer a:hover .contact-social-arrow { transform: none; }
+
 }
