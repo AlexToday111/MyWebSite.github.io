@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, type ReactNode } from "react";
 import { profileContent, profileLabels } from "@/data/profile-language";
 import { education } from "@/data/education";
+import { achievementLogos } from "@/data/achievement-logos";
 import { withBasePath } from "@/lib/paths";
 import styles from "./ProfileSection.module.css";
 import { usePortfolioLanguage } from "../providers/PortfolioLanguage";
@@ -120,7 +121,7 @@ export default function ProfileSection() {
             <div className={styles.educationContent}>
               <h3>{labels.university}</h3>
               <p className={styles.degree}>{labels.degree}</p>
-              <p className={styles.secondary}>GPA {university.gpa} / 5.0</p>
+              <p className={styles.gpa}>GPA {university.gpa} / 5.0</p>
               <p className={styles.subjects}>
                 {labels.subjects.map((subject) => (
                   <span key={subject} className="block">
@@ -134,14 +135,39 @@ export default function ProfileSection() {
           <ProfileCard className={styles.achievements} index={3}>
             <h3 className={styles.label}>{labels.achievements}</h3>
             <ol className={styles.awards}>
-              {homeProfile.achievements.map((award) => (
-                <li key={award.title}>
-                  <div>
-                    <h4>{award.title}</h4>
-                    <p>{award.description}</p>
-                  </div>
-                </li>
-              ))}
+              {homeProfile.achievements.map((award) => {
+                const logo = achievementLogos[award.id];
+                return (
+                  <li key={award.id}>
+                    <div>
+                      <h4>{award.title}</h4>
+                      <p>{award.description}</p>
+                    </div>
+                    {logo && (
+                      <div className={styles.awardLogo}>
+                        <Image
+                          src={withBasePath(logo.src)}
+                          alt={logo.alt}
+                          width={logo.width}
+                          height={logo.height}
+                          className={
+                            logo.darkSrc ? styles.awardLogoLight : undefined
+                          }
+                        />
+                        {logo.darkSrc && (
+                          <Image
+                            src={withBasePath(logo.darkSrc)}
+                            alt={logo.alt}
+                            width={logo.width}
+                            height={logo.height}
+                            className={styles.awardLogoDark}
+                          />
+                        )}
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
             </ol>
           </ProfileCard>
 

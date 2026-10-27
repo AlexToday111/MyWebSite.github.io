@@ -235,6 +235,52 @@
   line-height: 1.6;
   margin: 8px 0 4px;
 }
+.gpa {
+  width: fit-content;
+  color: hsl(var(--accent-blue));
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.7;
+  font-variant-numeric: tabular-nums;
+}
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+  .gpa {
+    background: linear-gradient(
+      100deg,
+      #8b5cf6 15%,
+      #c4a5f5 40%,
+      #a78bfa 50%,
+      #7c3aed 70%
+    );
+    background-size: 240% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gpa-shimmer 4s ease-in-out infinite alternate;
+  }
+  :global(.light) .gpa {
+    background-image: linear-gradient(
+      100deg,
+      #6d28d9 15%,
+      #9356d9 40%,
+      #7c3aed 50%,
+      #5b21b6 70%
+    );
+  }
+}
+@keyframes gpa-shimmer {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gpa {
+    animation: none;
+  }
+}
 .subjects {
   color: hsl(var(--muted));
   font-size: 13px;
@@ -260,6 +306,37 @@
 .awards {
   display: grid;
   gap: 18px;
+}
+.awards li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.awards li > div:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.awardLogo {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: flex-end;
+}
+.awardLogo img {
+  width: auto;
+  height: 40px;
+  max-width: 104px;
+  object-fit: contain;
+}
+.awardLogoLight {
+  display: none;
+}
+:global(.light) .awardLogoLight {
+  display: block;
+}
+:global(.light) .awardLogoDark {
+  display: none;
 }
 .awards h4 {
   font-size: 14px;
