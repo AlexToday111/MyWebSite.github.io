@@ -55,6 +55,8 @@ export default function RootLayout({
           Сразу к контенту
         </a>
         <Providers>{children}</Providers>
+        <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js'
+                data-cf-beacon='{"token": "d3b621a85bfa49188aaebf88cfbd7523"}'></script>
       </body>
     </html>
   );
