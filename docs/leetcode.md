@@ -3,7 +3,7 @@
 The portfolio is a static Next.js export hosted on GitHub Pages. The browser imports
 `data/leetcode.json`; it does not query LeetCode at runtime. `updatedAt` is the UTC
 time at which the live snapshot was acquired, not the build or deployment time.
-The UI displays that timestamp, including the time and UTC zone.
+The timestamp is retained in the snapshot for validation; it is not displayed in the UI.
 
 ## Source and metrics
 

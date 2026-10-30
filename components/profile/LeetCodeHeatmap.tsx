@@ -36,12 +36,6 @@ const days = Array.from({ length: 365 }, (_, index) => {
 });
 const total = days.reduce((sum, day) => sum + day.count, 0);
 const activeDays = days.filter((day) => day.count > 0).length;
-let streak = 0;
-let longestStreak = 0;
-for (const day of days) {
-  streak = day.count > 0 ? streak + 1 : 0;
-  longestStreak = Math.max(longestStreak, streak);
-}
 // Only label a month when it starts, plus the first visible partial month.
 const months = days.filter(
   (day, index) => index === 0 || day.date.getUTCDate() === 1,
@@ -55,9 +49,7 @@ const copy = {
     hard: "Hard",
     submissions: "submissions",
     activeDays: "active days",
-    streak: "days · longest streak",
     period: "Last 12 months",
-    updated: "Updated",
     less: "Less",
     more: "More",
     weekdays: ["Mon", "Wed", "Fri"],
@@ -70,9 +62,7 @@ const copy = {
     hard: "Сложные",
     submissions: "отправок решений",
     activeDays: "активных дней",
-    streak: "дней · максимальная серия",
     period: "Последние 12 месяцев",
-    updated: "Обновлено",
     less: "Меньше",
     more: "Больше",
     weekdays: ["Пн", "Ср", "Пт"],
@@ -95,14 +85,6 @@ export default function LeetCodeHeatmap({
     day: "numeric",
     month: "short",
     year: "numeric",
-    timeZone: "UTC",
-  });
-  const updatedFormat = new Intl.DateTimeFormat(locale, {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
     timeZone: "UTC",
   });
 
@@ -144,20 +126,6 @@ export default function LeetCodeHeatmap({
         <div>
           <dt className={styles.hard}>{labels.hard}</dt>
           <dd>{snapshot.solved.hard.toLocaleString(locale)}</dd>
-        </div>
-      </dl>
-      <dl className={styles.stats}>
-        <div>
-          <dt>{labels.submissions}</dt>
-          <dd>{total.toLocaleString(locale)}</dd>
-        </div>
-        <div>
-          <dt>{labels.activeDays}</dt>
-          <dd>{activeDays}</dd>
-        </div>
-        <div>
-          <dt>{labels.streak}</dt>
-          <dd>{longestStreak}</dd>
         </div>
       </dl>
       <div
@@ -218,14 +186,6 @@ export default function LeetCodeHeatmap({
         </svg>
       </div>
       <footer className={styles.footer}>
-        <p>
-          {labels.period}
-          <span aria-hidden="true"> · </span>
-          {labels.updated}{" "}
-          <time dateTime={snapshot.updatedAt}>
-            {updatedFormat.format(new Date(snapshot.updatedAt))} UTC
-          </time>
-        </p>
         <div className={styles.legend} aria-hidden="true">
           <span>{labels.less}</span>
           {COLORS.map((color) => (
