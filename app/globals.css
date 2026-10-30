@@ -314,7 +314,8 @@ html::-webkit-scrollbar {
 .portfolio-body::before {
   content: "";
   position: absolute;
-  inset: -240px 0 -24px;
+  /* Keep the decorative layer inside the bottom scroll boundary. */
+  inset: -240px 0 0;
   z-index: -1;
   pointer-events: none;
   background-image:
@@ -332,18 +333,15 @@ html::-webkit-scrollbar {
 @keyframes ambient-breathe {
   0%, 100% {
     opacity: calc(var(--ambient-opacity) * 0.88);
-    transform: translateY(-10px);
   }
   50% {
     opacity: var(--ambient-opacity);
-    transform: translateY(10px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .portfolio-body::before {
     animation: none;
     opacity: var(--ambient-opacity);
-    transform: none;
   }
 }
 @media (max-width: 767px) {
@@ -403,6 +401,7 @@ html::-webkit-scrollbar {
   --preview-description: #bbb2cc;
   --preview-highlight: #b2a6c5;
   --preview-badge: #282131;
+  --preview-badge-border: #40364c;
   --preview-badge-text: #d0c5e0;
   --preview-accent: #c4b5fd;
   --preview-hover: #c4b5fd;
@@ -414,25 +413,17 @@ html::-webkit-scrollbar {
   border-radius: 20px;
   background: var(--content-surface);
   box-shadow: 0 2px 6px rgb(24 16 40 / 0.04), 0 8px 24px rgb(24 16 40 / 0.025);
-  transition: border-color 250ms ease, box-shadow 250ms ease, transform 250ms ease;
 }
 .light .project-preview {
   --preview-border: #e9e2f5;
   --preview-title: #242036;
   --preview-description: #625d76;
   --preview-highlight: #756c89;
-  --preview-badge: #f5f2fa;
-  --preview-badge-text: #5d566f;
+  --preview-badge: #f8f7fc;
+  --preview-badge-border: #e8e3f1;
+  --preview-badge-text: #454057;
   --preview-accent: #c4b5fd;
   --preview-hover: #7c3aed;
-}
-.project-preview:hover, .project-preview:focus-within {
-  border-color: #a78bfa;
-  box-shadow: 0 4px 10px rgb(66 36 105 / 0.05), 0 12px 28px rgb(66 36 105 / 0.08);
-}
-@media (hover: hover) {
-  .project-preview:hover { transform: translateY(-4px); }
-  .project-preview:hover .project-artwork-image { transform: scale(1.035); }
 }
 .project-artwork {
   overflow: hidden;
@@ -452,7 +443,6 @@ html::-webkit-scrollbar {
   max-width: var(--logo-width, 320px);
   height: min(100%, var(--logo-height, 176px));
   min-height: 0;
-  transition: transform 300ms ease;
 }
 .project-artwork img {
   display: block;
@@ -493,35 +483,59 @@ html::-webkit-scrollbar {
   padding-left: 12px;
   border-left: 2px solid var(--preview-accent);
 }
-.project-source-icon { width: 16px; height: 16px; object-fit: contain; }
+.project-source-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
 .project-stack {
   display: flex;
   flex-wrap: wrap;
   align-content: start;
   align-items: start;
-  gap: 7px;
+  gap: 8px;
   margin-top: 16px;
   margin-bottom: 16px;
 }
 .project-tool {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   max-width: 100%;
-  padding: 5px 8px;
-  border-radius: 6px;
+  height: 34px;
+  padding: 0 11px;
+  border: 1px solid var(--preview-badge-border);
+  border-radius: 9px;
   color: var(--preview-badge-text);
   background: var(--preview-badge);
-  font-size: 11.5px;
+  font-size: 12.5px;
+  font-weight: 500;
   line-height: 1.5;
+  white-space: nowrap;
 }
-.project-tool img { flex-shrink: 0; width: 16px; height: 16px; object-fit: contain; }
-.project-tool span { overflow-wrap: anywhere; }
+.project-tool img {
+  display: block;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+.project-tool span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.project-tool .project-tool-icon-light { display: none; }
+.light .project-tool .project-tool-icon-light { display: block; }
+.light .project-tool .project-tool-icon-dark { display: none; }
 .project-actions {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 4px 24px;
+  flex-direction: column;
+  gap: 8px;
   border-top: 1px solid var(--preview-border);
   margin-top: auto;
   padding-top: 8px;
@@ -537,8 +551,50 @@ html::-webkit-scrollbar {
   transition: color 250ms ease;
 }
 .project-actions a:hover, .project-actions a:focus-visible { color: var(--preview-hover); }
-.project-actions a span { transition: transform 250ms ease; }
-.project-actions a:is(:hover, :focus-visible) span { transform: translate(2px, -2px); }
+.project-actions .project-demo-link { align-self: center; }
+.project-demo-link span { transition: transform 210ms ease; }
+.project-demo-link:is(:hover, :focus-visible) span { transform: translate(2px, -2px); }
+.project-actions .project-source-link {
+  --source-bg: #30283e;
+  --source-border: #4c405e;
+  --source-text: #f2edf9;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 46px;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1px solid var(--source-border);
+  border-radius: 12px;
+  background: var(--source-bg);
+  color: var(--source-text);
+  box-shadow: none;
+  line-height: 1.3;
+  transition: background-color 210ms ease, border-color 210ms ease, color 210ms ease, transform 210ms ease, box-shadow 210ms ease;
+}
+.light .project-actions .project-source-link {
+  --source-bg: #f3f0fa;
+  --source-border: #e2daf0;
+  --source-text: #28243b;
+}
+.project-actions .project-source-link:is(:hover, :focus-visible) {
+  background: #282538;
+  border-color: #282538;
+  color: #fff;
+  box-shadow: 0 5px 14px rgb(40 37 56 / 0.18);
+}
+@media (hover: hover) {
+  .project-actions .project-source-link:hover { transform: translateY(-2px); }
+}
+.project-source-link:focus:not(:focus-visible) { outline: none; }
+@media (prefers-reduced-motion: reduce) {
+  .project-actions .project-source-link,
+  .project-actions .project-source-link:hover,
+  .project-demo-link:is(:hover, :focus-visible) span {
+    transition: none;
+    transform: none;
+  }
+}
 .project-actions a:focus-visible, .contact-footer a:focus-visible, .project-filter:focus-visible {
   outline: 2px solid hsl(var(--accent-blue));
   outline-offset: 4px;
@@ -682,7 +738,5 @@ html::-webkit-scrollbar {
     transition: none !important;
     scroll-behavior: auto !important;
   }
-  .project-preview:hover, .project-preview .project-artwork-image,
-  .project-actions a:is(:hover, :focus-visible) span { transform: none; }
 
 }

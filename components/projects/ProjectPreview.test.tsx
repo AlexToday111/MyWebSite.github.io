@@ -38,8 +38,17 @@ it("keeps every project logo, full stack and repository while switching editoria
       );
       const link = card.querySelector(".project-actions a");
       expect(link?.getAttribute("href")).toBe(project.links?.repo);
-      expect(link?.textContent).toBe("GitHub");
-      expect(link?.getAttribute("aria-label")).toBe(`${project.title}: GitHub`);
+      const label = language === "en" ? "View on GitHub" : "Открыть на GitHub";
+      expect(link?.textContent).toBe(label);
+      expect(link?.getAttribute("aria-label")).toBe(
+        `${project.title}: ${label}`,
+      );
+      const icon = link?.querySelector("svg.project-source-icon");
+      expect(icon?.getAttribute("width")).toBe("20");
+      expect(icon?.getAttribute("height")).toBe("20");
+      expect(icon?.getAttribute("stroke")).toBe("currentColor");
+      expect(link?.querySelectorAll("svg")).toHaveLength(1);
+      expect(link?.querySelector(".project-source-arrow")).toBeNull();
       expect(card.querySelector(".project-highlight")?.textContent).toBe(
         projectHighlights[project.title]?.[language],
       );

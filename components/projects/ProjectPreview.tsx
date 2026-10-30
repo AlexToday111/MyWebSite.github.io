@@ -2,6 +2,7 @@
 
 import type { Project } from "@/data/projects";
 import type { CSSProperties } from "react";
+import { Github } from "lucide-react";
 import {
   projectDescriptionsEn,
   projectHighlights,
@@ -15,6 +16,8 @@ export default function ProjectPreview({ project }: { project: Project }) {
   const { language } = usePortfolioLanguage();
   const logo = projectLogoPresentation[project.title];
   const highlight = projectHighlights[project.title]?.[language];
+  const repositoryLabel =
+    language === "en" ? "View on GitHub" : "Открыть на GitHub";
   return (
     <article className="project-preview">
       <div className="project-artwork">
@@ -52,27 +55,31 @@ export default function ProjectPreview({ project }: { project: Project }) {
         <ProjectToolIcons stack={project.stack} />
         {project.links && (
           <div className="project-actions">
+            {project.links.demo && (
+              <a
+                className="project-demo-link"
+                href={project.links.demo}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {language === "en" ? "Live demo" : "Демо"}{" "}
+                <span aria-hidden="true">↗</span>
+              </a>
+            )}
             {project.links.repo && (
               <a
+                className="project-source-link"
                 href={project.links.repo}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={`${project.title}: GitHub`}
+                aria-label={`${project.title}: ${repositoryLabel}`}
               >
-                <img
-                  src={withBasePath("/icons/stack/github.svg")}
-                  alt=""
-                  width={16}
-                  height={16}
+                <Github
+                  aria-hidden="true"
                   className="project-source-icon"
+                  size={20}
                 />
-                GitHub
-              </a>
-            )}
-            {project.links.demo && (
-              <a href={project.links.demo} target="_blank" rel="noreferrer">
-                {language === "en" ? "Live demo" : "Демо"}{" "}
-                <span aria-hidden="true">↗</span>
+                <span>{repositoryLabel}</span>
               </a>
             )}
           </div>

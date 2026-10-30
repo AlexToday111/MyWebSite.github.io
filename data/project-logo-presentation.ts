@@ -1,5 +1,5 @@
 // Optical compensation only for artwork with generous transparent margins.
-// The hover transform is on a separate wrapper and preserves these proportions.
+// These fixed proportions are preserved in every interaction state.
 export const projectLogoPresentation: Record<
   string,
   { maxWidth: number; height: number; scale?: number }
