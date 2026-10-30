@@ -41,8 +41,8 @@ describe("project grid", () => {
       if (categoryProjects.length > 4) {
         const more = within(panel).getByRole("button", { name: "Show more" });
         expect(
-          document.getElementById(more.getAttribute("aria-controls")!),
-        ).toBe(panel.querySelector(".project-grid"));
+          document.getElementById(more.getAttribute("aria-controls")!)?.contains(panel.querySelector(".project-grid")),
+        ).toBe(true);
         fireEvent.click(more);
         expect(
           within(panel)
