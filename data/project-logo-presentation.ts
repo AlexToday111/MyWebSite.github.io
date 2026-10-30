@@ -18,6 +18,7 @@ export const projectLogoPresentation: Record<
   SaveOps: { maxWidth: 340, height: 180, scale: 1.5 },
   "Secure DevOps Pipeline": { maxWidth: 340, height: 180, scale: 1.5 },
   Link2Action: { maxWidth: 340, height: 180 },
+  "Backend Agent Skills": { maxWidth: 240, height: 176 },
   PortIQ: { maxWidth: 280, height: 180 },
   Liftory: { maxWidth: 280, height: 180 },
 };

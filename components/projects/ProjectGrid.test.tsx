@@ -23,69 +23,72 @@ afterEach(() => {
 });
 
 describe("project grid", () => {
-  it("shows four projects initially and reveals the rest on request in each category", () => {
-    const view = render(<NeonProjectGrid />);
-    const tabs = view.getAllByRole("tab");
-    expect(tabs.map((tab) => tab.textContent)).toEqual([
-      "Personal Projects",
-      "University Projects",
-      "Hackathon Projects",
-      "AI & Bots",
-    ]);
-    tabs.forEach((tab, index) => {
-      fireEvent.click(tab);
-      const panel = view.getByRole("tabpanel");
-      expect(panel.id).toBe(tab.getAttribute("aria-controls"));
-      expect(panel.getAttribute("aria-labelledby")).toBe(tab.id);
-      expect(panel.hasAttribute("inert")).toBe(false);
-      expect(
-        view.container.querySelectorAll('[role="tabpanel"][inert]'),
-      ).toHaveLength(3);
-      expect(
-        within(panel)
-          .getAllByRole("heading", { level: 4 })
-          .map((h) => h.textContent),
-      ).toEqual(
-        projects
-          .filter((p) => p.category === projectCategories[index])
-          .slice(0, 4)
-          .map((p) => p.title),
-      );
-      const categoryProjects = projects.filter(
-        (p) => p.category === projectCategories[index],
-      );
-      if (categoryProjects.length > 4) {
-        const more = within(panel).getByRole("button", { name: "Show more" });
+  it.each([false, true])(
+    "shows four projects and reveals the rest in each category (standalone: %s)",
+    (standalone) => {
+      const view = render(<NeonProjectGrid standalone={standalone} />);
+      const tabs = view.getAllByRole("tab");
+      expect(tabs.map((tab) => tab.textContent)).toEqual([
+        "Personal Projects",
+        "University Projects",
+        "Hackathon Projects",
+        "AI & Bots",
+      ]);
+      tabs.forEach((tab, index) => {
+        fireEvent.click(tab);
+        const panel = view.getByRole("tabpanel");
+        expect(panel.id).toBe(tab.getAttribute("aria-controls"));
+        expect(panel.getAttribute("aria-labelledby")).toBe(tab.id);
+        expect(panel.hasAttribute("inert")).toBe(false);
         expect(
-          document
-            .getElementById(more.getAttribute("aria-controls")!)
-            ?.contains(panel.querySelector(".project-grid")),
-        ).toBe(true);
-        fireEvent.click(more);
+          view.container.querySelectorAll('[role="tabpanel"][inert]'),
+        ).toHaveLength(3);
         expect(
           within(panel)
             .getAllByRole("heading", { level: 4 })
             .map((h) => h.textContent),
-        ).toEqual(categoryProjects.map((p) => p.title));
-      }
-      expect(within(panel).queryByRole("button")).toBeNull();
-      expect(within(panel).queryByRole("heading", { level: 3 })).toBeNull();
+        ).toEqual(
+          projects
+            .filter((p) => p.category === projectCategories[index])
+            .slice(0, 4)
+            .map((p) => p.title),
+        );
+        const categoryProjects = projects.filter(
+          (p) => p.category === projectCategories[index],
+        );
+        if (categoryProjects.length > 4) {
+          const more = within(panel).getByRole("button", { name: "Show more" });
+          expect(
+            document
+              .getElementById(more.getAttribute("aria-controls")!)
+              ?.contains(panel.querySelector(".project-grid")),
+          ).toBe(true);
+          fireEvent.click(more);
+          expect(
+            within(panel)
+              .getAllByRole("heading", { level: 4 })
+              .map((h) => h.textContent),
+          ).toEqual(categoryProjects.map((p) => p.title));
+        }
+        expect(within(panel).queryByRole("button")).toBeNull();
+        expect(within(panel).queryByRole("heading", { level: 3 })).toBeNull();
+        expect(
+          view
+            .getAllByRole("tab")
+            .filter((tab) => tab.querySelector('[aria-hidden="true"]')),
+        ).toEqual([tab]);
+        expect(within(panel).queryByRole("status")).toBeNull();
+        expect(
+          panel.querySelector('[aria-roledescription="carousel"]'),
+        ).toBeNull();
+      });
+      fireEvent.click(tabs[0]);
       expect(
-        view
-          .getAllByRole("tab")
-          .filter((tab) => tab.querySelector('[aria-hidden="true"]')),
-      ).toEqual([tab]);
-      expect(within(panel).queryByRole("status")).toBeNull();
-      expect(
-        panel.querySelector('[aria-roledescription="carousel"]'),
-      ).toBeNull();
-    });
-    fireEvent.click(tabs[0]);
-    expect(
-      within(view.getByRole("tabpanel")).getAllByRole("article"),
-    ).toHaveLength(projects.filter((p) => p.category === "pet").length);
-    expect(view.queryByText("Commercial Experience")).toBeNull();
-  });
+        within(view.getByRole("tabpanel")).getAllByRole("article"),
+      ).toHaveLength(projects.filter((p) => p.category === "pet").length);
+      expect(view.queryByText("Commercial Experience")).toBeNull();
+    },
+  );
 
   it("restores historical hackathons without duplicates and keeps all AI projects", () => {
     expect(
@@ -96,6 +99,7 @@ describe("project grid", () => {
     ).toEqual([
       "Trade360Lab",
       "Link2Action",
+      "Backend Agent Skills",
       "PortIQ",
       "Liftory",
       "Divergence Trading Bot",

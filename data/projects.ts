@@ -166,6 +166,24 @@ export const projects: Project[] = [
     links: { repo: "https://github.com/AlexToday111/Link2Action" },
   },
   {
+    title: "Backend Agent Skills",
+    description:
+      "Библиотека переиспользуемых Agent Skills для Java/Go-разработки. Первый скилл repository-bootstrap анализирует репозиторий и настраивает инфраструктуру разработки, сохраняя существующие конфигурации.",
+    stack: [
+      "Python",
+      "Java",
+      "Go",
+      "GitHub Actions",
+      "Maven",
+      "Gradle",
+      "Agent Skills",
+    ],
+    image: "/Logos/projects/backend-agent-skills.png",
+    logo: "/Logos/projects/backend-agent-skills.png",
+    category: "ai-bots",
+    links: { repo: "https://github.com/AlexToday111/backend-agent-skills" },
+  },
+  {
     title: "Smart Activity Tracker",
     description:
       "Сервис приёма событий с идемпотентной записью и JSONB-метаданными. Рассчитывает retention, когорты и воронки, поддерживает пакетную загрузку.",

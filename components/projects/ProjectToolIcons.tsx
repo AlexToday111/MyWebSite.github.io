@@ -21,6 +21,7 @@ const TOOL_ICONS: Record<string, string> = {
   kafka: "/icons/stack/kafka.svg",
   docker: "/icons/stack/docker.svg",
   maven: "/icons/stack/maven.svg",
+  gradle: "/icons/stack/gradle.svg",
   flyway: "/icons/stack/flyway.svg",
   junit: "/icons/stack/junit.svg",
   "junit 5": "/icons/stack/junit.svg",

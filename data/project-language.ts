@@ -31,6 +31,8 @@ export const projectDescriptionsEn: Record<string, string> = {
     "A ticket reservation system with expiring holds and order management. RabbitMQ events connect orders, simulated payments, and notifications.",
   Link2Action:
     "A Telegram media transcription platform with a separate Python worker. Produces transcripts and structured packages for manual use with LLMs.",
+  "Backend Agent Skills":
+    "A reusable Agent Skills library for Java/Go backend development. Its first skill, repository-bootstrap, inspects repositories and prepares development infrastructure while preserving existing configurations.",
   "Notification Subscription Platform":
     "A notification platform with JSON subscription rules and event deduplication. A transactional outbox links persisted events to RabbitMQ publication.",
   "Smart Activity Tracker":
@@ -83,6 +85,10 @@ export const projectHighlights: Record<string, { en: string; ru: string }> = {
   Link2Action: {
     en: "Worker isolation · Async processing · LLM-ready packages",
     ru: "Отдельный воркер · Асинхронная обработка · Пакеты для LLM",
+  },
+  "Backend Agent Skills": {
+    en: "Repository inspection · Safe changes · CI/CD",
+    ru: "Анализ репозитория · Безопасные изменения · CI/CD",
   },
   "Notification Subscription Platform": {
     en: "Transactional outbox · Rule matching · Delivery attempts",
