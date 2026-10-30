@@ -28,22 +28,7 @@ export default function ProjectGrid({ projects }: { projects: Project[] }) {
             aria-expanded={false}
             onClick={() => setExpanded(true)}
           >
-            {language === "ru" ? "Показать ещё" : "Show more"}
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="m6 9 6 6 6-6"
-                stroke="currentColor"
-                strokeWidth="1.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <span>{language === "ru" ? "Показать ещё" : "Show more"}</span>
           </button>
         </div>
       )}
