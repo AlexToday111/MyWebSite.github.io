@@ -1,7 +1,18 @@
 ﻿"use client";
 
-import { useId, useRef, useState, type KeyboardEvent } from "react";
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type KeyboardEvent,
+} from "react";
+import {
+  animate,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+} from "framer-motion";
 import { projectCategories, projects } from "@/data/projects";
 import { projectCategoryLabels } from "@/data/project-language";
 import { usePortfolioLanguage } from "../providers/PortfolioLanguage";
@@ -21,9 +32,44 @@ export default function NeonProjectGrid({
   const { language, toggleLanguage } = usePortfolioLanguage();
   const [active, setActive] = useState(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+  const panels = useRef<(HTMLDivElement | null)[]>([]);
+  const panelHeight = useMotionValue<number | string>("auto");
+  const hasMeasured = useRef(false);
   const id = useId();
   const reducedMotion = useReducedMotion();
   const Heading = standalone ? "h1" : "h2";
+
+  useLayoutEffect(() => {
+    panels.current.forEach((element, index) => {
+      element?.toggleAttribute("inert", index !== active);
+    });
+    const panel = panels.current[active];
+    if (!panel) return;
+    let height = panel.offsetHeight;
+    const animation =
+      hasMeasured.current && !reducedMotion
+        ? animate(panelHeight, height, {
+            duration: 0.36,
+            ease: [0.22, 1, 0.36, 1],
+          })
+        : null;
+    if (!animation) panelHeight.set(height);
+    hasMeasured.current = true;
+
+    // Follow intrinsic content changes immediately: Show more already animates its height.
+    const observer = new ResizeObserver(() => {
+      const nextHeight = panel.offsetHeight;
+      if (nextHeight === height) return;
+      height = nextHeight;
+      animation?.stop();
+      panelHeight.set(height);
+    });
+    observer.observe(panel);
+    return () => {
+      observer.disconnect();
+      animation?.stop();
+    };
+  }, [active, panelHeight, reducedMotion]);
 
   function onKeyDown(event: KeyboardEvent<HTMLButtonElement>, index: number) {
     let next: number;
@@ -105,21 +151,40 @@ export default function NeonProjectGrid({
           </button>
         ))}
       </div>
-      <div className={styles.panels}>
+      <motion.div className={styles.panels} style={{ height: panelHeight }}>
         {categories.map((category, index) => (
-          <div
+          <motion.div
             key={category.id}
+            ref={(element) => {
+              panels.current[index] = element;
+            }}
             role="tabpanel"
             id={`${id}-panel-${category.id}`}
             aria-labelledby={`${id}-tab-${category.id}`}
-            hidden={active !== index}
-            tabIndex={0}
+            aria-hidden={active !== index}
+            tabIndex={active === index ? 0 : -1}
             className={styles.panel}
+            initial={false}
+            animate={
+              active === index
+                ? {
+                    opacity: 1,
+                    y: 0,
+                  }
+                : {
+                    opacity: 0,
+                    y: reducedMotion ? 0 : -8,
+                  }
+            }
+            transition={{
+              duration: reducedMotion ? 0 : 0.24,
+              ease: "easeInOut",
+            }}
           >
             <ProjectGrid projects={category.projects} />
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

@@ -75,8 +75,22 @@
 .panel {
   min-width: 0;
 }
-.panel[hidden] {
-  display: none;
+.panels {
+  position: relative;
+}
+.panel {
+  position: relative;
+  width: 100%;
+  visibility: visible;
+  transition: visibility 0s;
+}
+.panel[aria-hidden="true"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition-delay: 240ms;
 }
 @media (max-width: 639px) {
   .tabs {
@@ -87,6 +101,9 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .panel {
+    transition: none;
+  }
   .indicator::after {
     animation: none;
     opacity: 0;

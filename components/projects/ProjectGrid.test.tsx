@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { cleanup, fireEvent, render, within } from "@testing-library/react";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import NeonProjectGrid from "./NeonProjectGrid";
 import ProjectGrid from "./ProjectGrid";
 import { projects, projectCategories } from "@/data/projects";
@@ -8,7 +8,19 @@ import { projects, projectCategories } from "@/data/projects";
 vi.mock("../providers/PortfolioLanguage", () => ({
   usePortfolioLanguage: () => ({ language: "en" }),
 }));
-afterEach(cleanup);
+beforeEach(() => {
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      disconnect() {}
+    },
+  );
+});
+afterEach(() => {
+  cleanup();
+  vi.unstubAllGlobals();
+});
 
 describe("project grid", () => {
   it("shows four projects initially and reveals the rest on request in each category", () => {
@@ -25,6 +37,10 @@ describe("project grid", () => {
       const panel = view.getByRole("tabpanel");
       expect(panel.id).toBe(tab.getAttribute("aria-controls"));
       expect(panel.getAttribute("aria-labelledby")).toBe(tab.id);
+      expect(panel.hasAttribute("inert")).toBe(false);
+      expect(
+        view.container.querySelectorAll('[role="tabpanel"][inert]'),
+      ).toHaveLength(3);
       expect(
         within(panel)
           .getAllByRole("heading", { level: 4 })
@@ -41,7 +57,9 @@ describe("project grid", () => {
       if (categoryProjects.length > 4) {
         const more = within(panel).getByRole("button", { name: "Show more" });
         expect(
-          document.getElementById(more.getAttribute("aria-controls")!)?.contains(panel.querySelector(".project-grid")),
+          document
+            .getElementById(more.getAttribute("aria-controls")!)
+            ?.contains(panel.querySelector(".project-grid")),
         ).toBe(true);
         fireEvent.click(more);
         expect(
